@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <title>Forgot password</title>
+  <!-- Favicon -->
+  <link href="img/favicon.ico" rel="icon">
+
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+
+  <!-- Icon Font Stylesheet -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Libraries Stylesheet -->
+  <link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
+  <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+
+  <!-- Customized Bootstrap Stylesheet -->
+  <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+  <!-- Template Stylesheet -->
+  <link th:href="@{/css/style.css}" rel="stylesheet">
+  <style>
+    .error-text {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg bg-white navbar-light shadow p-0 sticky-top">
+  <a href="index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
+    <h1 class="m-0 text-primary">5Job</h1>
+  </a>
+  <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"
+          data-bs-target="#navbarCollapse">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <div class="navbar-nav ms-auto p-4 p-lg-0">
+      <a href="index.html" class="nav-item nav-link active">Home</a>
+      <a href="" class="nav-item nav-link">Companies</a>
+      <a href="" class="nav-item nav-link">5Job tool</a>
+      <a href="" class="nav-item nav-link">CV</a>
+      <div class="nav-item dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Login</a>
+        <div class="dropdown-menu rounded-0 m-0">
+          <a href="" class="dropdown-item">Login</a>
+          <a href="" class="dropdown-item">register</a>
+          <a href="" class="dropdown-item">My 5job</a>
+          <a href="" class="dropdown-item">my resumes</a>
+          <a href="saved-job.html" class="dropdown-item">Saved jobs</a>
+          <a href="" class="dropdown-item">Applied jobs</a>
+          <a href="" class="dropdown-item">Job alerts</a>
+          <a href="" class="dropdown-item">My account</a>
+        </div>
+      </div>
+    </div>
+    <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Employers<i
+            class="fa fa-arrow-right ms-3"></i></a>
+  </div>
+</nav>
+<!-- Navbar End -->
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 bg-black shadow rounded mb-4">
+      <span>We have successfully sent the privacy code to your email!</span><br>
+     <span style="color:red;"><span th:text="${error}"></span></span>
+      <h2 class="text-center text-primary">Set a new password</h2>
+      <form id="forgotPasswordForm" th:action="@{/forgotPass}" method="POST" th:object="${account}">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Please enter email" required >
+        </div>
+        <div class="form-group">
+          <label for="privacyCode">Confirmation ID:</label>
+          <input type="text" class="form-control" id="privacyCode" name="privacyCode" required>
+        </div>
+        <div class="form-group">
+          <p id="verificationCodeError" class="error-text"></p>
+        </div>
+        <div class="form-group">
+          <label for="newPassword">A new password:</label>
+          <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm new password:</label>
+          <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+        </div>
+        <div class="form-group">
+          <p id="passwordError" class="error-text"></p>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+            <i class="fa fa-eye" aria-hidden="true"> Show password</i>
+          </button>
+        </div>
+        <div class="form-group text-center">
+          <button type="submit" class="btn btn-success" >Change Password</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+  function changePassword() {
+    // Lấy giá trị các ô nhập liệu
+    var verificationCode = document.getElementById('verificationCode').value;
+    var newPassword = document.getElementById('newPassword').value;
+    var confirmPassword = document.getElementById('confirmPassword').value;
+
+    // Clear previous error messages
+    document.getElementById('verificationCodeError').innerText = "";
+    document.getElementById('passwordError').innerText = "";
+
+    // Kiểm tra mã xác nhận
+    var expectedCode = "123456"; // Replace with the actual code sent to the email
+    if (verificationCode !== verificationCode) {
+      document.getElementById('verificationCodeError').innerText = 'Mã xác nhận không đúng';
+      return;
+    }
+
+
+    // Kiểm tra mật khẩu mới và xác nhận mật khẩu
+    if (newPassword === '' || confirmPassword === '') {
+      document.getElementById('passwordError').innerText = 'Vui lòng nhập mật khẩu mới và xác nhận mật khẩu';
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      document.getElementById('passwordError').innerText = 'Mật khẩu mới và xác nhận mật khẩu không khớp';
+      return;
+    }
+
+    // Ẩn thông báo lỗi nếu có
+    document.getElementById('verificationCodeError').innerText = '';
+    document.getElementById('passwordError').innerText = '';
+
+    // Thực hiện logic đổi mật khẩu
+    // Thay thế phần này bằng logic thực tế để đổi mật khẩu
+    alert('Mật khẩu đã được đổi thành công!');
+  }
+  document.getElementById('togglePassword').addEventListener('click', function () {
+    var passwordInput = document.getElementById('newPassword');
+    var passwordConfirm = document.getElementById('confirmPassword');
+    var passwordToggle = document.getElementById('togglePassword');
+
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      passwordConfirm.type = 'text';
+      passwordToggle.innerHTML = '<i class="fa fa-eye-slash" aria-hidden="true"> Ẩn mật khẩu</i>';
+    } else {
+      passwordInput.type = 'password';
+      passwordConfirm.type = 'password';
+      passwordToggle.innerHTML = '<i class="fa fa-eye" aria-hidden="true"> Hiện mật khẩu</i>';
+    }
+  });
+</script>
+<script>
+  function generateAndSendCode() {
+    // Lấy giá trị email từ ô nhập email
+    var email = document.getElementById('email').value;
+
+    // Kiểm tra định dạng email
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      document.getElementById('emailError').innerText = 'Email không hợp lệ';
+      return;
+    }
+
+    // Tạo mã ngẫu nhiên
+    var verificationCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+    console.log("Code sent to email: " + verificationCode);
+    // Gửi mã đến email
+    // Thay thế phần này bằng logic thực tế để gửi mã
+
+    // Ẩn thông báo lỗi nếu có
+    document.getElementById('emailError').innerText = '';
+
+    console.log(verificationCode);
+  }
+
+
+  function changePassword() {
+    // Lấy giá trị các ô nhập liệu
+    var verificationCode = document.getElementById('verificationCode').value;
+    var newPassword = document.getElementById('newPassword').value;
+    var confirmPassword = document.getElementById('confirmPassword').value;
+
+    // Clear previous error messages
+    document.getElementById('verificationCodeError').innerText = "";
+    document.getElementById('passwordError').innerText = "";
+
+    // Kiểm tra mã xác nhận
+    var expectedCode = "123456"; // Replace with the actual code sent to the email
+    if (verificationCode !== verificationCode) {
+      document.getElementById('verificationCodeError').innerText = 'Mã xác nhận không đúng';
+      return;
+    }
+
+
+    // Kiểm tra mật khẩu mới và xác nhận mật khẩu
+    if (newPassword === '' || confirmPassword === '') {
+      document.getElementById('passwordError').innerText = 'Vui lòng nhập mật khẩu mới và xác nhận mật khẩu';
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      document.getElementById('passwordError').innerText = 'Mật khẩu mới và xác nhận mật khẩu không khớp';
+      return;
+    }
+
+    // Ẩn thông báo lỗi nếu có
+    document.getElementById('verificationCodeError').innerText = '';
+    document.getElementById('passwordError').innerText = '';
+
+    // Thực hiện logic đổi mật khẩu
+    // Thay thế phần này bằng logic thực tế để đổi mật khẩu
+    alert('Mật khẩu đã được đổi thành công!');
+  }
+</script>
+
+
+</body>
+</html>
+

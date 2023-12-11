@@ -1,4 +1,7 @@
-package edu.vku.searchjob.service;
-
-public interface IAccountRoleService {
-}
+//package edu.vku.searchjob.service;
+//
+//import edu.vku.searchjob.entity.AppRole;
+//
+//public interface IAccountRoleService {
+//
+//}

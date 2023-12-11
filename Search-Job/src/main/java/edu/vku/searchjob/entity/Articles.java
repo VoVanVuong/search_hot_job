@@ -16,10 +16,10 @@ public class Articles {
 
     @Column(name = "decription")
     private String decription;
-    @ManyToOne
-    @JoinColumn(name = "account_id ")
-    private Account account;
-
+    //fix1 sau này thêm nó kết nối với employer
+//    @ManyToOne
+//    @JoinColumn(name = "account_id ")
+//    private Account account;
     @Column(name = "images")
     private String images;
     @Column(name = "status")
@@ -36,11 +36,11 @@ public class Articles {
     public Articles() {
     }
 
-    public Articles(int id, String name, String decription, Account account, String images, String status, String views, String createdAt, String updateAt, boolean deleteFlag) {
+    public Articles(int id, String name, String decription,String images, String status, String views, String createdAt, String updateAt, boolean deleteFlag) {
         this.id = id;
         this.name = name;
         this.decription = decription;
-        this.account = account;
+//       this.account = account;
         this.images = images;
         this.status = status;
         this.views = views;
@@ -73,13 +73,13 @@ public class Articles {
         this.decription = decription;
     }
 
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
+//    public Account getAccount() {
+//        return account;
+//    }
+//
+//    public void setAccount(Account account) {
+//        this.account = account;
+//    }
 
     public String getImages() {
         return images;

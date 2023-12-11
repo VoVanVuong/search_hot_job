@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -12,13 +12,13 @@
     <title>SB Admin 2 - Dashboard</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
 
 </head>
 
@@ -59,35 +59,35 @@
             </div>
             <!-- Nav Item - Tables -->
             <li class="nav-item active">
-                <a class="nav-link" href="CategoryTable.html">
+                <a class="nav-link" th:href="@{/admin/ListCategory}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Category table</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="jobTable.html">
+                <a class="nav-link" th:href="@{/admin/ListJob}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Job table</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="employerTable.html">
+                <a class="nav-link" th:href="@{/admin/ListEmployer}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Employer table</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="jobseekerTable.html">
+                <a class="nav-link" th:href="@{/admin/listAccount}">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Job seeker table</span></a>
+                    <span>Account table</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="articleTable.html">
+                <a class="nav-link" th:href="@{/admin/ListArticle}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Article table</span></a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="helpTable.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Help table</span></a>
-            </li>
+            <!--    <li class="nav-item active">-->
+            <!--      <a class="nav-link" href="helpTable.html">-->
+            <!--        <i class="fas fa-fw fa-table"></i>-->
+            <!--        <span>Help table</span></a>-->
+            <!--    </li>-->
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -623,21 +623,21 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script th:href="@{/vendor/jquery/jquery.min.js}"></script>
+    <script th:href="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script th:href="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script th:href="@{/js/sb-admin-2.min.js}"></script>
 
     <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script th:href="@{/vendor/chart.js/Chart.min.js}"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
+    <script th:href="@{/js/demo/chart-area-demo.js}"></script>
+    <script th:href="@{/js/demo/chart-pie-demo.js}"></script>
 
 </body>
 

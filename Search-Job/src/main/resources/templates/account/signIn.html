@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Log in</title>
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
+    <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+
+</head>
+<body>
+<!-- Spinner Start -->
+<div id="spinner"
+     class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<!-- Spinner End -->
+
+
+
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg bg-white navbar-light shadow p-0 sticky-top">
+    <a href="index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
+        <h1 class="m-0 text-primary">5Job</h1>
+    </a>
+    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"
+            data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto p-4 p-lg-0">
+            <a href="index.html" class="nav-item nav-link active">Home</a>
+            <a href="" class="nav-item nav-link">Companies</a>
+            <a href="" class="nav-item nav-link">5Job tool</a>
+            <a href="" class="nav-item nav-link">CV</a>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Login</a>
+                <div class="dropdown-menu rounded-0 m-0">
+                    <a href="" class="dropdown-item">Login</a>
+                    <a href="" class="dropdown-item">register</a>
+                    <a href="" class="dropdown-item">My 5job</a>
+                    <a href="" class="dropdown-item">my resumes</a>
+                    <a href="saved-job.html" class="dropdown-item">Saved jobs</a>
+                    <a href="" class="dropdown-item">Applied jobs</a>
+                    <a href="" class="dropdown-item">Job alerts</a>
+                    <a href="" class="dropdown-item">My account</a>
+                </div>
+            </div>
+        </div>
+        <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Employers<i
+                class="fa fa-arrow-right ms-3"></i></a>
+    </div>
+</nav>
+<!-- Navbar End -->
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 bg-black shadow rounded mb-4">
+            <h2 class="text-center text-primary">Login</h2>
+            <span th:text="${success}"></span>
+            <span th:text="${error}"></span>
+            <th:block th:if="${param.error}">
+                <p>  Wrong email or password, please re-enter!</p>
+            </th:block>
+            <form th:action="@{/login}" method="POST">
+                <!-- Thông tin tài khoản -->
+                <div class="form-group">
+                    <input type="email" class="form-control" id="email" name="username" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="showPassword">
+                    <label class="form-check-label" for="showPassword">Show Password</label>
+                </div>
+<!--                <input class="text " type="text" name="username" placeholder="Email" required="">-->
+<!--                <input class="text" type="password" name="password" placeholder="Password" required="">-->
+<!--                <input type="submit" value="Sign In">-->
+                <div class="text-center mb-4">
+                    <button class="btn btn-primary" type="submit" >Login</button>
+                </div>
+                <script>
+                    // JavaScript to toggle password visibility
+                    document.getElementById('showPassword').addEventListener('change', function () {
+                        var currentPassword = document.getElementById('password');
+                        var newPassword = document.getElementById('confirmPassword');
+                        if (this.checked) {
+                            password.type = 'text';
+                            confirmPassword.type = 'text';
+                        } else {
+                            password.type = 'password';
+                            confirmPassword.type = 'password';
+                        }
+                    });
+                    // JavaScript to compare new password and confirm password
+                </script>
+
+            </form>
+            <p>You forgot your password,  <a th:href="@{/signIn/emailAuthentication}"> Retrieve your password!</a></p>
+            <p>Dont't have an Account? <a th:href="@{/signUp}">  Sign up Now!</a></p>
+        </div>
+    </div>
+    <a href="http://localhost:9000/">click me </a>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/lib/wow/wow.min.js}"></script>
+<script th:src="@{/lib/easing/easing.min.js}"></script>
+<script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
+
+<!-- Template Javascript -->
+<script th:src="@{/js/main.js}"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

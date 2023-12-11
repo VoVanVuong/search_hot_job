@@ -1,0 +1,214 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <title>Nhà tuyển dụng đăng ký</title>
+  <!-- Favicon -->
+  <link href="img/favicon.ico" rel="icon">
+
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+
+  <!-- Icon Font Stylesheet -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Libraries Stylesheet -->
+  <link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
+  <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+
+  <!-- Customized Bootstrap Stylesheet -->
+  <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+  <!-- Template Stylesheet -->
+  <link th:href="@{/css/style.css}" rel="stylesheet">
+
+</head>
+<body>
+<!-- Spinner Start -->
+<div id="spinner"
+     class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+  <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+<!-- Spinner End -->
+
+
+
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg bg-white navbar-light shadow p-0 sticky-top">
+  <a href="index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
+    <h1 class="m-0 text-primary">5Job</h1>
+  </a>
+  <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"
+          data-bs-target="#navbarCollapse">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <div class="navbar-nav ms-auto p-4 p-lg-0">
+      <a href="index.html" class="nav-item nav-link active">Home</a>
+      <a href="" class="nav-item nav-link">Companies</a>
+      <a href="" class="nav-item nav-link">5Job tool</a>
+      <a href="" class="nav-item nav-link">CV</a>
+      <div class="nav-item dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Login</a>
+        <div class="dropdown-menu rounded-0 m-0">
+          <a href="" class="dropdown-item">Login</a>
+          <a href="" class="dropdown-item">register</a>
+          <a href="" class="dropdown-item">My 5job</a>
+          <a href="" class="dropdown-item">my resumes</a>
+          <a href="saved-job.html" class="dropdown-item">Saved jobs</a>
+          <a href="" class="dropdown-item">Applied jobs</a>
+          <a href="" class="dropdown-item">Job alerts</a>
+          <a href="" class="dropdown-item">My account</a>
+        </div>
+      </div>
+    </div>
+    <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Employers<i
+            class="fa fa-arrow-right ms-3"></i></a>
+  </div>
+</nav>
+<!-- Navbar End -->
+
+<div class="container mt-2">
+  <div class="row justify-content-center">
+    <div class="col-md-6 bg-black shadow rounded mb-4">
+      <h2 class="text-center text-primary">Sign Up for Job-seekers</h2>
+      <span  style="color: red" th:text="${error}"></span>
+      <span  style="color: red" th:text="${success}"></span>
+      <form  th:action="@{/signUp}" method="post" th:object="${account}">
+        <!--        <input class="text" type="text" name="name" th:field="*{name}" placeholder="Username" >-->
+        <!--        <span  style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" placeholder="name"></span>-->
+        <!--        <input class="text email" type="email"  name="email" th:field="*{email}" placeholder="Email" required="">-->
+        <!--        <span  style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>-->
+        <!--        <input class="text" type="password" name="password"th:field="*{password}" placeholder="Password" required="">-->
+        <!--        <span  style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>-->
+        <!-- Thông tin tài khoản -->
+        <div class="form-group">
+          <input type="text" class="form-control"  th:field="*{name}" name="name" placeholder="Full name" required>
+          <span  style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" placeholder="name"></span>
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-control"  name="email" th:field="*{email}"  placeholder="Email" required>
+          <span  style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+          <span id="passwordError" class="text-danger"></span>
+        </div>
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="showPassword">
+          <label class="form-check-label" for="showPassword">Show Password</label>
+        </div>
+
+        <!-- Thông tin công ty -->
+        <div th:object="${candidate}">
+
+<!--          <h4 class="text-center text-primary">User Information</h4>-->
+<!--          <div class="form-group">-->
+<!--            <input type="text" class="form-control" id="fullName" name="cadidatedName" placeholder="Full Name" required>-->
+<!--          </div>-->
+<!--          <div class="form-group">-->
+<!--            <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" placeholder="Day of birth" required>-->
+<!--          </div>-->
+<!--          <div class="form-row">-->
+<!--            <div class="form-group col-md-6">-->
+<!--              <select class="form-select border" name="gender">-->
+<!--                <option selected>Gender</option>-->
+<!--                <option value="1">Male</option>-->
+<!--                <option value="2">Female</option>-->
+<!--                <option value="3">Other</option>-->
+<!--              </select>          </div>-->
+<!--            <div class="form-group col-md-6">-->
+<!--              <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Phone Number" required>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="form-group">-->
+<!--            <textarea class="form-control" id="skill" name="skill" placeholder="skill" required></textarea>-->
+<!--          </div>-->
+
+<!--          <div class="form-group">-->
+
+<!--            <div class="form-group">-->
+<!--              <input type="text" class="form-control" id="address" name="address" placeholder="Country,Province/city,District,Street(Ex: 123 Nguyễn Tri Phương)" required>-->
+<!--            </div>-->
+<!--            &lt;!&ndash;          <div class="form-group">&ndash;&gt;-->
+<!--            &lt;!&ndash;            <input type="text" class="form-control" id="city" name="city" placeholder="Province/city" required>&ndash;&gt;-->
+<!--            &lt;!&ndash;          </div>&ndash;&gt;-->
+<!--            &lt;!&ndash;          <div class="form-group">&ndash;&gt;-->
+<!--            &lt;!&ndash;            <input type="text" class="form-control" id="district" name="district" placeholder="District" required>&ndash;&gt;-->
+<!--            &lt;!&ndash;          </div>&ndash;&gt;-->
+<!--            &lt;!&ndash;          <input type="text" class="form-control mb-2" id="street" name="street" placeholder="Street(Ex: 123 Nguyễn Tri Phương)" required>&ndash;&gt;-->
+<!--          </div>-->
+
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="subscribeNewsletter">
+            <label class="form-check-label" for="subscribeNewsletter">I would like to receive newsletter from 5Jobs</label>
+          </div>
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="agreeTerms">
+            <label class="form-check-label" for="agreeTerms">I consent to the processing of my personal data and agree to provide personal information and have read and agree to the 5Jobs Terms of Use and Privacy Policy.</label>
+          </div>
+
+          <div class="text-center mb-4">
+            <button type="submit" class="btn btn-primary" >Sign up now</button>
+          </div>
+        </div>
+        <script>
+
+          document.getElementById('showPassword').addEventListener('change', function () {
+            var currentPassword = document.getElementById('password');
+            var newPassword = document.getElementById('confirmPassword');
+            if (this.checked) {
+              password.type = 'text';
+              confirmPassword.type = 'text';
+            } else {
+              password.type = 'password';
+              confirmPassword.type = 'password';
+            }
+          });
+          // JavaScript to compare new password and confirm password
+          function signUp() {
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+            var passwordError = document.getElementById('passwordError');
+
+            if (password !== confirmPassword) {
+              passwordError.textContent = 'Passwords do not match';
+            } else {
+              passwordError.textContent = '';
+              // Add logic to handle password update here
+            }
+          }
+        </script>
+
+      </form>
+    </div>
+  </div>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/lib/wow/wow.min.js}"></script>
+<script th:src="@{/lib/easing/easing.min.js}"></script>
+<script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
+
+<!-- Template Javascript -->
+<script th:src="@{/js/main.js}"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-package edu.vku.searchjob.service;
-
-public interface IJobDetailsService {
-}
+//package edu.vku.searchjob.service;
+//
+//public interface IJobDetailsService {
+//}
