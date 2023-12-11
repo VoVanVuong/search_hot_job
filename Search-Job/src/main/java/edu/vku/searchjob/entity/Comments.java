@@ -20,6 +20,9 @@ public class Comments {
     // parent_id ang like
     @Column(name = "delete_flag")
     private Boolean deleteFlag;
+//    @ManyToOne()
+//    @JoinColumn(name = "account_id ")
+//    private Account account;
     @Column(name = "created_at",columnDefinition = "Datetime")
     private String createdAt;
     @Column(name = "updated_at",columnDefinition = "Datetime")
@@ -33,6 +36,7 @@ public class Comments {
         this.content = content;
         this.article = article;
         this.deleteFlag = deleteFlag;
+//        this.account=account;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -68,6 +72,14 @@ public class Comments {
     public void setDeleteFlag(Boolean deleteFlag) {
         this.deleteFlag = deleteFlag;
     }
+
+//    public Account getAccount() {
+//        return account;
+//    }
+//
+//    public void setAccount(Account account) {
+//        this.account = account;
+//    }
 
     public String getCreatedAt() {
         return createdAt;

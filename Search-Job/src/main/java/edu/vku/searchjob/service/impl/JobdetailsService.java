@@ -1,4 +1,4 @@
-package edu.vku.searchjob.service.impl;
-
-public class JobdetailsService {
-}
+//package edu.vku.searchjob.service.impl;
+//
+//public class JobdetailsService {
+//}

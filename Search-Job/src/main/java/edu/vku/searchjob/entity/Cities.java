@@ -8,6 +8,8 @@ public class Cities {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "name")
+    private String name;
     @Column(name = "created_at",columnDefinition = "Datetime")
     private String createdAt;
     @Column(name = "updated_at",columnDefinition = "Datetime")
@@ -16,8 +18,9 @@ public class Cities {
     public Cities() {
     }
 
-    public Cities(int id, String createdAt, String updatedAt) {
+    public Cities(int id,String name, String createdAt, String updatedAt) {
         this.id = id;
+        this.name=name;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -40,6 +43,14 @@ public class Cities {
 
     public String getUpdatedAt() {
         return updatedAt;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setUpdatedAt(String updatedAt) {

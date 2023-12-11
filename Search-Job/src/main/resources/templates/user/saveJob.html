@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <title>5Jobs</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicon -->
+  <link href="img/favicon.ico" rel="icon">
+
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"
+        rel="stylesheet">
+
+  <!-- Icon Font Stylesheet -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Libraries Stylesheet -->
+  <link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
+  <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+
+  <!-- Customized Bootstrap Stylesheet -->
+  <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+  <!-- Template Stylesheet -->
+  <link th:href="@{/css/style.css}" rel="stylesheet">
+  <style>
+    /* Ẩn chấm đầu dòng của thẻ li */
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+<div class="container-fluid bg-white p-0">
+  <!-- Spinner Start -->
+  <div id="spinner"
+       class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <!-- Spinner End -->
+
+  <div class="sticky-top">
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow p-0">
+      <a href="index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
+        <h1 class="m-0 text-primary">5Job</h1>
+      </a>
+      <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"
+              data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto p-4 p-lg-0">
+          <a href="index.html" class="nav-item nav-link active">Home</a>
+          <a href="" class="nav-item nav-link">Companies</a>
+          <a href="" class="nav-item nav-link">5Job tool</a>
+          <a href="" class="nav-item nav-link">CV</a>
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Login</a>
+            <div class="dropdown-menu rounded-0 m-0">
+              <a href="" class="dropdown-item">Login</a>
+              <a href="" class="dropdown-item">register</a>
+              <a href="" class="dropdown-item">My 5job</a>
+              <a href="" class="dropdown-item">my resumes</a>
+              <a href="saved-job.html" class="dropdown-item active">Saved jobs</a>
+              <a href="" class="dropdown-item">Applied jobs</a>
+              <a href="" class="dropdown-item">Job alerts</a>
+              <a href="" class="dropdown-item">My account</a>
+            </div>
+          </div>
+        </div>
+        <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Employers<i
+                class="fa fa-arrow-right ms-3"></i></a>
+      </div>
+    </nav>
+    <!-- Navbar End -->
+    <!-- Search Start -->
+    <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 5px;">
+      <div class="container">
+        <div class="row g-2">
+          <div class="col-md-10">
+            <div class="row g-2">
+              <div class="col-md-4">
+                <input type="text" class="form-control border-0" placeholder="Keyword" />
+              </div>
+              <div class="col-md-4">
+                <select class="form-select border-0">
+                  <option selected>Category</option>
+                  <option value="1">Category 1</option>
+                  <option value="2">Category 2</option>
+                  <option value="3">Category 3</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select class="form-select border-0">
+                  <option selected>Location</option>
+                  <option value="1">Location 1</option>
+                  <option value="2">Location 2</option>
+                  <option value="3">Location 3</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-dark border-0 w-100">Search</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Search End -->
+
+  </div>
+
+  <div class="container mt-4">
+    <div class="row">
+      <!-- Column 1: Job Listings -->
+      <div class="col-md-8">
+        <!-- Your job listings go here -->
+        <div class="container" style="position:relative; width: 100%">
+          <h1 class="mb-3"
+              style="letter-spacing:-1px;font-size:20px;font-weight:700;color:rgb(0, 19, 63);box-sizing:border-box;">
+            Công việc đã lưu
+            (
+            <span style="box-sizing:border-box;">2</span>
+            )
+          </h1>
+          <ul class="list-unstyled my-4" id="content-list">
+            <li class="mb-3 pb-3 border-bottom">
+              <div class="d-flex align-items-center">
+                <div class="mr-3 job-logo-container"
+                     style="width: 3rem;height:48px;padding:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;">
+                  <img class="img-fluid" alt="CareerLink's Client" loading="lazy"
+                       src="avata.jpg" />
+                </div>
+                <div class="flex-grow-1">
+                  <div class="mb-0">
+                    <a class="text-decoration-none text-dark"
+                       title="Kế Toán Tổng Hợp (VSIP Bắc Ninh)" href="">
+                      <h6 class="font-weight-bold font-size-18 mb-0">
+                        Kế Toán Tổng Hợp (VSIP Bắc Ninh)
+                      </h6>
+                    </a>
+                  </div>
+                  <div class="font-weight-600 text-muted">
+                                            <span class="text-success">
+                                                Hết hạn:
+                                                <span data-datetime="1703375999">một tháng tới</span>
+                                            </span>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <button class="btn btn-primary mr-2" data-job-id="2718916"
+                          data-target="#applyModal" data-toggle="modal" type="button">
+                    Nộp đơn
+                  </button>
+                  <button class="btn btn-outline-primary" data-job-id="2718916" data-locale="vi"
+                          data-saved-job-id="2281925" type="button">
+                    <i class="fas fa-bookmark"></i> Bỏ lưu
+                  </button>
+                </div>
+              </div>
+            </li>
+            <li class="mb-3 pb-3 border-bottom">
+              <div class="d-flex align-items-center">
+                <div class="mr-3 job-logo-container"
+                     style="width: 3rem;height:48px;padding:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;">
+                  <img class="img-fluid" alt="CareerLink's Client" loading="lazy"
+                       src="avata.jpg" />
+                </div>
+                <div class="flex-grow-1">
+                  <div class="mb-0">
+                    <a class="text-decoration-none text-dark"
+                       title="Kế Toán Tổng Hợp (VSIP Bắc Ninh)" href="">
+                      <h6 class="font-weight-bold font-size-18 mb-0">
+                        Kế Toán Tổng Hợp (VSIP Bắc Ninh)
+                      </h6>
+                    </a>
+                  </div>
+                  <div class="font-weight-600 text-muted">
+                                            <span class="text-success">
+                                                Hết hạn:
+                                                <span data-datetime="1703375999">một tháng tới</span>
+                                            </span>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <button class="btn btn-primary mr-2" data-job-id="2718916"
+                          data-target="#applyModal" data-toggle="modal" type="button">
+                    Nộp đơn
+                  </button>
+                  <button class="btn btn-outline-primary" data-job-id="2718916" data-locale="vi"
+                          data-saved-job-id="2281925" type="button">
+                    <i class="fas fa-bookmark"></i> Bỏ lưu
+                  </button>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+
+
+        </div>
+        <nav aria-label="Page navigation">
+          <ul class="pagination" id="pagination"></ul>
+        </nav>
+        <!-- Link to a specific version of jQuery (e.g., version 3.5.1) -->
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+        <!-- Your other script and stylesheet links -->
+
+        <script
+                src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script
+                src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
+
+        <script>
+          // Your pagination initialization code here
+          $(document).ready(function () {
+            // Total items and items per page
+            var totalItems = 2;
+            var itemsPerPage = 1;
+
+            // Calculate total pages
+            var totalPages = Math.ceil(totalItems / itemsPerPage);
+
+            // Initialize Twbs-pagination
+            $('#pagination').twbsPagination({
+              totalPages: totalPages,
+              visiblePages: 5, // Number of visible pages in the pagination
+              onPageClick: function (event, page) {
+                // Handle page change event
+                console.log("Showing page " + page);
+
+                // You can update the content here based on the selected page
+                var startItem = (page - 1) * itemsPerPage;
+                var endItem = Math.min(page * itemsPerPage, totalItems);
+                console.log("Displaying items from " + startItem + " to " + (endItem - 1));
+                updateContent(startItem, endItem);
+              }
+            });
+
+            // Function to update content based on the selected page
+            function updateContent(start, end) {
+              // This is just a placeholder. You should replace this with your actual logic
+              $('#content-list li').hide(); // Hide all items
+              $('#content-list li').slice(start, end).show(); // Show items for the current page
+            }
+          });
+        </script>
+
+      </div>
+
+      <!-- Column 2: Advertisement -->
+      <div class="col-sm-4" style="box-sizing:border-box;">
+        <div class="ad-container">
+          <h3>Advertisement</h3>
+          <!-- Your advertisement content goes here -->
+          <p>This is where your ad content will be displayed.</p>
+        </div>
+        <div style="box-sizing:border-box;"></div>
+        <div class="rounded">
+          <div style="margin-top:0px;padding:16px;box-sizing:border-box;">
+            <h4 class="my-2 font-weight-bold">
+              Gợi ý việc làm
+            </h4>
+          </div>
+          <div style="margin-left:0px;margin-bottom:0px;margin-right:0px;box-sizing:border-box;">
+
+            <div class="p-3 position-relative border-top border-gray">
+              <div class="d-flex align-items-start">
+                <div class="d-flex align-items-center justify-content-center rounded-circle"
+                     style="width: 3.5rem; height: 56px;">
+                  <img alt="Công Ty TNHH YTG Vina" loading="lazy" src="avata.jpg"
+                       class="img-fluid" />
+                </div>
+                <div class="pl-3 mt-0 flex-grow-1">
+                  <a href="" class="font-weight-bold text-dark text-decoration-none">
+                    <p class="clamp-2">NHÂN VIÊN PHÒNG CHẤT LƯỢNG</p>
+                  </a>
+                  <a title="Công Ty TNHH YTG Vina" href=""
+                     class="text-muted text-decoration-none">
+                    <p class="clamp-1">Công Ty TNHH YTG Vina</p>
+                  </a>
+                  <div class="text-muted clamp-2">
+                    <span>Hải Phòng</span>
+                  </div>
+                  <div class="text-primary clamp-1">
+                    Trên 800 USD
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-3 position-relative border-top border-gray">
+              <div class="d-flex align-items-start">
+                <div class="d-flex align-items-center justify-content-center rounded-circle"
+                     style="width: 3.5rem; height: 56px;">
+                  <img alt="Công Ty TNHH YTG Vina" loading="lazy" src="avata.jpg"
+                       class="img-fluid" />
+                </div>
+                <div class="pl-3 mt-0 flex-grow-1">
+                  <a href="" class="font-weight-bold text-dark text-decoration-none">
+                    <p class="clamp-2">NHÂN VIÊN PHÒNG CHẤT LƯỢNG</p>
+                  </a>
+                  <a title="Công Ty TNHH YTG Vina" href=""
+                     class="text-muted text-decoration-none">
+                    <p class="clamp-1">Công Ty TNHH YTG Vina</p>
+                  </a>
+                  <div class="text-muted clamp-2">
+                    <span>Hải Phòng</span>
+                  </div>
+                  <div class="text-primary clamp-1">
+                    Trên 800 USD
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-3 position-relative border-top border-gray">
+              <div class="d-flex align-items-start">
+                <div class="d-flex align-items-center justify-content-center rounded-circle"
+                     style="width: 3.5rem; height: 56px;">
+                  <img alt="Công Ty TNHH YTG Vina" loading="lazy" src="avata.jpg"
+                       class="img-fluid" />
+                </div>
+                <div class="pl-3 mt-0 flex-grow-1">
+                  <a href="" class="font-weight-bold text-dark text-decoration-none">
+                    <p class="clamp-2">NHÂN VIÊN PHÒNG CHẤT LƯỢNG</p>
+                  </a>
+                  <a title="Công Ty TNHH YTG Vina" href=""
+                     class="text-muted text-decoration-none">
+                    <p class="clamp-1">Công Ty TNHH YTG Vina</p>
+                  </a>
+                  <div class="text-muted clamp-2">
+                    <span>Hải Phòng</span>
+                  </div>
+                  <div class="text-primary clamp-1">
+                    Trên 800 USD
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Footer Start -->
+  <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container py-5">
+      <div class="row g-5">
+        <div class="col-lg-3 col-md-6">
+          <h5 class="text-white mb-4">Company</h5>
+          <a class="btn btn-link text-white-50" href="">About Us</a>
+          <a class="btn btn-link text-white-50" href="">Contact Us</a>
+          <a class="btn btn-link text-white-50" href="">Our Services</a>
+          <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
+          <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <h5 class="text-white mb-4">Contact</h5>
+          <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Da Nang</p>
+          <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+0934746662</p>
+          <p class="mb-2"><i class="fa fa-envelope me-3"></i>hodincanh@gmail.com</p>
+          <div class="d-flex pt-2">
+            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <h5 class="text-white mb-4">Newsletter</h5>
+          <p>send your email here</p>
+          <div class="position-relative mx-auto" style="max-width: 400px;">
+            <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text"
+                   placeholder="Your email">
+            <button type="button"
+                    class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="copyright">
+        <div class="row">
+          <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+            &copy; <a class="border-bottom" href="#">5Job</a>, All Right Reserved.
+
+            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+            Designed By <a class="border-bottom" href="">Canh-Vuong</a>
+          </div>
+          <div class="col-md-6 text-center text-md-end">
+            <div class="footer-menu">
+              <a href="">Home</a>
+              <a href="">Cookies</a>
+              <a href="">Help</a>
+              <a href="">FQAs</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer End -->
+
+
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+</div>
+
+<!-- JavaScript Libraries -->
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/lib/wow/wow.min.js}"></script>
+<script th:src="@{/lib/easing/easing.min.js}"></script>
+<!-- <script src="lib/waypoints/waypoints.min.js"></script> -->
+<script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
+
+<!-- Template Javascript -->
+<script th:src="@{/js/main.js}"></script>
+</body>
+
+</html>

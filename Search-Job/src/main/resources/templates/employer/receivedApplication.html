@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>SB Admin 2 - Dashboard</title>
+
+  <!-- Custom fonts for this template-->
+  <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+  <link
+          href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+  <!-- Sidebar -->
+  <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center"
+       href="employerIndexWhenLogin.html">
+      <div class="sidebar-brand-icon rotate-n-15">
+        <i class="fas fa-laugh-wink"></i>
+      </div>
+      <div class="sidebar-brand-text mx-3">My 5job <sup>employer</sup></div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+    <hr class="sidebar-divider">
+    <!-- Nav Item - Dashboard -->
+
+    <!-- Heading -->
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+      Jobs
+    </div>
+    <!-- Nav Item - Tables -->
+    <li class="nav-item">
+      <a class="nav-link" href="employerManagerJobs.html">
+        <i class="fas fa-fw fa-table"></i>
+        <span>My Jobs</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Post Jobs</span></a>
+    </li>
+    <hr class="sidebar-divider">
+    <div class="sidebar-heading">
+      My candidates
+    </div>
+    <li class="nav-item">
+      <a class="nav-link" href="searchResumes.html">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Search Resumes</span></a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="receivedApplication.html">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Received Applications</span></a>
+
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Saved Resumes</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Resume Alerts</span></a>
+    </li>
+    <hr class="sidebar-divider">
+    <div class="sidebar-heading">
+      Blog
+    </div>
+    <li class="nav-item">
+      <a class="nav-link" href="">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Blog</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+      <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+    <!-- Sidebar Message -->
+
+  </ul>
+  <!-- End of Sidebar -->
+
+  <!-- Content Wrapper -->
+  <div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+      <!-- Topbar -->
+      <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+        <!-- Sidebar Toggle (Topbar) -->
+        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+          <i class="fa fa-bars"></i>
+        </button>
+        <a class="sidebar-brand d-flex align-items-center justify-content-center"
+           href="employerIndexWhenLogin.html">
+          <div class="sidebar-brand-text mx-3">My 5job <sup>employer</sup></div>
+        </a>
+
+        <!-- Topbar Navbar -->
+        <ul class="navbar-nav ml-auto">
+
+          <!-- Nav Item - Alerts -->
+          <li class="nav-item dropdown no-arrow mx-1">
+            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-bell fa-fw"></i>
+              <!-- Counter - Alerts -->
+              <span class="badge badge-danger badge-counter">3+</span>
+            </a>
+            <!-- Dropdown - Alerts -->
+            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                 aria-labelledby="alertsDropdown">
+              <h6 class="dropdown-header">
+                Alerts Center
+              </h6>
+              <a class="dropdown-item d-flex align-items-center" href="#">
+                <div class="mr-3">
+                  <div class="icon-circle bg-primary">
+                    <i class="fas fa-file-alt text-white"></i>
+                  </div>
+                </div>
+                <div>
+                  <div class="small text-gray-500">December 12, 2023</div>
+                  <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                </div>
+              </a>
+              <a class="dropdown-item d-flex align-items-center" href="#">
+                <div class="mr-3">
+                  <div class="icon-circle bg-success">
+                    <i class="fas fa-donate text-white"></i>
+                  </div>
+                </div>
+                <div>
+                  <div class="small text-gray-500">December 7, 2023</div>
+                  $290.29 has been deposited into your account!
+                </div>
+              </a>
+              <a class="dropdown-item d-flex align-items-center" href="#">
+                <div class="mr-3">
+                  <div class="icon-circle bg-warning">
+                    <i class="fas fa-exclamation-triangle text-white"></i>
+                  </div>
+                </div>
+                <div>
+                  <div class="small text-gray-500">December 2, 2023</div>
+                  Spending Alert: We've noticed unusually high spending for your account.
+                </div>
+              </a>
+              <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+            </div>
+          </li>
+
+          <div class="topbar-divider d-none d-sm-block"></div>
+
+          <!-- Nav Item - User Information -->
+          <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+              <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+            </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                 aria-labelledby="userDropdown">
+              <a class="dropdown-item" href="#">
+                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                Profile
+              </a>
+              <a class="dropdown-item" href="#">
+                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                Settings
+              </a>
+              <a class="dropdown-item" href="#">
+                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                Activity Log
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <!-- End of Topbar -->
+      <!-- Begin Page Content -->
+      <div class="row bg-white">
+        <div class="col-md-4">
+          <div class="btn-group ">
+            <div class="d-flex flex-row">
+              <div class="d-flex flex-column">
+                <div class="d-flex justify-content-center">
+                  <h4 class="display-18 text-center">
+                    Received Application
+                  </h4>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-md-7">
+          <div class="btn-group float-right">
+            <span class="badge badge-pill bg-primary">0</span> Credits Left
+          </div>
+        </div>
+      </div>
+<!--      <div class="d-flex align-items-center flex-wrap">-->
+<!--        <div class="mr-2">Job title:</div>-->
+<!--        <div class="dropdown">-->
+<!--          <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown"-->
+<!--                  aria-haspopup="true" aria-expanded="false">-->
+<!--            No job posting found-->
+<!--          </button>-->
+<!--          <div class="dropdown-menu p-2 style-4">-->
+<!--            &lt;!&ndash; Content for the dropdown menu goes here &ndash;&gt;-->
+<!--            <a class="dropdown-item" href="#">Option 1</a>-->
+<!--            <a class="dropdown-item" href="#">Option 2</a>-->
+<!--            <a class="dropdown-item" href="#">Option 3</a>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <a href="#" class="btn btn-primary ml-2">Details</a>-->
+<!--      </div>-->
+      <div class="row mt-4">
+        <div class="col-sm-4 mb-3">
+          <div class="card p-3">
+            <div class="text-muted font-weight-bold">Total applications</div>
+            <div class="font-weight-bold display-4">0 <i class="icon"></i></div>
+          </div>
+        </div>
+
+        <div class="col-sm-4 mb-3">
+          <div class="card p-3">
+            <div class="text-muted font-weight-bold">Total Views</div>
+            <div class="font-weight-bold display-4">0 <i class="icon"></i></div>
+          </div>
+        </div>
+        <div class="col-sm-4 mb-3">
+          <div class="card p-3">
+            <div class="text-muted font-weight-bold">Post Date</div>
+            <div class="font-weight-bold display-4">N/A</div>
+          </div>
+        </div>
+      </div>
+<span th:text="${messages}"></span>
+      <!-- DataTales Example -->
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="btn-group ">
+              <div class="d-flex flex-row">
+                <div class="d-flex flex-column">
+                  <div class="d-flex justify-content-center">
+                    <button class="btn btn-danger" type="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <span class="p-2">List of non-applicants</span>
+                    </button>
+
+                  </div>
+                </div>
+<!--                <div class="d-flex flex-column">-->
+<!--                  <div class="d-flex justify-content-center">-->
+<!--                    <button class="btn btn-secondary dropdown-toggle" type="button"-->
+<!--                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                      <span class="p-2">Receivee in</span>-->
+<!--                    </button>-->
+<!--                    <div class="dropdown-menu">-->
+<!--                      <a class="dropdown-item" href="#">a day</a>-->
+<!--                      <a class="dropdown-item" href="#">3 day</a>-->
+<!--                      <a class="dropdown-item" href="#">...</a>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+              </div>
+
+            </div>
+          </div>
+<!--          <div class="col-md-8">-->
+<!--            <div class="d-flex justify-content-center">-->
+<!--&lt;!&ndash;              <a class="btn btn-primary" href="">Export</a>&ndash;&gt;-->
+<!--              <button class="btn btn-dark" type="button"-->
+<!--                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                <span class="p-2">List of non-applicants</span>-->
+<!--              </button>-->
+
+<!--            </div>-->
+<!--          </div>-->
+        </div>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+<!--                <li>-->
+<!--                  <p><strong>Candidate Name:</strong> <span th:text="${candidateJob.candidateName}"></span></p>-->
+<!--                  <p><strong>Other Candidate Job Details:</strong> <span th:text="${candidateJob.otherDetails}"></span></p>-->
+<!--                  &lt;!&ndash; Add other candidate job details as needed &ndash;&gt;-->
+<!--                </li>-->
+<!--                <tr  th:each="candidateJob, stat: ${candidateJobs}">-->
+                <tr  >
+                  <th>Id</th>
+                  <th >Name job</th>
+                  <th>Applicant's name</th>
+                  <th>Candidate email</th>
+                  <th>Recruitment status</th>
+                  <th>Application period <br> Dealine</th>
+                  <th></th>
+                </tr>
+                </thead>
+                <!--<tfoot>
+                      <tr>
+                          <th>ID</th>
+                          <th>Name</th>
+                          <th>...</th>
+                          <th>...</th>
+                          <th>...</th>
+                          <th>...</th>
+                      </tr>
+                  </tfoot>-->
+                <tbody>
+                <tr th:each="candidateJob, stat: ${candidateJobs}">
+                  <span th:if="${!candidateJob.isStatus()}">
+                  <td th:text="${stat.count}"></td>
+                  <td th:text="${candidateJob.getJob().name}"></td>
+                  <td th:text="${candidateJob.getCandidate().getAccount().name}"></td>
+                  <td th:text="${candidateJob.getCandidate().getAccount().email}"></td>
+<!--                  <td th:text="${candidateJob.getAccount().name}"></td>-->
+<!--                  <td th:text="${candidateJob.getAccount().email}"></td>-->
+                  <td th:text="${candidateJob.isStatus()} ? ' Have applied' : 'Not applied yet'" th:style="${candidateJob.isStatus() ? 'background-color: green;' : 'background-color: red;'}"></td>
+                  <td > <span th:text="${candidateJob.getCreatedAt()}"></span> <br> <span th:text="${candidateJob.getJob().deadline}" ></span></td>
+                  <td> <a th:href="@{/employer/jobDetails/applyEmployer/{id}(id=${candidateJob.id})}" class="btn btn-success"> <span   style="color: white">choose </span></a> //
+                    <!-- Button to trigger the modal -->
+<!--                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">-->
+<!--                      Delete-->
+<!--                    </button>-->
+
+<!--                    &lt;!&ndash; Modal &ndash;&gt;-->
+<!--                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--                      <div class="modal-dialog" role="document">-->
+<!--                        <div class="modal-content">-->
+<!--                          <div class="modal-header">-->
+<!--                            <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>-->
+<!--                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                              <span aria-hidden="true">&times;</span>-->
+<!--                            </button>-->
+<!--                          </div>-->
+<!--                          <div class="modal-body">-->
+<!--                            &lt;!&ndash; Place your user information here &ndash;&gt;-->
+<!--                            <p><strong>ID:</strong> 123</p>-->
+<!--                            <p><strong>Name:</strong> John Doe</p>-->
+<!--                            <p><strong>DOB:</strong> January 1, 1990</p>-->
+<!--                            <p><strong>Phone:</strong> +1234567890</p>-->
+<!--                            <p><strong>Address:</strong> 123 Main St, Cityville</p>-->
+<!--                          </div>-->
+<!--                          <div class="modal-footer">-->
+<!--                            &lt;!&ndash; Thêm đường dẫn xoá vào nút "Confirm Delete" &ndash;&gt;-->
+<!--                            <a th:href="@{/employer/jobDetails/applyEmployer/{id}(id=${candidateJob.id})}" class="btn btn-danger">Confirm Delete</a>-->
+<!--                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>-->
+<!--                          </div>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>-->
+<!--                    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>-->
+<!--                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
+
+<!--                    //-->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" th:attr="data-target='#userInfoModal-' + ${candidateJob.id}">
+                      View
+                    </button>
+                    <div th:id="'userInfoModal-' + ${candidateJob.id}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">User Information</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <!-- Place your user information here -->
+<!--                            <img src="path/to/avatar.jpg" alt="Avatar" class="img-fluid mb-2">-->
+                            <p><strong>Name:</strong> <span th:text="${candidateJob.getCandidate().getAccount().name}"></span></p>
+                            <p><strong>Address:</strong><span th:text="${candidateJob.getCandidate().address}"></span> </p>
+                            <p><strong>Phone:</strong> <span th:text="${candidateJob.getCandidate().phoneNumber}"></span></p>
+                            <p><strong>Email:</strong><span th:text="${candidateJob.getCandidate().getAccount().email}"></span> </p>
+                            <p><strong>Skill:</strong><span th:text="${candidateJob.getCandidate().skill}"></span> </p>
+<!--                            <p><strong>Describe:</strong><span th:text="${candidateJob.getCandidate().describe}"></span> </p>-->
+
+                            <p><strong>Cv: </strong><span th:text="${candidateJob.getCandidate().candidateCV}"></span> </p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+                  </td>
+                  <!-- Modal -->
+                  </span>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+<!--        <div class="d-flex justify-content-center">-->
+<!--          <button class="btn btn-danger" type="button"-->
+<!--                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--         -->
+<!--          </button>-->
+
+<!--        </div>-->
+<!--        <div class="card shadow mb-4">-->
+<!--          <div class="card-body">-->
+<!--            <div class="table-responsive">-->
+<!--              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">-->
+<!--                <thead>-->
+<!--                &lt;!&ndash;                <li>&ndash;&gt;-->
+<!--                &lt;!&ndash;                  <p><strong>Candidate Name:</strong> <span th:text="${candidateJob.candidateName}"></span></p>&ndash;&gt;-->
+<!--                &lt;!&ndash;                  <p><strong>Other Candidate Job Details:</strong> <span th:text="${candidateJob.otherDetails}"></span></p>&ndash;&gt;-->
+<!--                &lt;!&ndash;                  &lt;!&ndash; Add other candidate job details as needed &ndash;&gt;&ndash;&gt;-->
+<!--                &lt;!&ndash;                </li>&ndash;&gt;-->
+<!--                &lt;!&ndash;                <tr  th:each="candidateJob, stat: ${candidateJobs}">&ndash;&gt;-->
+<!--                <tr  >-->
+<!--                  <th>Id</th>-->
+<!--                  <th >Name job</th>-->
+<!--                  <th>Applicant's name</th>-->
+<!--                  <th>Candidate email</th>-->
+<!--                  <th>Recruitment status</th>-->
+<!--                  <th>Application period</th>-->
+<!--                  <th></th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                &lt;!&ndash;<tfoot>-->
+<!--                      <tr>-->
+<!--                          <th>ID</th>-->
+<!--                          <th>Name</th>-->
+<!--                          <th>...</th>-->
+<!--                          <th>...</th>-->
+<!--                          <th>...</th>-->
+<!--                          <th>...</th>-->
+<!--                      </tr>-->
+<!--                  </tfoot>&ndash;&gt;-->
+<!--                <tbody>-->
+<!--                <tr th:each="candidateJob, stat: ${candidateJobs}">-->
+<!--                  <span th:if="${!candidateJob.isStatus()}">-->
+<!--                  <td th:text="${stat.count}"></td>-->
+<!--                  <td th:text="${candidateJob.getJob().name}"></td>-->
+<!--                  <td th:text="${candidateJob.getCandidate().getAccount().name}"></td>-->
+<!--                  <td th:text="${candidateJob.getCandidate().getAccount().email}"></td>-->
+<!--&lt;!&ndash;                                      <td th:text="${candidateJob.getAccount().name}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <td th:text="${candidateJob.getAccount().email}"></td>&ndash;&gt;-->
+<!--                  <td th:text="${candidateJob.isStatus()} ? ' Have applied' : 'Not applied yet'" th:style="${candidateJob.isStatus() ? 'background-color: green;' : 'background-color: red;'}"></td>-->
+<!--                  <td th:text="${candidateJob.getCreatedAt()}"></td>-->
+<!--&lt;!&ndash;                  <td> <a th:href="@{/employer/jobDetails/applyEmployer/{id}(id=${candidateJob.id})}"> <span   style="color: red">choose </span></a></td>&ndash;&gt;-->
+<!--                  <td>-->
+<!--                      <button type="button" class="btn btn-primary" data-toggle="modal" th:attr="data-target='#userInfoModal-' + ${candidateJob.id}">-->
+<!--                      View-->
+<!--                    </button>-->
+<!--                    <div th:id="'userInfoModal-' + ${candidateJob.id}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--                      <div class="modal-dialog" role="document">-->
+<!--                        <div class="modal-content">-->
+<!--                          <div class="modal-header">-->
+<!--                            <h5 class="modal-title" id="exampleModalLabel">User Information</h5>-->
+<!--                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                              <span aria-hidden="true">&times;</span>-->
+<!--                            </button>-->
+<!--                          </div>-->
+<!--                          <div class="modal-body">-->
+<!--                            &lt;!&ndash; Place your user information here &ndash;&gt;-->
+<!--&lt;!&ndash;                            <img src="path/to/avatar.jpg" alt="Avatar" class="img-fluid mb-2">&ndash;&gt;-->
+<!--                            <p><strong>Name:</strong> <span th:text="${candidateJob.getCandidate().getAccount().name}"></span></p>-->
+<!--                            <p><strong>Address:</strong><span th:text="${candidateJob.getCandidate().address}"></span> </p>-->
+<!--                            <p><strong>Phone:</strong> <span th:text="${candidateJob.getCandidate().phoneNumber}"></span></p>-->
+<!--                            <p><strong>Email:</strong><span th:text="${candidateJob.getCandidate().getAccount().email}"></span> </p>-->
+<!--&lt;!&ndash;                             <p><strong>Email:</strong><span th:text="${candidateJob.getCandidate().getAccount().}"></span> </p>&ndash;&gt;-->
+<!--&lt;!&ndash;                            &ndash;&gt;-->
+<!--                            <p><strong>Skill:</strong><span th:text="${candidateJob.getCandidate().skill}"></span> </p>-->
+<!--                            &lt;!&ndash;                            <p><strong>Describe:</strong><span th:text="${candidateJob.getCandidate().describe}"></span> </p>&ndash;&gt;-->
+<!--                            <p><strong>Cv: </strong><span th:text="${candidateJob.getCandidate().candidateCV}"></span> </p>-->
+<!--                          </div>-->
+<!--                          <div class="modal-footer">-->
+<!--                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+<!--                          </div>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+
+<!--                    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>-->
+<!--                    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>-->
+<!--                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
+
+<!--                  </td>-->
+<!--                  </span>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--              </table>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+        <div class="d-flex justify-content-center">
+          <button class="btn btn-info" type="button"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="p-2">List of applicants</span>
+          </button>
+
+        </div>
+        <div class="card shadow mb-4">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <!--                <li>-->
+                <!--                  <p><strong>Candidate Name:</strong> <span th:text="${candidateJob.candidateName}"></span></p>-->
+                <!--                  <p><strong>Other Candidate Job Details:</strong> <span th:text="${candidateJob.otherDetails}"></span></p>-->
+                <!--                  &lt;!&ndash; Add other candidate job details as needed &ndash;&gt;-->
+                <!--                </li>-->
+                <!--                <tr  th:each="candidateJob, stat: ${candidateJobs}">-->
+                <tr  >
+                  <th>Id</th>
+                  <th >Name job</th>
+                  <th>Applicant's name</th>
+                  <th>Candidate email</th>
+                  <th>Recruitment status</th>
+                  <th>Application period</th>
+                  <th></th>
+                </tr>
+                </thead>
+                <!--<tfoot>
+                      <tr>
+                          <th>ID</th>
+                          <th>Name</th>
+                          <th>...</th>
+                          <th>...</th>
+                          <th>...</th>
+                          <th>...</th>
+                      </tr>
+                  </tfoot>-->
+                <tbody>
+                <tr th:each="candidateJob, stat: ${candidateJobs}">
+                  <span th:if="${candidateJob.isStatus()}">
+                  <td th:text="${stat.count}"></td>
+                  <td th:text="${candidateJob.getJob().name}"></td>
+                  <td th:text="${candidateJob.getCandidate().getAccount().name}"></td>
+                  <td th:text="${candidateJob.getCandidate().getAccount().email}"></td>
+<!--                                      <td th:text="${candidateJob.getAccount().name}"></td>-->
+<!--                  <td th:text="${candidateJob.getAccount().email}"></td>-->
+                  <td th:text="${candidateJob.isStatus()} ? ' Brower' : 'Do not Browse'" th:style="${candidateJob.isStatus() ? 'background-color: green;' : 'background-color: red;'}"></td>
+                  <td th:text="${candidateJob.getCreatedAt()}"></td>
+<!--                  <td> <a th:href="@{/employer/jobDetails/{id}(id=${candidateJob.id})}"> <span   style="color: red">choose </span></a></td>-->
+                 <td>
+                     <button type="button" class="btn btn-primary" data-toggle="modal" th:attr="data-target='#userInfoModal-' + ${candidateJob.id}">
+                      View
+                    </button>
+                    <div th:id="'userInfoModal-' + ${candidateJob.id}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">User Information</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <!-- Place your user information here -->
+<!--                            <img src="path/to/avatar.jpg" alt="Avatar" class="img-fluid mb-2">-->
+                            <p><strong>Name:</strong> <span th:text="${candidateJob.getCandidate().getAccount().name}"></span></p>
+                            <p><strong>Address:</strong><span th:text="${candidateJob.getCandidate().address}"></span> </p>
+                            <p><strong>Phone:</strong> <span th:text="${candidateJob.getCandidate().phoneNumber}"></span></p>
+                            <p><strong>Email:</strong><span th:text="${candidateJob.getCandidate().getAccount().email}"></span> </p>
+                            <p><strong>Skill:</strong><span th:text="${candidateJob.getCandidate().skill}"></span> </p>
+                            <!--                            <p><strong>Describe:</strong><span th:text="${candidateJob.getCandidate().describe}"></span> </p>-->
+
+                            <p><strong>Cv: </strong><span th:text="${candidateJob.getCandidate().candidateCV}"></span> </p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+                 </td>
+                  </span>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+<!--        <div class="card shadow mb-4">-->
+<!--          <div class="card-body">-->
+<!--            <div class="table-responsive">-->
+<!--              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">-->
+<!--                <thead>-->
+<!--                &lt;!&ndash;                <li>&ndash;&gt;-->
+<!--                &lt;!&ndash;                  <p><strong>Candidate Name:</strong> <span th:text="${candidateJob.candidateName}"></span></p>&ndash;&gt;-->
+<!--                &lt;!&ndash;                  <p><strong>Other Candidate Job Details:</strong> <span th:text="${candidateJob.otherDetails}"></span></p>&ndash;&gt;-->
+<!--                &lt;!&ndash;                  &lt;!&ndash; Add other candidate job details as needed &ndash;&gt;&ndash;&gt;-->
+<!--                &lt;!&ndash;                </li>&ndash;&gt;-->
+<!--                &lt;!&ndash;                <tr  th:each="candidateJob, stat: ${candidateJobs}">&ndash;&gt;-->
+<!--                <tr  >-->
+<!--                  <th>Id</th>-->
+<!--                  <th >Name job</th>-->
+<!--                  <th>Applicant's name</th>-->
+<!--                  <th>Candidate email</th>-->
+<!--                  <th>Recruitment status</th>-->
+<!--                  <th>Application period</th>-->
+<!--                  <th></th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                &lt;!&ndash;<tfoot>-->
+<!--                      <tr>-->
+<!--                          <th>ID</th>-->
+<!--                          <th>Name</th>-->
+<!--                          <th>...</th>-->
+<!--                          <th>...</th>-->
+<!--                          <th>...</th>-->
+<!--                          <th>...</th>-->
+<!--                      </tr>-->
+<!--                  </tfoot>&ndash;&gt;-->
+<!--                <tbody>-->
+<!--                <tr th:each="candidateJob, stat: ${candidateJobs}">-->
+<!--                  <td th:text="${stat.count}"></td>-->
+<!--                  <td th:text="${candidateJob.getJob().name}"></td>-->
+<!--                  <td th:text="${candidateJob.getAccount().name}"></td>-->
+<!--                  <td th:text="${candidateJob.getAccount().email}"></td>-->
+<!--                  <td th:text="${candidateJob.isStatus()} ? ' Brower' : 'Do not Browse'" th:style="${candidateJob.isStatus() ? 'background-color: green;' : 'background-color: red;'}"></td>-->
+<!--                  <td th:text="${candidateJob.getCreatedAt()}"></td>-->
+<!--                  <td> <a th:href="@{/employer/jobDetails/applyEmployer/{id}(id=${candidateJob.id})}"> <span   style="color: red">choose </span></a></td>-->
+
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--              </table>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <p class="text-center">No job postings found</p>
+        </div>
+      </div>
+
+
+
+
+
+    </div>
+  </div>
+</div>
+
+
+<!-- End of Main Content -->
+
+<!-- Footer -->
+<footer class="sticky-footer bg-white">
+  <div class="container my-auto">
+    <div class="copyright text-center my-auto">
+      <span>Copyright &copy; 5Jobs 2023</span>
+    </div>
+  </div>
+</footer>
+<!-- End of Footer -->
+</div>
+<!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+  <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+        <a class="btn btn-primary" href="login.html">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+<!-- Core plugin JavaScript-->
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+<!-- Custom scripts for all pages-->
+<script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+<!-- Page level plugins -->
+<script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
+
+<!-- Page level custom scripts -->
+<script th:src="@{/js/demo/chart-area-demo.js}"></script>
+<script th:src="@{/js/demo/chart-pie-demo.js}"></script>
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/lib/wow/wow.min.js}"></script>
+<script th:src="@{/lib/easing/easing.min.js}"></script>
+<script th:src="@{/lib/waypoints/waypoints.min.js}"></script>
+<script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
+
+<!-- Template Javascript -->
+<script th:src="@{/js/main.js}"></script>
+
+
+<!-- Core plugin JavaScript-->
+
+
+<!-- Page level plugins -->
+<script th:src="@{/vendor/datatables/jquery.dataTables.min.js}"></script>
+<script th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+
+<!-- Page level custom scripts -->
+<script th:src="@{/js/demo/datatables-demo.js}"></script>
+
+</body>
+
+</html>

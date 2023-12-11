@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>5Jobs</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicon -->
+  <link th:href="@{/img/favicon.ico}" rel="icon">
+
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"
+        rel="stylesheet">
+
+  <!-- Icon Font Stylesheet -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Libraries Stylesheet -->
+  <link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
+  <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+
+  <!-- Customized Bootstrap Stylesheet -->
+  <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+  <!-- Template Stylesheet -->
+  <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+
+<body>
+<div class="container-fluid bg-white p-0">
+  <!-- Spinner Start -->
+  <div id="spinner"
+       class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <!-- Spinner End -->
+
+  <div class="sticky-top">
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow p-0">
+      <a href="index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
+        <h1 class="m-0 text-primary">5Job</h1>
+      </a>
+      <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"
+              data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto p-4 p-lg-0">
+          <a href="index.html" class="nav-item nav-link active">Home</a>
+          <a href="" class="nav-item nav-link">Companies</a>
+          <a href="" class="nav-item nav-link">5Job tool</a>
+          <a href="" class="nav-item nav-link">CV</a>
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Login</a>
+            <div class="dropdown-menu rounded-0 m-0">
+              <a href="" class="dropdown-item">Login</a>
+              <a href="" class="dropdown-item">register</a>
+              <a href="" class="dropdown-item">My 5job</a>
+              <a href="" class="dropdown-item">my resumes</a>
+              <a href="saved-job.html" class="dropdown-item active">Saved jobs</a>
+              <a href="" class="dropdown-item">Applied jobs</a>
+              <a href="" class="dropdown-item">Job alerts</a>
+              <a href="" class="dropdown-item">My account</a>
+            </div>
+          </div>
+        </div>
+        <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Employers<i
+                class="fa fa-arrow-right ms-3"></i></a>
+      </div>
+    </nav>
+    <!-- Navbar End -->
+
+  </div>
+
+  <div class="container mt-4">
+    <div class="row">
+      <!-- Column 1: Job Listings -->
+      <div class="col-md-8">
+        <!-- Your job listings go here -->
+        <div class="container" style="position:relative; width: 100%">
+          <div class="row">
+            <div class="col-md-9">
+              <h1 class="mb-3"
+                  style="letter-spacing:-1px;font-size:20px;font-weight:700;color:rgb(0, 19, 63);box-sizing:border-box;">
+                My CV
+                (
+                <span style="box-sizing:border-box;">2</span>
+                )
+              </h1>
+            </div>
+            <div class="col">
+              <button type="button" class="btn btn-success text-white" style="border-radius: 32px;"
+                      data-toggle="modal" data-target="#NewFileModal">
+                <i class="fas fa-plus-circle mr-2"></i> New File
+              </button>
+            </div>
+            <!-- Button to trigger the modal -->
+
+
+
+          </div>
+          <!-- Modal -->
+          <div class="modal fade" id="NewFileModal" tabindex="-1" role="dialog"
+               aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">User Information</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+
+                  <p><strong>CV Name:</strong><input type="text" class="form-control" id="name"></p>
+                  <div class="custom-file mb-3">
+                    <input type="file" class="custom-file-input" id="pdfInput" accept=".pdf">
+                    <label class="custom-file-label" for="pdfInput">Choose PDF file</label>
+                  </div>
+                  <div class="row">
+                    <div class="embed-responsive embed-responsive-16by9">
+                      <canvas class="embed-responsive-item" id="pdfViewer"></canvas>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+          <div class="row">
+            <div class="col-6 mb-4">
+              <div class="card rounded" style="height: 310px; overflow: hidden; position: relative;">
+                <img src="" class="card-img-top" alt="CV Image" style="object-fit: cover;">
+                <div class="card-img-overlay"
+                     style="background: linear-gradient(rgba(255, 255, 255, 0), rgb(33, 47, 63)); bottom: 0; position: absolute; width: 100%;">
+                  <div class="position-absolute" style="right: 16px; top: 16px;">
+                    <a href="#" class="btn btn-primary btn-sm">Đặt làm CV chính</a>
+                  </div>
+                  <div class="position-absolute"
+                       style="bottom: 16px; color: #fff; left: 16px; right: 16px; z-index: 3;">
+                    <h4 class="card-title">
+                      <a href="" class="text-white" target="_blank">CV nhân viên kỹ thuật</a>
+                    </h4>
+                    <p class="card-text">Lasted updated <span>09-08-2023 20:49 PM</span></p>
+                    <ul class="list-unstyled d-flex mb-0">
+                      <li class="m-1"><a href="#" class="btn btn-light btn-sm"
+                                         data-toggle="tooltip"
+                                         title="Đưa CV lên đầu trang tìm kiếm của NTD"><i
+                              class="fas fa-arrow-up"></i> On Top</a></li>
+                      <li class="m-1"><a href="" class="btn btn-light btn-sm"
+                                         target="_blank"><i class="fas fa-share"></i> Share</a></li>
+                      <li class="m-1"><a href="#" class="btn btn-light btn-sm"
+                                         data-id="UgUDAQAGBFIPAAJXDgRVVgNQVQoLAAwBUFZWVQ6123"
+                                         data-cv-id="ffb92d63763194622e1280442ffe6123"><i
+                              class="fas fa-download"></i> Download</a></li>
+                      <li class=" m-1 flex-grow-1 text-right"><a href="#" class="text-white"
+                                                                 data-toggle="modal"
+                                                                 data-cv-id="ffb92d63763194622e1280442ffe6123"
+                                                                 data-target="#confirmDelete"><i class="fas fa-trash-alt"></i>
+                        Delete</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 mb-4">
+              <div class="card rounded" style="height: 310px; overflow: hidden; position: relative;">
+                <img src="" class="card-img-top" alt="CV Image" style="object-fit: cover;">
+                <div class="card-img-overlay"
+                     style="background: linear-gradient(rgba(255, 255, 255, 0), rgb(33, 47, 63)); bottom: 0; position: absolute; width: 100%;">
+                  <div class="position-absolute" style="right: 16px; top: 16px;">
+                    <a href="#" class="btn btn-primary btn-sm">Đặt làm CV chính</a>
+                  </div>
+                  <div class="position-absolute"
+                       style="bottom: 16px; color: #fff; left: 16px; right: 16px; z-index: 3;">
+                    <h4 class="card-title">
+                      <a href="" class="text-white" target="_blank">CV nhân viên kỹ thuật</a>
+                    </h4>
+                    <p class="card-text">Lasted updated <span>09-08-2023 20:49 PM</span></p>
+                    <ul class="list-unstyled d-flex mb-0">
+                      <li class="m-1"><a href="#" class="btn btn-light btn-sm"
+                                         data-toggle="tooltip"
+                                         title="Đưa CV lên đầu trang tìm kiếm của NTD"><i
+                              class="fas fa-arrow-up"></i> On Top</a></li>
+                      <li class="m-1"><a href="" class="btn btn-light btn-sm"
+                                         target="_blank"><i class="fas fa-share"></i> Share</a></li>
+                      <li class="m-1"><a href="#" class="btn btn-light btn-sm"
+                                         data-id="UgUDAQAGBFIPAAJXDgRVVgNQVQoLAAwBUFZWVQ6123"
+                                         data-cv-id="ffb92d63763194622e1280442ffe6123"><i
+                              class="fas fa-download"></i> Download</a></li>
+                      <li class=" m-1 flex-grow-1 text-right"><a href="#" class="text-white"
+                                                                 data-toggle="modal"
+                                                                 data-cv-id="ffb92d63763194622e1280442ffe6123"
+                                                                 data-target="#confirmDelete"><i class="fas fa-trash-alt"></i>
+                        Delete</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 mb-4">
+              <div class="card rounded" style="height: 310px; overflow: hidden; position: relative;">
+                <img src="" class="card-img-top" alt="CV Image" style="object-fit: cover;">
+                <div class="card-img-overlay"
+                     style="background: linear-gradient(rgba(255, 255, 255, 0), rgb(33, 47, 63)); bottom: 0; position: absolute; width: 100%;">
+                  <div class="position-absolute" style="right: 16px; top: 16px;">
+                    <a href="#" class="btn btn-primary btn-sm">Đặt làm CV chính</a>
+                  </div>
+                  <div class="position-absolute"
+                       style="bottom: 16px; color: #fff; left: 16px; right: 16px; z-index: 3;">
+                    <h4 class="card-title">
+                      <a href="" class="text-white" target="_blank">CV nhân viên kỹ thuật</a>
+                    </h4>
+                    <p class="card-text">Lasted updated <span>09-08-2023 20:49 PM</span></p>
+                    <ul class="list-unstyled d-flex mb-0">
+                      <li class="m-1"><a href="#" class="btn btn-light btn-sm"
+                                         data-toggle="tooltip"
+                                         title="Đưa CV lên đầu trang tìm kiếm của NTD"><i
+                              class="fas fa-arrow-up"></i> On Top</a></li>
+                      <li class="m-1"><a href="" class="btn btn-light btn-sm"
+                                         target="_blank"><i class="fas fa-share"></i> Share</a></li>
+                      <li class="m-1"><a href="#" class="btn btn-light btn-sm"
+                                         data-id="UgUDAQAGBFIPAAJXDgRVVgNQVQoLAAwBUFZWVQ6123"
+                                         data-cv-id="ffb92d63763194622e1280442ffe6123"><i
+                              class="fas fa-download"></i> Download</a></li>
+                      <li class=" m-1 flex-grow-1 text-right"><a href="#" class="text-white"
+                                                                 data-toggle="modal"
+                                                                 data-cv-id="ffb92d63763194622e1280442ffe6123"
+                                                                 data-target="#confirmDelete"><i class="fas fa-trash-alt"></i>
+                        Delete</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+          </div>
+
+
+
+        </div>
+
+      </div>
+
+      <!-- Column 2: Advertisement -->
+      <div class="col-sm-4" style="box-sizing:border-box;">
+        <div class="ad-container">
+          <h3>Advertisement</h3>
+          <!-- Your advertisement content goes here -->
+          <p>This is where your ad content will be displayed.</p>
+        </div>
+        <div style="box-sizing:border-box;"></div>
+        <div class="rounded">
+          <div class="container mt-5">
+            <h4>Option</h4>
+            <div class="custom-control custom-switch">
+              <input type="checkbox" class="custom-control-input" id="customSwitch1">
+              <label class="custom-control-label" for="customSwitch1">On/Off Find Jobs</label>
+            </div>
+            <div class="custom-control custom-switch">
+              <input type="checkbox" class="custom-control-input" id="customSwitch1">
+              <label class="custom-control-label" for="customSwitch1">Allows employers to search for
+                profiles</label>
+            </div>
+          </div>
+        </div>
+        <div style="box-sizing:border-box;"></div>
+        <div class="rounded">
+          <div style="margin-top:0px;padding:16px;box-sizing:border-box;">
+            <h4 class="my-2 font-weight-bold">
+              Gợi ý việc làm
+            </h4>
+          </div>
+          <div style="margin-left:0px;margin-bottom:0px;margin-right:0px;box-sizing:border-box;">
+
+            <div class="p-3 position-relative border-top border-gray">
+              <div class="d-flex align-items-start">
+                <div class="d-flex align-items-center justify-content-center rounded-circle"
+                     style="width: 3.5rem; height: 56px;">
+                  <img alt="Công Ty TNHH YTG Vina" loading="lazy" src="avata.jpg"
+                       class="img-fluid" />
+                </div>
+                <div class="pl-3 mt-0 flex-grow-1">
+                  <a href="" class="font-weight-bold text-dark text-decoration-none">
+                    <p class="clamp-2">NHÂN VIÊN PHÒNG CHẤT LƯỢNG</p>
+                  </a>
+                  <a title="Công Ty TNHH YTG Vina" href=""
+                     class="text-muted text-decoration-none">
+                    <p class="clamp-1">Công Ty TNHH YTG Vina</p>
+                  </a>
+                  <div class="text-muted clamp-2">
+                    <span>Hải Phòng</span>
+                  </div>
+                  <div class="text-primary clamp-1">
+                    Trên 800 USD
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-3 position-relative border-top border-gray">
+              <div class="d-flex align-items-start">
+                <div class="d-flex align-items-center justify-content-center rounded-circle"
+                     style="width: 3.5rem; height: 56px;">
+                  <img alt="Công Ty TNHH YTG Vina" loading="lazy" src="avata.jpg"
+                       class="img-fluid" />
+                </div>
+                <div class="pl-3 mt-0 flex-grow-1">
+                  <a href="" class="font-weight-bold text-dark text-decoration-none">
+                    <p class="clamp-2">NHÂN VIÊN PHÒNG CHẤT LƯỢNG</p>
+                  </a>
+                  <a title="Công Ty TNHH YTG Vina" href=""
+                     class="text-muted text-decoration-none">
+                    <p class="clamp-1">Công Ty TNHH YTG Vina</p>
+                  </a>
+                  <div class="text-muted clamp-2">
+                    <span>Hải Phòng</span>
+                  </div>
+                  <div class="text-primary clamp-1">
+                    Trên 800 USD
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-3 position-relative border-top border-gray">
+              <div class="d-flex align-items-start">
+                <div class="d-flex align-items-center justify-content-center rounded-circle"
+                     style="width: 3.5rem; height: 56px;">
+                  <img alt="Công Ty TNHH YTG Vina" loading="lazy" src="avata.jpg"
+                       class="img-fluid" />
+                </div>
+                <div class="pl-3 mt-0 flex-grow-1">
+                  <a href="" class="font-weight-bold text-dark text-decoration-none">
+                    <p class="clamp-2">NHÂN VIÊN PHÒNG CHẤT LƯỢNG</p>
+                  </a>
+                  <a title="Công Ty TNHH YTG Vina" href=""
+                     class="text-muted text-decoration-none">
+                    <p class="clamp-1">Công Ty TNHH YTG Vina</p>
+                  </a>
+                  <div class="text-muted clamp-2">
+                    <span>Hải Phòng</span>
+                  </div>
+                  <div class="text-primary clamp-1">
+                    Trên 800 USD
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Footer Start -->
+  <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container py-5">
+      <div class="row g-5">
+        <div class="col-lg-3 col-md-6">
+          <h5 class="text-white mb-4">Company</h5>
+          <a class="btn btn-link text-white-50" href="">About Us</a>
+          <a class="btn btn-link text-white-50" href="">Contact Us</a>
+          <a class="btn btn-link text-white-50" href="">Our Services</a>
+          <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
+          <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <h5 class="text-white mb-4">Contact</h5>
+          <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Da Nang</p>
+          <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+0934746662</p>
+          <p class="mb-2"><i class="fa fa-envelope me-3"></i>hodincanh@gmail.com</p>
+          <div class="d-flex pt-2">
+            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <h5 class="text-white mb-4">Newsletter</h5>
+          <p>send your email here</p>
+          <div class="position-relative mx-auto" style="max-width: 400px;">
+            <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text"
+                   placeholder="Your email">
+            <button type="button"
+                    class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="copyright">
+        <div class="row">
+          <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+            &copy; <a class="border-bottom" href="#">5Job</a>, All Right Reserved.
+
+            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+            Designed By <a class="border-bottom" href="">Canh-Vuong</a>
+          </div>
+          <div class="col-md-6 text-center text-md-end">
+            <div class="footer-menu">
+              <a href="">Home</a>
+              <a href="">Cookies</a>
+              <a href="">Help</a>
+              <a href="">FQAs</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer End -->
+
+
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+</div>
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/lib/wow/wow.min.js}"></script>
+<script th:src="@{/lib/easing/easing.min.js}"></script>
+<script th:src="@{/lib/waypoints/waypoints.min.js}"></script>
+<script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
+
+<!-- Template Javascript -->
+<script th:src="@{/js/main.js}"></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+</body>
+
+</html>

@@ -2,6 +2,8 @@
 package edu.vku.searchjob.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "employers")
@@ -13,39 +15,50 @@ public class Employers {
     private String name;
     @Column(name = "address")
     private String address;
-    //nhieu nha tuyen dung tuyen trong 1 thanh pho
-    @ManyToOne
-    @JoinColumn(name = "cities_id")
-    private Cities cities;
+//    //nhieu nha tuyen dung tuyen trong 1 thanh pho
+//    @ManyToOne
+//    @JoinColumn(name = "cities_id")
+//    private Cities cities;
+    @OneToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
     @Column(name = "phoneNumber")
     private String phoneNumber;
     @Column(name = "business_paper")
     private String businessPaper;
-    @Column(name = "avatar")
-    private String avatar;
+//    @Column(name = "avatar")
+//    private String avatar;
+//@Lob
+//@Column(name = "avatar_data", columnDefinition = "MEDIUMBLOB")
+//private byte[] avatarData;
     @Column(name = "decription")
     private String decription;
     @Column(name = "total_job")
     private String totalJob;
     @Column(name = "delete_flag")
     private Boolean deleteFlag;
-
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at",columnDefinition = "Datetime")
     private String createdAt;
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "UpdatedAt",columnDefinition = "Datetime")
     private String updatedAt;
 
     public Employers() {
     }
 
-    public Employers(int id, String name, String address, Cities cities, String phoneNumber, String businessPaper, String avatar, String decription, String totalJob, String createdAt, String updatedAt,Boolean deleteFlag) {
+    public Employers(int id, String name,Account account, String address, byte[] avatarData, String phoneNumber, String businessPaper,  String decription, String totalJob, String createdAt, String updatedAt,Boolean deleteFlag) {
         this.id = id;
         this.name = name;
         this.address = address;
-        this.cities = cities;
+//        this.cities = cities;
+        this.account=account;
         this.phoneNumber = phoneNumber;
         this.businessPaper = businessPaper;
-        this.avatar = avatar;
+//        this.avatar = avatar;
+     //   this.avatarData=avatarData;
         this.decription = decription;
         this.totalJob = totalJob;
         this.deleteFlag=deleteFlag;
@@ -77,13 +90,13 @@ public class Employers {
         this.address = address;
     }
 
-    public Cities getCities() {
-        return cities;
-    }
-
-    public void setCities(Cities cities) {
-        this.cities = cities;
-    }
+//    public Cities getCities() {
+//        return cities;
+//    }
+//
+//    public void setCities(Cities cities) {
+//        this.cities = cities;
+//    }
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -101,13 +114,21 @@ public class Employers {
         this.businessPaper = businessPaper;
     }
 
-    public String getAvatar() {
-        return avatar;
-    }
+//    public String getAvatar() {
+//        return avatar;
+//    }
+//
+//    public void setAvatar(String avatar) {
+//        this.avatar = avatar;
+//    }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
+//    public byte[] getAvatarData() {
+//        return avatarData;
+//    }
+
+//    public void setAvatarData(byte[] avatarData) {
+//        this.avatarData = avatarData;
+//    }
 
     public String getDecription() {
         return decription;
@@ -147,5 +168,13 @@ public class Employers {
 
     public void setDeleteFlag(Boolean deleteFlag) {
         this.deleteFlag = deleteFlag;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }

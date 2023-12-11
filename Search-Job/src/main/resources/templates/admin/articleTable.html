@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -10,18 +10,18 @@
     <meta name="author" content="">
 
     <title>SB Admin 2 - Articles</title>
-
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Custom fonts for this template -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
 
     <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
 
 </head>
 
@@ -57,37 +57,77 @@
             <div class="sidebar-heading">
                 Tables
             </div>
-            <!-- Nav Item - Tables -->
             <li class="nav-item active">
-                <a class="nav-link" href="CategoryTable.html">
+                <a class="nav-link" th:href="@{/admin/ListCategory}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Category table</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="jobTable.html">
+                <a class="nav-link" th:href="@{/admin/ListJob}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Job table</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="employerTable.html">
+                <a class="nav-link" th:href="@{/admin/ListEmployer}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Employer table</span></a>
             </li>
+<!--            <li class="nav-item active">-->
+<!--                <a class="nav-link" th:href="@{/admin/listAccount}">-->
+<!--                    <i class="fas fa-fw fa-table"></i>-->
+<!--                    <span>Account table</span></a>-->
+<!--            </li>-->
             <li class="nav-item active">
-                <a class="nav-link" href="jobseekerTable.html">
+                <a class="nav-link" th:href="@{/admin/listAccount}">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Job seeker table</span></a>
-            </li>
+                    <span>Account employer</span></a>
+            </li><li class="nav-item active">
+            <a class="nav-link" th:href="@{/admin/listUserAccount}">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Account User</span></a>
+        </li>
             <li class="nav-item active">
-                <a class="nav-link" href="articleTable.html">
+                <a class="nav-link" th:href="@{/admin/ListArticle}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Article table</span></a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="helpTable.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Help table</span></a>
-            </li>
+            <!--    <li class="nav-item active">-->
+            <!--      <a class="nav-link" href="helpTable.html">-->
+            <!--        <i class="fas fa-fw fa-table"></i>-->
+            <!--        <span>Help table</span></a>-->
+            <!--    </li>-->
+            <!-- Nav Item - Tables -->
+<!--            <li class="nav-item active">-->
+<!--                <a class="nav-link" href="CategoryTable.html">-->
+<!--                    <i class="fas fa-fw fa-table"></i>-->
+<!--                    <span>Category table</span></a>-->
+<!--            </li>-->
+<!--            <li class="nav-item active">-->
+<!--                <a class="nav-link" href="jobTable.html">-->
+<!--                    <i class="fas fa-fw fa-table"></i>-->
+<!--                    <span>Job table</span></a>-->
+<!--            </li>-->
+<!--            <li class="nav-item active">-->
+<!--                <a class="nav-link" href="employerTable.html">-->
+<!--                    <i class="fas fa-fw fa-table"></i>-->
+<!--                    <span>Employer table</span></a>-->
+<!--            </li>-->
+<!--            <li class="nav-item active">-->
+<!--                <a class="nav-link" href="jobseekerTable.html">-->
+<!--                    <i class="fas fa-fw fa-table"></i>-->
+<!--                    <span>Job seeker table</span></a>-->
+<!--            </li>-->
+<!--            <li class="nav-item active">-->
+<!--                <a class="nav-link" href="articleTable.html">-->
+<!--                    <i class="fas fa-fw fa-table"></i>-->
+<!--                    <span >Article table</span></a>-->
+
+<!--            </li>-->
+<!--            <li class="nav-item active">-->
+<!--                <a class="nav-link" href="helpTable.html">-->
+<!--                    <i class="fas fa-fw fa-table"></i>-->
+<!--                    <span>Help table</span></a>-->
+<!--            </li>-->
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -255,7 +295,9 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Articles</h6>
+                            <h6 class="m-0 font-weight-bold text-primary" style="display: inline-block;">DataTables Articles</h6>
+                            <a th:href="@{/admin/listDeleteArticle}">    <i class="fa-solid fa-folder"></i> </a>
+                            <i class="fa-solid fa-plus" style="display: inline-block;"></i>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -264,10 +306,12 @@
                                         <tr>
                                             <th>Id</th>
                                             <th>Name</th>
-                                            <th>...</th>
-                                            <th>...</th>
-                                            <th>...</th>
-                                            <th>...</th>
+                                            <th>Status</th>
+                                            <th>Decription</th>
+                                            <th>View</th>
+                                            <th>Created At</th>
+                                            <th>Updated At</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                   <!--<tfoot>
@@ -281,13 +325,16 @@
                                         </tr>
                                     </tfoot>-->  
                                     <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
+                                        <tr th:each="articles , stat :${listArticles}">
+                                            <td th:text="${stat.count}">td>
+                                            <td th:text="${articles.name}"></td>
+                                            <td th:text="${articles.status}"></td>
+                                            <td th:text="${articles.decription}"></td>
+                                            <td th:text="${articles.views}"></td>
+                                            <td th:text="${articles.createdAt}"></td>
+                                            <td th:text="${articles.updateAt}"></td>
+                                            <td> <a th:href="@{/admin/article/deleteArticle/{id}(id=${articles.id})}"> <span   style="color: red"><i class="fa-solid fa-trash-can-arrow-up"></i> </span></a>|| <i class="fa-regular fa-pen-to-square"></i></td>
+
                                         </tr>
                                     </tbody>
                                 </table>
@@ -343,21 +390,21 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script th:src="@{/js/sb-admin-2.min.js}"></script>
 
     <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script th:src="@{/vendor/datatables/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
+    <script th:src="@{/js/demo/datatables-demo.js}"></script>
 
 </body>
 
