@@ -1,5 +1,6 @@
 package edu.vku.searchjob.service.impl;
 
+import edu.vku.searchjob.entity.Account;
 import edu.vku.searchjob.entity.Cadidates;
 import edu.vku.searchjob.entity.Jobs;
 import edu.vku.searchjob.entity.SaveJob;
@@ -32,6 +33,14 @@ public class SaveJobService implements ISaveJobService {
         // Assuming you have a repository or some data access mechanism to query the database
         // You need to replace the following line with the actual logic to check for existing SaveJob
         return iSaveJobRepository.findByCandidateAndJob(candidate, job);
+    }
+    @Override
+    public List<SaveJob> findByAccountId(Account account){
+        return iSaveJobRepository.findByCandidateAccount(account);
+    }
+    @Override
+    public List<SaveJob> findByAccountIdAndName(Account account,String name){
+        return iSaveJobRepository.findByCandidateAccountAndName(account,name);
     }
     @Override
     public void deleteSaveJob(int id) {

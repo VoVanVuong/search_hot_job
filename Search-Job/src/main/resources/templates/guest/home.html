@@ -1,0 +1,1983 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>5Jobs</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
+    <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css}" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css"
+          th:href="@{https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css}" />
+    <link rel="stylesheet" type="text/css"
+          th:href="@{https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css}" />
+    <script th:src="@{https://code.jquery.com/jquery-3.6.4.min.js}"></script>
+    <script type="text/javascript"
+            th:src="@{https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js}"></script>
+
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <style>
+        /* Ẩn chấm đầu dòng của thẻ li */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Thẻ li với card */
+        .custom-card {
+            width: 100%;
+            height: fixed;
+            border: 1px solid #ccc;
+            overflow: hidden;
+            /* Để ẩn phần tử vượt ra khỏi card */
+            margin-bottom: 10px;
+
+        }
+
+        /* Hàng 1 */
+        .custom-card .row-1 {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+        }
+
+        /* Cột 1 - Hiển thị ảnh */
+        .custom-card .col-1 {
+            flex: 1;
+        }
+
+        /* Cột 2 - Hiển thị tên công ty và địa chỉ */
+        .custom-card .col-2 {
+            flex: 2;
+        }
+
+        /* Hàng 2 - Hiển thị text giới thiệu công ty */
+        .custom-card .row-2 {
+            padding: 10px;
+            overflow: hidden;
+        }
+
+        /* Đảm bảo văn bản không tràn ra khỏi card và thêm dấu "..." khi tràn */
+        .custom-card p {
+
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Đảm bảo ảnh trong cột 1 không vượt ra khỏi card */
+        .custom-card img {
+            max-width: 80px;
+            max-height: 80px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container-fluid p-0" style=" background-color: #F3F5F7">
+    <!--    &lt;!&ndash; Spinner Start &ndash;&gt;-->
+    <!--    <div id="spinner"-->
+    <!--         class="show position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">-->
+    <!--        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">-->
+    <!--            <span class="sr-only">Loading...</span>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--    &lt;!&ndash; Spinner End &ndash;&gt;-->
+
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+        <a href="index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
+            <!--            <h1 class="m-0 text-primary">5Job</h1>-->
+
+            <!--            <img th:src="../../static/img/5jlogo1.png" height="376" width="743"/></a>-->
+            <img th:src="@{/img/5jlogo1.png}" height="60%" />
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0 position-relative mb-0">
+                <a th:href="@{/user/home}"  class="nav-item nav-link active"><i class="bi bi-house-door"></i> Home</a>
+                <!--                <a th:href="@{/user/appliedJob}" class="nav-item nav-link">Job application</a>-->
+                <a th:href="@{/user/listCompany}" class="nav-item nav-link"><i class="bi bi-building"></i> Company</a>
+                <a th:href="@{/user/listJob}" class="nav-item nav-link"><i class="bi bi-book"></i> List job</a>
+<!--                <a th:if="${acc != null and not #strings.isEmpty(acc.name)}" th:href="@{http://localhost:9000/}"-->
+<!--                   class="nav-item nav-link"><i class="bi bi-chat"></i>Bot chat</a>-->
+<!--                <div th:if="${acc != null and not #strings.isEmpty(acc.name)}" class="nav-item dropdown mb-0 ml-1">-->
+<!--                        <span style="display:flex;align-items:center;position:relative;box-sizing:border-box;">-->
+<!--                            <a href="#" class="nav-link" data-bs-toggle="dropdown"-->
+<!--                               style="background-color:#E0F2FA;padding-right:6px;padding-left:6px;border-radius:50px;color:rgb(14, 18, 37);display:flex;align-items:center;font-weight:100;margin-left:4px;border:0.8px solid rgb(215, 215, 219);white-space:nowrap;cursor:pointer;text-decoration:none solid rgb(14, 18, 37);background-color:rgba(0, 0, 0, 0);box-sizing:border-box;">-->
+<!--&lt;!&ndash;                             <img th:if="${acc.avatar ne null}" th:src="${acc.avatar}" alt="User Avatar">&ndash;&gt;-->
+<!--                                &lt;!&ndash;<img th:if="${acc.avatar == null}" th:src="@{/img/nomal.jpg}" alt="Default Avatar">&ndash;&gt;-->
+<!--          <img alt="avatar" height="30" width="30" th:if="${acc.avatar ne null}" th:src="${acc.avatar}"-->
+<!--               style="object-fit:cover;object-position:50% 50%;margin-right:4px;border-radius:50%;vertical-align:middle;border-style:none;box-sizing:border-box;" />-->
+<!--                                <img alt="avatar" height="30" width="30" th:if="${acc.avatar == null}" th:src="@{/img/nomal.jpg}"-->
+<!--                                     style="object-fit:cover;object-position:50% 50%;margin-right:4px;border-radius:50%;vertical-align:middle;border-style:none;box-sizing:border-box;" />-->
+<!--                                <span-->
+<!--                                        style="max-width:150px;text-overflow:ellipsis;overflow:hidden;box-sizing:border-box;">-->
+<!--                                </span>-->
+<!--                                <span id="accName" th:if="${acc != null and not #strings.isEmpty(acc.name)}"-->
+<!--                                      th:text="${acc.name}">-->
+<!--                                </span>-->
+<!--                            </a>-->
+<!--                        </span>-->
+<!--                    <div class="dropdown-menu rounded-0 m-0 top-50 start-40 translate-middle mr-2">-->
+
+<!--                        <a th:href="@{/user/interview}" class="dropdown-item"><i class="fas fa-envelope"></i>-->
+<!--                            Interview</a>-->
+<!--                        <a th:href="@{/user/statusInterview}" class="dropdown-item"><i class="fas fa-envelope"></i>-->
+<!--                            Status Interview</a>-->
+<!--                        &lt;!&ndash;                        <a href="" class="dropdown-item">My 5job</a>&ndash;&gt;-->
+<!--                        &lt;!&ndash;                        <a href="" class="dropdown-item">my resumes</a>&ndash;&gt;-->
+<!--                        <a class="dropdown-item" th:href="@{/user/saveJob}"><i class="fas fa-heart"></i> Saved-->
+<!--                            jobs</a>-->
+<!--                        <a th:href="@{/user/appliedJob}" class="dropdown-item"><i class="fas fa-check"></i> Applied-->
+<!--                            jobs</a>-->
+
+<!--                        &lt;!&ndash;                        <a href="" class="dropdown-item">Job alerts</a>&ndash;&gt;-->
+<!--                        <li>-->
+<!--                            <hr class="dropdown-divider">-->
+<!--                        </li>-->
+<!--                        <a th:href="@{#}" class="dropdown-item"><i class="bi bi-chat"></i>Chat</a>-->
+
+<!--                        <a th:href="@{/user/myAccount}" class="dropdown-item"><i class="fas fa-user"></i> My-->
+<!--                            account</a>-->
+<!--                        <li>-->
+<!--                            <hr class="dropdown-divider">-->
+<!--                        </li>-->
+<!--                        <a th:href="@{/logout}" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+                <a th:href="@{/logout}" class="nav-item nav-link"
+                   th:unless="${acc != null and not #strings.isEmpty(acc.name)}"><i class="fas fa-sign-in-alt"></i>
+                    Login</a>
+
+            </div>
+
+            <!--            <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block"><i-->
+            <!--                    class="fa fa-arrow-right ms-3"></i></a>-->
+        </div>
+    </nav>
+
+    <!-- Navbar End -->
+
+    <!-- Search Start -->
+    <div class="container-fluid mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 15px;
+    background-color:#008CBA;">
+        <div class="container">
+            <div class="row g-2">
+                <div class="col-md-10">
+                    <div class="row g-2">
+                        <div class="col-md-4">
+                            <input type="text" class="form-control border-0" placeholder="Keyword" />
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-select border-0">
+                                <option selected>Category</option>
+                                <option value="1">Category 1</option>
+                                <option value="2">Category 2</option>
+                                <option value="3">Category 3</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-select border-0">
+                                <option selected>Location</option>
+                                <option value="1">Location 1</option>
+                                <option value="2">Location 2</option>
+                                <option value="3">Location 3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-dark border-0 w-100">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Search End -->
+    <!-- Jobs Start -->
+    <div class="row container">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-9">
+                    <h4 class="text-center mb-5 pt-1 wow fadeInUp" data-wow-delay="0.1s">Job Listing</h4>
+                    <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
+                        <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
+                            <li class="nav-item">
+                                <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3 active"
+                                   data-bs-toggle="pill" href="#tab-1">
+                                    <h6 class="mt-n1 mb-0">New jobs</h6>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="d-flex align-items-center text-start mx-3 pb-3" data-bs-toggle="pill"
+                                   href="#tab-2">
+                                    <h6 class="mt-n1 mb-0">Full time</h6>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" data-bs-toggle="pill"
+                                   href="#tab-3">
+                                    <h6 class="mt-n1 mb-0">Part time</h6>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="tab-1" class=" tab-pane fade show p-0 active">
+                                <ul class="row" id="">
+                                    <li class="col-md-4 shadow " th:each="job : ${latestJobs}">
+                                            <span class="list-group-item custom-card">
+                                                <!-- Hàng 1 -->
+                                                <div class="row row-1">
+                                                    <!-- Cột 1 - Hiển thị ảnh -->
+                                                    <div class="col-1">
+                                                        <th:block th:with="companyFounds=false">
+                                                            <!-- Dùng th:each để lặp qua danh sách -->
+                                                            <span th:each="employers : ${employersList}"
+                                                                  th:unless="${companyFounds}">
+                                                                <!-- Kiểm tra điều kiện, nếu khớp thì hiển thị và đặt companyFound=true để dừng lặp -->
+                                                                <span
+                                                                        th:if="${employers.getAccount().id == job.getAccountId()}"
+                                                                        th:with="companyFounds=true">
+                                                                    <img class="flex-shrink-0 img-fluid border rounded"
+                                                                         th:src="${employers.account.getAvatar()}" alt=""
+                                                                         style="width: 80px; height: 80px;">
+                                                                </span>
+                                                            </span>
+                                                            <!-- Hiển thị thông báo nếu không tìm thấy công ty -->
+                                                            <h4 th:unless="${companyFound}"></h4>
+                                                            <!-- Các dòng code khác nếu cần -->
+                                                        </th:block>
+                                                    </div>
+                                                    <!-- Cột 2 - Hiển thị tên công ty và địa chỉ -->
+                                                    <div class="col-2">
+                                                        <!--                                            <h5 style="height: 50px; overflow: hidden;text-overflow: ellipsis;">Tên job</h5>-->
+                                                        <a style="text-align:left;"
+                                                           th:href="@{/user/jobDetail/{id}(id=${job.id})}">
+                                                            <p style="color:black;overflow: hidden;word-wrap: break-word; height: 70px;"
+                                                               class="mb-3" th:text="${job.name}"></p>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!-- Hàng 2 -->
+                                                <div class="row row-1">
+                                                    <!-- Cột 1 - Hiển thị jobtype -->
+                                                    <div class="col-1">
+                                                        <span class="text-truncate me-3"><i
+                                                                class="far fa-clock text-primary me-2"></i><span
+                                                                th:text="${job.requestTime}"></span></span>
+                                                    </div>
+                                                    <!-- Cột 2 - Hiển thị salary -->
+                                                    <div class="col-2">
+                                                        <!--                                            <h5 style="height: 50px; overflow: hidden;text-overflow: ellipsis;">Tên job</h5>-->
+                                                        <span class="text-truncate me-3">
+                                                            <span>
+                                                                <i class="far fa-money-bill-alt text-primary me-2"></i>
+                                                                <span id="salaryValue" th:text="${job.salary}"
+                                                                      style="display:none;">
+                                                                </span>
+                                                            </span>
+                                                            <script>
+                                                                var salaryElement = document.getElementById('salaryValue');
+                                                                var salary = parseFloat(salaryElement.innerText.replace(/[^0-9.-]+/g, "")); // Remove non-numeric characters
+
+                                                                // Check if salary is a valid number
+                                                                if (!isNaN(salary)) {
+                                                                    var formattedSalary = salary.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+                                                                    document.write(formattedSalary);
+                                                                } else {
+                                                                    document.write("Invalid salary value");
+                                                                }
+                                                            </script>
+                                                        </span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="row row-2" style="text-align:left;">
+                                                    <span style="text-align:left;" class="text-truncate me-0"><i
+                                                            class="fa fa-map-marker-alt text-primary me-2"></i><span
+                                                            th:text="${job.address}"></span></span>
+                                                </div>
+                                                <div class="row row-1">
+                                                    <!-- Cột 1 - Hiển thị deadline -->
+                                                    <div class="col-md-10">
+                                                        <small class="text-truncate">
+
+                                                            <i class="far fa-calendar-alt text-primary me-2"></i>
+                                                            Deadline:<span th:text="${job.deadline}"></span>
+                                                        </small>
+
+                                                    </div>
+                                                    <!-- Cột 2 - Hiển thị button save -->
+                                                    <div class="col-md-2">
+                                                        <!--                                            <h5 style="height: 50px; overflow: hidden;text-overflow: ellipsis;">Tên job</h5>-->
+                                                        <a class="btn btn-light btn-square me-3"
+                                                           th:href="@{/user/saveJob/{id}(id=${job.id})}">
+                                                            <i class="far fa-heart text-primary"></i>
+                                                        </a>
+
+                                                    </div>
+
+                                                </div>
+                                            </span>
+                                    </li>
+
+                                </ul>
+                                <!--                        <ul th:if="${latestJobs != null}" class="row" id="content-list">-->
+                                <!--                            <li th:each="job : ${latestJobs}"-->
+                                <!--                                class="bg-white card-body job-item p-2 mb-2 ml-2 col-md-3"-->
+                                <!--                                style="height: 200px; margin-bottom: 20px; margin-left:20px; min-width:300px; max-width:300px;">-->
+                                <!--                                <div>-->
+                                <!--                                    <div class="row">-->
+                                <!--                                        &lt;!&ndash; Row 1: Image and Job Name &ndash;&gt;-->
+                                <!--                                        <div class="col-md-12">-->
+                                <!--                                            <div class="row">-->
+                                <!--                                                &lt;!&ndash; Column 1: Image &ndash;&gt;-->
+                                <!--                                                <div class="col-md-4">-->
+                                <!--                                                    <th:block th:with="companyFounds=false">-->
+                                <!--                                                        &lt;!&ndash; Dùng th:each để lặp qua danh sách &ndash;&gt;-->
+                                <!--                                                        <span th:each="employers : ${employersList}"-->
+                                <!--                                                              th:unless="${companyFounds}">-->
+                                <!--                                                                &lt;!&ndash; Kiểm tra điều kiện, nếu khớp thì hiển thị và đặt companyFound=true để dừng lặp &ndash;&gt;-->
+                                <!--                                                                <span-->
+                                <!--                                                                        th:if="${employers.getAccount().id == job.getAccountId()}"-->
+                                <!--                                                                        th:with="companyFounds=true">-->
+                                <!--                                                                    <img class="flex-shrink-0 img-fluid border rounded"-->
+                                <!--                                                                         th:src="${employers.account.getAvatar()}" alt=""-->
+                                <!--                                                                         style="width: 80px; height: 80px;">-->
+                                <!--                                                                </span>-->
+                                <!--                                                            </span>-->
+                                <!--                                                        &lt;!&ndash; Hiển thị thông báo nếu không tìm thấy công ty &ndash;&gt;-->
+                                <!--                                                        <h4 th:unless="${companyFound}"></h4>-->
+                                <!--                                                        &lt;!&ndash; Các dòng code khác nếu cần &ndash;&gt;-->
+                                <!--                                                    </th:block>-->
+                                <!--                                                </div>-->
+                                <!--                                                &lt;!&ndash; Column 2: Job Name &ndash;&gt;-->
+                                <!--                                                <div class="col-md-8 text-start">-->
+                                <!--                                                    <a th:href="@{/user/jobDetail/{id}(id=${job.id})}">-->
+                                <!--                                                        <p style="color:black;overflow: hidden;word-wrap: break-word; height: 70px;" class="mb-3" th:text="${job.name}">-->
+                                <!--                                                        </p>-->
+                                <!--                                                    </a>-->
+                                <!--                                                </div>-->
+                                <!--                                            </div>-->
+                                <!--                                        </div>-->
+                                <!--                                        &lt;!&ndash; Row 2: Job Type and Salary &ndash;&gt;-->
+                                <!--                                        <div class="col-md-12">-->
+                                <!--                                            <div class="row">-->
+                                <!--                                                &lt;!&ndash; Column 1: Job Type &ndash;&gt;-->
+                                <!--                                                <div class="col-md-4 text-start ps-4">-->
+                                <!--                                                        <span class="text-truncate me-3"><i-->
+                                <!--                                                                class="far fa-clock text-primary me-2"></i><span-->
+                                <!--                                                                th:text="${job.requestTime}"></span></span>-->
+                                <!--                                                </div>-->
+                                <!--                                                &lt;!&ndash; Column 2: Salary &ndash;&gt;-->
+                                <!--                                                <div class="col-md-8 text-start ps-4">-->
+                                <!--                                                        <span class="text-truncate me-3">-->
+                                <!--                                                            <span style="overflow: hidden; width: 80%; display: inline-block;">-->
+                                <!--                                                                    <i class="far fa-money-bill-alt text-primary me-2"></i>-->
+                                <!--                                                            <span id="salaryValue" th:text="${job.salary}"-->
+                                <!--                                                                  style="display:none;">-->
+
+                                <!--                                                            </span>-->
+                                <!--                                                            </span>-->
+                                <!--&lt;!&ndash;                                                            <i class="far fa-money-bill-alt text-primary me-2"></i>&ndash;&gt;-->
+                                <!--&lt;!&ndash;                                                            <span id="salaryValue" th:text="${job.salary}"&ndash;&gt;-->
+                                <!--&lt;!&ndash;                                                                  style="display:none; overflow: hidden;"></span>&ndash;&gt;-->
+                                <!--                                                            <script>-->
+                                <!--                                                                var salaryElement = document.getElementById('salaryValue');-->
+                                <!--                                                                var salary = parseFloat(salaryElement.innerText.replace(/[^0-9.-]+/g, "")); // Remove non-numeric characters-->
+
+                                <!--                                                                // Check if salary is a valid number-->
+                                <!--                                                                if (!isNaN(salary)) {-->
+                                <!--                                                                    var formattedSalary = salary.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });-->
+                                <!--                                                                    document.write(formattedSalary);-->
+                                <!--                                                                } else {-->
+                                <!--                                                                    document.write("Invalid salary value");-->
+                                <!--                                                                }-->
+                                <!--                                                            </script>-->
+                                <!--                                                        </span>-->
+                                <!--                                                </div>-->
+                                <!--                                            </div>-->
+                                <!--                                        </div>-->
+                                <!--                                        &lt;!&ndash; Row 3: Address &ndash;&gt;-->
+                                <!--                                        <div class="col-md-12 text-start ps-4">-->
+                                <!--                                                <span class="text-truncate me-0"><i-->
+                                <!--                                                        class="fa fa-map-marker-alt text-primary me-2"></i><span-->
+                                <!--                                                        th:text="${job.address}"></span></span>-->
+                                <!--                                        </div>-->
+                                <!--                                        <div class="col-md-12 d-flex justify-content-left">-->
+                                <!--                                            <small class="text-truncate"><i-->
+                                <!--                                                    class="far fa-calendar-alt text-primary me-2"></i>Deadline:-->
+                                <!--                                                <span th:text="${job.deadline}"></span></small>-->
+                                <!--                                            <a class="btn btn-light btn-square me-3"-->
+                                <!--                                               th:href="@{/user/saveJob/{id}(id=${job.id})}">-->
+                                <!--                                                <i class="far fa-heart text-primary"></i>-->
+                                <!--                                            </a>-->
+                                <!--                                        </div>-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
+                                <!--                            </li>-->
+                                <!--                        </ul>-->
+                                <a style="color:blue;" class="btn btn-outline-light" href="">More Jobs >></a>
+
+                            </div>
+
+                            <div id="tab-2" class=" tab-pane fade show p-0">
+                                <ul class="row" id="ssdasd">
+                                    <li class="col-md-4 shadow " th:each="job : ${latestJobs}"
+                                        th:if="${job.requestTime}=='Full time'">
+                                            <span class="list-group-item custom-card">
+                                                <!-- Hàng 1 -->
+                                                <div class="row row-1">
+                                                    <!-- Cột 1 - Hiển thị ảnh -->
+                                                    <div class="col-1">
+                                                        <th:block th:with="companyFounds=false">
+                                                            <!-- Dùng th:each để lặp qua danh sách -->
+                                                            <span th:each="employers : ${employersList}"
+                                                                  th:unless="${companyFounds}">
+                                                                <!-- Kiểm tra điều kiện, nếu khớp thì hiển thị và đặt companyFound=true để dừng lặp -->
+                                                                <span
+                                                                        th:if="${employers.getAccount().id == job.getAccountId()}"
+                                                                        th:with="companyFounds=true">
+                                                                    <img class="flex-shrink-0 img-fluid border rounded"
+                                                                         th:src="${employers.account.getAvatar()}" alt=""
+                                                                         style="width: 80px; height: 80px;">
+                                                                </span>
+                                                            </span>
+                                                            <!-- Hiển thị thông báo nếu không tìm thấy công ty -->
+                                                            <h4 th:unless="${companyFound}"></h4>
+                                                            <!-- Các dòng code khác nếu cần -->
+                                                        </th:block>
+                                                    </div>
+                                                    <!-- Cột 2 - Hiển thị tên công ty và địa chỉ -->
+                                                    <div class="col-2">
+                                                        <!--                                            <h5 style="height: 50px; overflow: hidden;text-overflow: ellipsis;">Tên job</h5>-->
+                                                        <a style="text-align:left;"
+                                                           th:href="@{/user/jobDetail/{id}(id=${job.id})}">
+                                                            <p style="color:black;overflow: hidden;word-wrap: break-word; height: 70px;"
+                                                               class="mb-3" th:text="${job.name}"></p>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!-- Hàng 2 -->
+                                                <div class="row row-1">
+                                                    <!-- Cột 1 - Hiển thị jobtype -->
+                                                    <div class="col-1">
+                                                        <span class="text-truncate me-3"><i
+                                                                class="far fa-clock text-primary me-2"></i><span
+                                                                th:text="${job.requestTime}"></span></span>
+                                                    </div>
+                                                    <!-- Cột 2 - Hiển thị salary -->
+                                                    <div class="col-2">
+                                                        <!--                                            <h5 style="height: 50px; overflow: hidden;text-overflow: ellipsis;">Tên job</h5>-->
+                                                        <span class="text-truncate me-3">
+                                                            <span>
+                                                                <i class="far fa-money-bill-alt text-primary me-2"></i>
+                                                                <span id="salaryValue1" th:text="${job.salary}"
+                                                                      style="display:none;">
+                                                                </span>
+                                                            </span>
+                                                            <script>
+                                                                var salaryElement = document.getElementById('salaryValue1');
+                                                                var salary = parseFloat(salaryElement.innerText.replace(/[^0-9.-]+/g, "")); // Remove non-numeric characters
+
+                                                                // Check if salary is a valid number
+                                                                if (!isNaN(salary)) {
+                                                                    var formattedSalary = salary.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+                                                                    document.write(formattedSalary);
+                                                                } else {
+                                                                    document.write("Invalid salary value");
+                                                                }
+                                                            </script>
+                                                        </span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="row row-2" style="text-align:left;">
+                                                    <span style="text-align:left;" class="text-truncate me-0"><i
+                                                            class="fa fa-map-marker-alt text-primary me-2"></i><span
+                                                            th:text="${job.address}"></span></span>
+                                                </div>
+                                                <div class="row row-1">
+                                                    <!-- Cột 1 - Hiển thị deadline -->
+                                                    <div class="col-md-10">
+                                                        <small class="text-truncate">
+
+                                                            <i class="far fa-calendar-alt text-primary me-2"></i>
+                                                            Deadline:<span th:text="${job.deadline}"></span>
+                                                        </small>
+
+                                                    </div>
+                                                    <!-- Cột 2 - Hiển thị button save -->
+                                                    <div class="col-md-2">
+                                                        <!--                                            <h5 style="height: 50px; overflow: hidden;text-overflow: ellipsis;">Tên job</h5>-->
+                                                        <a class="btn btn-light btn-square me-3"
+                                                           th:href="@{/user/saveJob/{id}(id=${job.id})}">
+                                                            <i class="far fa-heart text-primary"></i>
+                                                        </a>
+
+                                                    </div>
+
+                                                </div>
+                                            </span>
+                                    </li>
+
+                                </ul>
+                                <!--                        <ul th:if="${latestJobs != null}" class="row" id="content-list">-->
+                                <!--                            <li th:each="job : ${latestJobs}"-->
+                                <!--                                class="bg-white card-body job-item p-2 mb-2 ml-2 col-md-3"-->
+                                <!--                                style="height: 200px; margin-bottom: 20px; margin-left:20px; min-width:300px; max-width:300px;">-->
+                                <!--                                <div>-->
+                                <!--                                    <div class="row">-->
+                                <!--                                        &lt;!&ndash; Row 1: Image and Job Name &ndash;&gt;-->
+                                <!--                                        <div class="col-md-12">-->
+                                <!--                                            <div class="row">-->
+                                <!--                                                &lt;!&ndash; Column 1: Image &ndash;&gt;-->
+                                <!--                                                <div class="col-md-4">-->
+                                <!--                                                    <th:block th:with="companyFounds=false">-->
+                                <!--                                                        &lt;!&ndash; Dùng th:each để lặp qua danh sách &ndash;&gt;-->
+                                <!--                                                        <span th:each="employers : ${employersList}"-->
+                                <!--                                                              th:unless="${companyFounds}">-->
+                                <!--                                                                &lt;!&ndash; Kiểm tra điều kiện, nếu khớp thì hiển thị và đặt companyFound=true để dừng lặp &ndash;&gt;-->
+                                <!--                                                                <span-->
+                                <!--                                                                        th:if="${employers.getAccount().id == job.getAccountId()}"-->
+                                <!--                                                                        th:with="companyFounds=true">-->
+                                <!--                                                                    <img class="flex-shrink-0 img-fluid border rounded"-->
+                                <!--                                                                         th:src="${employers.account.getAvatar()}" alt=""-->
+                                <!--                                                                         style="width: 80px; height: 80px;">-->
+                                <!--                                                                </span>-->
+                                <!--                                                            </span>-->
+                                <!--                                                        &lt;!&ndash; Hiển thị thông báo nếu không tìm thấy công ty &ndash;&gt;-->
+                                <!--                                                        <h4 th:unless="${companyFound}"></h4>-->
+                                <!--                                                        &lt;!&ndash; Các dòng code khác nếu cần &ndash;&gt;-->
+                                <!--                                                    </th:block>-->
+                                <!--                                                </div>-->
+                                <!--                                                &lt;!&ndash; Column 2: Job Name &ndash;&gt;-->
+                                <!--                                                <div class="col-md-8 text-start">-->
+                                <!--                                                    <a th:href="@{/user/jobDetail/{id}(id=${job.id})}">-->
+                                <!--                                                        <p style="color:black;overflow: hidden;word-wrap: break-word; height: 70px;" class="mb-3" th:text="${job.name}">-->
+                                <!--                                                        </p>-->
+                                <!--                                                    </a>-->
+                                <!--                                                </div>-->
+                                <!--                                            </div>-->
+                                <!--                                        </div>-->
+                                <!--                                        &lt;!&ndash; Row 2: Job Type and Salary &ndash;&gt;-->
+                                <!--                                        <div class="col-md-12">-->
+                                <!--                                            <div class="row">-->
+                                <!--                                                &lt;!&ndash; Column 1: Job Type &ndash;&gt;-->
+                                <!--                                                <div class="col-md-4 text-start ps-4">-->
+                                <!--                                                        <span class="text-truncate me-3"><i-->
+                                <!--                                                                class="far fa-clock text-primary me-2"></i><span-->
+                                <!--                                                                th:text="${job.requestTime}"></span></span>-->
+                                <!--                                                </div>-->
+                                <!--                                                &lt;!&ndash; Column 2: Salary &ndash;&gt;-->
+                                <!--                                                <div class="col-md-8 text-start ps-4">-->
+                                <!--                                                        <span class="text-truncate me-3">-->
+                                <!--                                                            <span style="overflow: hidden; width: 80%; display: inline-block;">-->
+                                <!--                                                                    <i class="far fa-money-bill-alt text-primary me-2"></i>-->
+                                <!--                                                            <span id="salaryValue" th:text="${job.salary}"-->
+                                <!--                                                                  style="display:none;">-->
+
+                                <!--                                                            </span>-->
+                                <!--                                                            </span>-->
+                                <!--&lt;!&ndash;                                                            <i class="far fa-money-bill-alt text-primary me-2"></i>&ndash;&gt;-->
+                                <!--&lt;!&ndash;                                                            <span id="salaryValue" th:text="${job.salary}"&ndash;&gt;-->
+                                <!--&lt;!&ndash;                                                                  style="display:none; overflow: hidden;"></span>&ndash;&gt;-->
+                                <!--                                                            <script>-->
+                                <!--                                                                var salaryElement = document.getElementById('salaryValue');-->
+                                <!--                                                                var salary = parseFloat(salaryElement.innerText.replace(/[^0-9.-]+/g, "")); // Remove non-numeric characters-->
+
+                                <!--                                                                // Check if salary is a valid number-->
+                                <!--                                                                if (!isNaN(salary)) {-->
+                                <!--                                                                    var formattedSalary = salary.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });-->
+                                <!--                                                                    document.write(formattedSalary);-->
+                                <!--                                                                } else {-->
+                                <!--                                                                    document.write("Invalid salary value");-->
+                                <!--                                                                }-->
+                                <!--                                                            </script>-->
+                                <!--                                                        </span>-->
+                                <!--                                                </div>-->
+                                <!--                                            </div>-->
+                                <!--                                        </div>-->
+                                <!--                                        &lt;!&ndash; Row 3: Address &ndash;&gt;-->
+                                <!--                                        <div class="col-md-12 text-start ps-4">-->
+                                <!--                                                <span class="text-truncate me-0"><i-->
+                                <!--                                                        class="fa fa-map-marker-alt text-primary me-2"></i><span-->
+                                <!--                                                        th:text="${job.address}"></span></span>-->
+                                <!--                                        </div>-->
+                                <!--                                        <div class="col-md-12 d-flex justify-content-left">-->
+                                <!--                                            <small class="text-truncate"><i-->
+                                <!--                                                    class="far fa-calendar-alt text-primary me-2"></i>Deadline:-->
+                                <!--                                                <span th:text="${job.deadline}"></span></small>-->
+                                <!--                                            <a class="btn btn-light btn-square me-3"-->
+                                <!--                                               th:href="@{/user/saveJob/{id}(id=${job.id})}">-->
+                                <!--                                                <i class="far fa-heart text-primary"></i>-->
+                                <!--                                            </a>-->
+                                <!--                                        </div>-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
+                                <!--                            </li>-->
+                                <!--                        </ul>-->
+                                <a style="color:blue;" class="btn btn-outline-light" href="">More Jobs >></a>
+
+                            </div>
+                            <div id="tab-3" class=" tab-pane fade show p-0">
+                                <ul class="row" id="aaasd">
+                                    <li class="col-md-4 shadow " th:each="job : ${latestJobs}"
+                                        th:if="${job.requestTime}=='Part time'">
+                                            <span class="list-group-item custom-card">
+                                                <!-- Hàng 1 -->
+                                                <div class="row row-1">
+                                                    <!-- Cột 1 - Hiển thị ảnh -->
+                                                    <div class="col-1">
+                                                        <th:block th:with="companyFounds=false">
+                                                            <!-- Dùng th:each để lặp qua danh sách -->
+                                                            <span th:each="employers : ${employersList}"
+                                                                  th:unless="${companyFounds}">
+                                                                <!-- Kiểm tra điều kiện, nếu khớp thì hiển thị và đặt companyFound=true để dừng lặp -->
+                                                                <span
+                                                                        th:if="${employers.getAccount().id == job.getAccountId()}"
+                                                                        th:with="companyFounds=true">
+                                                                    <img class="flex-shrink-0 img-fluid border rounded"
+                                                                         th:src="${employers.account.getAvatar()}" alt=""
+                                                                         style="width: 80px; height: 80px;">
+                                                                </span>
+                                                            </span>
+                                                            <!-- Hiển thị thông báo nếu không tìm thấy công ty -->
+                                                            <h4 th:unless="${companyFound}"></h4>
+                                                            <!-- Các dòng code khác nếu cần -->
+                                                        </th:block>
+                                                    </div>
+                                                    <!-- Cột 2 - Hiển thị tên công ty và địa chỉ -->
+                                                    <div class="col-2">
+                                                        <!--                                            <h5 style="height: 50px; overflow: hidden;text-overflow: ellipsis;">Tên job</h5>-->
+                                                        <a style="text-align:left;"
+                                                           th:href="@{/user/jobDetail/{id}(id=${job.id})}">
+                                                            <p style="color:black;overflow: hidden;word-wrap: break-word; height: 70px;"
+                                                               class="mb-3" th:text="${job.name}"></p>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!-- Hàng 2 -->
+                                                <div class="row row-1">
+                                                    <!-- Cột 1 - Hiển thị jobtype -->
+                                                    <div class="col-1">
+                                                        <span class="text-truncate me-3"><i
+                                                                class="far fa-clock text-primary me-2"></i><span
+                                                                th:text="${job.requestTime}"></span></span>
+                                                    </div>
+                                                    <!-- Cột 2 - Hiển thị salary -->
+                                                    <div class="col-2">
+                                                        <!--                                            <h5 style="height: 50px; overflow: hidden;text-overflow: ellipsis;">Tên job</h5>-->
+                                                        <span class="text-truncate me-3">
+                                                            <span>
+                                                                <i class="far fa-money-bill-alt text-primary me-2"></i>
+                                                                <span id="salaryValue2" th:text="${job.salary}"
+                                                                      style="display:none;">
+                                                                </span>
+                                                            </span>
+                                                            <script>
+                                                                var salaryElement = document.getElementById('salaryValue2');
+                                                                var salary = parseFloat(salaryElement.innerText.replace(/[^0-9.-]+/g, "")); // Remove non-numeric characters
+
+                                                                // Check if salary is a valid number
+                                                                if (!isNaN(salary)) {
+                                                                    var formattedSalary = salary.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+                                                                    document.write(formattedSalary);
+                                                                } else {
+                                                                    document.write("Invalid salary value");
+                                                                }
+                                                            </script>
+                                                        </span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="row row-2" style="text-align:left;">
+                                                    <span style="text-align:left;" class="text-truncate me-0"><i
+                                                            class="fa fa-map-marker-alt text-primary me-2"></i><span
+                                                            th:text="${job.address}"></span></span>
+                                                </div>
+                                                <div class="row row-1">
+                                                    <!-- Cột 1 - Hiển thị deadline -->
+                                                    <div class="col-md-10">
+                                                        <small class="text-truncate">
+
+                                                            <i class="far fa-calendar-alt text-primary me-2"></i>
+                                                            Deadline:<span th:text="${job.deadline}"></span>
+                                                        </small>
+
+                                                    </div>
+                                                    <!-- Cột 2 - Hiển thị button save -->
+                                                    <div class="col-md-2">
+                                                        <!--                                            <h5 style="height: 50px; overflow: hidden;text-overflow: ellipsis;">Tên job</h5>-->
+                                                        <a class="btn btn-light btn-square me-3"
+                                                           th:href="@{/user/saveJob/{id}(id=${job.id})}">
+                                                            <i class="far fa-heart text-primary"></i>
+                                                        </a>
+
+                                                    </div>
+
+                                                </div>
+                                            </span>
+                                    </li>
+
+                                </ul>
+                                <!--                        <ul th:if="${latestJobs != null}" class="row" id="content-list">-->
+                                <!--                            <li th:each="job : ${latestJobs}"-->
+                                <!--                                class="bg-white card-body job-item p-2 mb-2 ml-2 col-md-3"-->
+                                <!--                                style="height: 200px; margin-bottom: 20px; margin-left:20px; min-width:300px; max-width:300px;">-->
+                                <!--                                <div>-->
+                                <!--                                    <div class="row">-->
+                                <!--                                        &lt;!&ndash; Row 1: Image and Job Name &ndash;&gt;-->
+                                <!--                                        <div class="col-md-12">-->
+                                <!--                                            <div class="row">-->
+                                <!--                                                &lt;!&ndash; Column 1: Image &ndash;&gt;-->
+                                <!--                                                <div class="col-md-4">-->
+                                <!--                                                    <th:block th:with="companyFounds=false">-->
+                                <!--                                                        &lt;!&ndash; Dùng th:each để lặp qua danh sách &ndash;&gt;-->
+                                <!--                                                        <span th:each="employers : ${employersList}"-->
+                                <!--                                                              th:unless="${companyFounds}">-->
+                                <!--                                                                &lt;!&ndash; Kiểm tra điều kiện, nếu khớp thì hiển thị và đặt companyFound=true để dừng lặp &ndash;&gt;-->
+                                <!--                                                                <span-->
+                                <!--                                                                        th:if="${employers.getAccount().id == job.getAccountId()}"-->
+                                <!--                                                                        th:with="companyFounds=true">-->
+                                <!--                                                                    <img class="flex-shrink-0 img-fluid border rounded"-->
+                                <!--                                                                         th:src="${employers.account.getAvatar()}" alt=""-->
+                                <!--                                                                         style="width: 80px; height: 80px;">-->
+                                <!--                                                                </span>-->
+                                <!--                                                            </span>-->
+                                <!--                                                        &lt;!&ndash; Hiển thị thông báo nếu không tìm thấy công ty &ndash;&gt;-->
+                                <!--                                                        <h4 th:unless="${companyFound}"></h4>-->
+                                <!--                                                        &lt;!&ndash; Các dòng code khác nếu cần &ndash;&gt;-->
+                                <!--                                                    </th:block>-->
+                                <!--                                                </div>-->
+                                <!--                                                &lt;!&ndash; Column 2: Job Name &ndash;&gt;-->
+                                <!--                                                <div class="col-md-8 text-start">-->
+                                <!--                                                    <a th:href="@{/user/jobDetail/{id}(id=${job.id})}">-->
+                                <!--                                                        <p style="color:black;overflow: hidden;word-wrap: break-word; height: 70px;" class="mb-3" th:text="${job.name}">-->
+                                <!--                                                        </p>-->
+                                <!--                                                    </a>-->
+                                <!--                                                </div>-->
+                                <!--                                            </div>-->
+                                <!--                                        </div>-->
+                                <!--                                        &lt;!&ndash; Row 2: Job Type and Salary &ndash;&gt;-->
+                                <!--                                        <div class="col-md-12">-->
+                                <!--                                            <div class="row">-->
+                                <!--                                                &lt;!&ndash; Column 1: Job Type &ndash;&gt;-->
+                                <!--                                                <div class="col-md-4 text-start ps-4">-->
+                                <!--                                                        <span class="text-truncate me-3"><i-->
+                                <!--                                                                class="far fa-clock text-primary me-2"></i><span-->
+                                <!--                                                                th:text="${job.requestTime}"></span></span>-->
+                                <!--                                                </div>-->
+                                <!--                                                &lt;!&ndash; Column 2: Salary &ndash;&gt;-->
+                                <!--                                                <div class="col-md-8 text-start ps-4">-->
+                                <!--                                                        <span class="text-truncate me-3">-->
+                                <!--                                                            <span style="overflow: hidden; width: 80%; display: inline-block;">-->
+                                <!--                                                                    <i class="far fa-money-bill-alt text-primary me-2"></i>-->
+                                <!--                                                            <span id="salaryValue" th:text="${job.salary}"-->
+                                <!--                                                                  style="display:none;">-->
+
+                                <!--                                                            </span>-->
+                                <!--                                                            </span>-->
+                                <!--&lt;!&ndash;                                                            <i class="far fa-money-bill-alt text-primary me-2"></i>&ndash;&gt;-->
+                                <!--&lt;!&ndash;                                                            <span id="salaryValue" th:text="${job.salary}"&ndash;&gt;-->
+                                <!--&lt;!&ndash;                                                                  style="display:none; overflow: hidden;"></span>&ndash;&gt;-->
+                                <!--                                                            <script>-->
+                                <!--                                                                var salaryElement = document.getElementById('salaryValue');-->
+                                <!--                                                                var salary = parseFloat(salaryElement.innerText.replace(/[^0-9.-]+/g, "")); // Remove non-numeric characters-->
+
+                                <!--                                                                // Check if salary is a valid number-->
+                                <!--                                                                if (!isNaN(salary)) {-->
+                                <!--                                                                    var formattedSalary = salary.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });-->
+                                <!--                                                                    document.write(formattedSalary);-->
+                                <!--                                                                } else {-->
+                                <!--                                                                    document.write("Invalid salary value");-->
+                                <!--                                                                }-->
+                                <!--                                                            </script>-->
+                                <!--                                                        </span>-->
+                                <!--                                                </div>-->
+                                <!--                                            </div>-->
+                                <!--                                        </div>-->
+                                <!--                                        &lt;!&ndash; Row 3: Address &ndash;&gt;-->
+                                <!--                                        <div class="col-md-12 text-start ps-4">-->
+                                <!--                                                <span class="text-truncate me-0"><i-->
+                                <!--                                                        class="fa fa-map-marker-alt text-primary me-2"></i><span-->
+                                <!--                                                        th:text="${job.address}"></span></span>-->
+                                <!--                                        </div>-->
+                                <!--                                        <div class="col-md-12 d-flex justify-content-left">-->
+                                <!--                                            <small class="text-truncate"><i-->
+                                <!--                                                    class="far fa-calendar-alt text-primary me-2"></i>Deadline:-->
+                                <!--                                                <span th:text="${job.deadline}"></span></small>-->
+                                <!--                                            <a class="btn btn-light btn-square me-3"-->
+                                <!--                                               th:href="@{/user/saveJob/{id}(id=${job.id})}">-->
+                                <!--                                                <i class="far fa-heart text-primary"></i>-->
+                                <!--                                            </a>-->
+                                <!--                                        </div>-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
+                                <!--                            </li>-->
+                                <!--                        </ul>-->
+                                <a style="color:blue;" class="btn btn-outline-light" href="">More Jobs >></a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                        <span class="card shadow row">
+                            <h4 class="text-center mb-5 pt-1 wow fadeInUp" data-wow-delay="0.1s">Category</h4>
+                            <span class="" th:each="category, iterStat : ${topCategories}">
+                                <ul id="content-list" style="max-width: 700px">
+                                    <li>
+                                        <span class="" th:classappend="${iterStat.index % 4 == 0} ? 'clearfix' : ''">
+                                            <a class="" href="">
+                                                <p style="color:gray;" class="mb-0" th:text="${category}"></p>
+                                            </a>
+                                        </span>
+                                    </li>
+                                </ul>
+
+
+                            </span>
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination" id="pagination"></ul>
+                            </nav>
+
+                        </span>
+                    <input id="totalItems" value="10" style="display: none"></input>
+                    <!--                    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>-->
+
+                    <!-- Your other script and stylesheet links -->
+
+                    <script
+                            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                    <script
+                            src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
+
+                    <script>
+                        // Your pagination initialization code here
+                        $(document).ready(function () {
+                            // Total items and items per page
+
+                            // var totalItems = document.getElementById("totalItems1");
+                            var inputElement = document.getElementById('totalItems1');
+
+                            // Lấy giá trị của thuộc tính value
+                            var valuess = inputElement.value;
+                            // var size = re.length; // Độ dài của mảng
+
+                            // Sử dụng size ở đây theo cách bạn muốn
+                            console.log(valuess);
+                            var totalItems = 10;
+                            var itemsPerPage = 2;
+
+                            // Calculate total pages
+                            var totalPages = Math.ceil(totalItems / itemsPerPage);
+
+                            // Initialize Twbs-pagination
+                            $('#pagination').twbsPagination({
+                                totalPages: totalPages,
+                                visiblePages: 0, // Number of visible pages in the pagination
+                                onPageClick: function (event, page) {
+                                    // Handle page change event
+                                    console.log("Showing page " + page);
+
+                                    // You can update the content here based on the selected page
+                                    var startItem = (page - 1) * itemsPerPage;
+                                    var endItem = Math.min(page * itemsPerPage, totalItems);
+                                    console.log("Displaying items from " + startItem + " to " + (endItem - 1));
+                                    updateContent(startItem, endItem);
+                                }
+                            });
+
+                            // Function to update content based on the selected page
+                            function updateContent(start, end) {
+                                // This is just a placeholder. You should replace this with your actual logic
+                                $('#content-list li').hide(); // Hide all items
+                                $('#content-list li').slice(start, end).show(); // Show items for the current page
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Jobs End -->
+    <!-- AD -->
+    <div class="w-100 h-200">
+        <img class="flex-shrink-0 img-fluid border rounded" th:src="@{/img/bandnerad.jpg}" alt=""
+             style="width: 100%; height: 100px;">
+    </div>
+    <!-- AD end -->
+    <!--Autoplay Slider-->
+    <!--    company-->
+    <style>
+        .cardc {
+            position: relative;
+            width: 200px;
+            height: 150px;
+            overflow: hidden;
+        }
+
+        .cardc img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .company-name {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            color: #000000;
+            font-size: 18px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(151, 5, 5, 0.5);
+        }
+    </style>
+    <div class="container-xxl py-5">
+        <h4>Company</h4>
+        <ul id="slideshow" class="slick-container">
+            <li>
+                <div class="cardc shadow">
+                    <img th:src="@{/img/5jlogo1.png}" alt="Company Image">
+                    <div class="company-name">Tên Công Ty</div>
+                </div>
+            </li>
+            <li>
+                <div class="cardc shadow">
+                    <img th:src="@{/img/5jlogo1.png}" alt="Company Image">
+                    <div class="company-name">Tên Công Ty</div>
+                </div>
+            </li>
+            <li>
+                <div class="cardc shadow">
+                    <img th:src="@{/img/5jlogo1.png}" alt="Company Image">
+                    <div class="company-name">Tên Công Ty</div>
+                </div>
+            </li>
+            <li>
+                <div class="cardc shadow">
+                    <img th:src="@{/img/5jlogo1.png}" alt="Company Image">
+                    <div class="company-name">Tên Công Ty</div>
+                </div>
+            </li>
+            <li>
+                <div class="cardc shadow">
+                    <img th:src="@{/img/5jlogo1.png}" alt="Company Image">
+                    <div class="company-name">Tên Công Ty</div>
+                </div>
+            </li>
+            <li>
+                <div class="cardc shadow">
+                    <img th:src="@{/img/5jlogo1.png}" alt="Company Image">
+                    <div class="company-name">Tên Công Ty</div>
+                </div>
+            </li>
+            <li>
+                <div class="cardc shadow">
+                    <img th:src="@{/img/5jlogo1.png}" alt="Company Image">
+                    <div class="company-name">Tên Công Ty</div>
+                </div>
+            </li>
+            <li>
+                <div class="cardc shadow">
+                    <img th:src="@{/img/5jlogo1.png}" alt="Company Image">
+                    <div class="company-name">Tên Công Ty</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <script>
+        $(document).ready(function () {
+            // Initialize Slick Slider
+            $("#slideshow").slick({
+                slidesToShow: 5,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 4000,
+                prevArrow: '<button type="button" class="slick-prev">Previous</button>',
+                nextArrow: '<button type="button" class="slick-next">Next</button>',
+                responsive: [
+                    {
+                        breakpoint: 1200, // Đối với màn hình có độ rộng nhỏ hơn hoặc bằng 1200px
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 3
+                        }
+                    },
+                    {
+                        breakpoint: 992, // Đối với màn hình có độ rộng nhỏ hơn hoặc bằng 992px
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 2
+                        }
+                    },
+                    {
+                        breakpoint: 768, // Đối với màn hình có độ rộng nhỏ hơn hoặc bằng 768px
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+    <!--    company-->
+    <!-- Category Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <h4 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Category</h4>
+            <div class="row g-4">
+                    <span class="col-lg-3 col-sm-6 " th:each="category, iterStat : ${topCategories}">
+                        <div class="wow fadeInUp" data-wow-delay="0.1s"
+                             th:classappend="${iterStat.index % 4 == 0} ? 'clearfix' : ''">
+                            <a class="cat-item rounded p-4" href="">
+                                <i class="fa fa-3x fa-mail-bulk text-primary mb-4"></i>
+                                <h6 class="mb-3" th:text="${category}"></h6>
+                                <p class="mb-0">123 Vacancy</p>
+                            </a>
+                        </div>
+                    </span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Category End -->
+    <!-- news start -->
+    <!--    <div class="container-fluid p-0">-->
+    <!--        &lt;!&ndash;        <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">News</h1>&ndash;&gt;-->
+    <!--        &lt;!&ndash;        <div class="d-flex justify-content-end">&ndash;&gt;-->
+    <!--        &lt;!&ndash;            <a class="nav-link ml-auto" href="">View all >>></a>&ndash;&gt;-->
+    <!--        &lt;!&ndash;        </div>&ndash;&gt;-->
+    <!--        <div class="owl-carousel header-carousel direction-left">-->
+    <!--            <div class="owl-carousel-item position-relative">-->
+    <!--                <div class="row">-->
+    <!--                    <div class="col-md-3">-->
+    <!--                        <img class="img-fluid" src="img/carousel-1.jpg" alt="">-->
+    <!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Vero elitr justo</p>-->
+    <!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Lorem ipsum dolor sit amet.</p>-->
+    <!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Etiam et quam ac lectus tincidunt-->
+    <!--                            pellentesque. Sed scelerisque, nulla ac tristique semper,</p>-->
+    <!--                    </div>-->
+    <!--                    <div class="col-md-3">-->
+    <!--                        <img class="img-fluid" src="img/carousel-1.jpg" alt="">-->
+    <!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Vero elitr justo</p>-->
+    <!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Lorem ipsum dolor sit amet.</p>-->
+    <!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Etiam et quam ac lectus tincidunt-->
+    <!--                            pellentesque. Sed scelerisque, nulla ac tristique semper,</p>-->
+    <!--                    </div>-->
+    <!--                    <div class="col-md-3">-->
+    <!--                        <img class="img-fluid" src="img/carousel-1.jpg" alt="">-->
+    <!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Vero elitr justo</p>-->
+    <!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Lorem ipsum dolor sit amet.</p>-->
+    <!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Etiam et quam ac lectus tincidunt-->
+    <!--                            pellentesque. Sed scelerisque, nulla ac tristique semper,</p>-->
+    <!--                    </div>-->
+    <!--                    <div class="col-md-3">-->
+    <!--                        <img class="img-fluid" src="img/carousel-1.jpg" alt="">-->
+    <!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Vero elitr justo</p>-->
+    <!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Lorem ipsum dolor sit amet.</p>-->
+    <!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Etiam et quam ac lectus tincidunt-->
+    <!--                            pellentesque. Sed scelerisque, nulla ac tristique semper,</p>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--            <div class="owl-carousel-item position-relative">-->
+    <!--                <div class="row">-->
+    <!--                    <div class="col-md-3">-->
+    <!--                        <img class="img-fluid" src="img/carousel-1.jpg" alt="">-->
+    <!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Vero elitr justo</p>-->
+    <!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Lorem ipsum dolor sit amet.</p>-->
+    <!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Etiam et quam ac lectus tincidunt-->
+    <!--                            pellentesque. Sed scelerisque, nulla ac tristique semper,</p>-->
+    <!--                    </div>-->
+    <!--                    <div class="col-md-3">-->
+    <!--                        <img class="img-fluid" src="img/carousel-1.jpg" alt="">-->
+    <!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Vero elitr justo</p>-->
+    <!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Lorem ipsum dolor sit amet.</p>-->
+    <!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Etiam et quam ac lectus tincidunt-->
+    <!--                            pellentesque. Sed scelerisque, nulla ac tristique semper,</p>-->
+    <!--                    </div>-->
+    <!--                    <div class="col-md-3">-->
+    <!--                        <img class="img-fluid" src="img/carousel-1.jpg" alt="">-->
+    <!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Vero elitr justo</p>-->
+    <!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Lorem ipsum dolor sit amet.</p>-->
+    <!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Etiam et quam ac lectus tincidunt-->
+    <!--                            pellentesque. Sed scelerisque, nulla ac tristique semper,</p>-->
+    <!--                    </div>-->
+    <!--                    <div class="col-md-3">-->
+    <!--                        <img class="img-fluid" src="img/carousel-1.jpg" alt="">-->
+    <!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Vero elitr justo</p>-->
+    <!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Lorem ipsum dolor sit amet.</p>-->
+    <!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Etiam et quam ac lectus tincidunt-->
+    <!--                            pellentesque. Sed scelerisque, nulla ac tristique semper,</p>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!-- news end -->
+
+    <!-- News Start -->
+    <!-- <div class="container-xxl py-5">
+<div class="container">
+<div class="row g-5 align-items-center">
+    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+        <div class="row g-0 about-bg rounded overflow-hidden">
+            <div class="col-6 text-start">
+                <img class="img-fluid w-100" src="img/about-1.jpg">
+            </div>
+            <div class="col-6 text-start">
+                <img class="img-fluid" src="img/about-2.jpg" style="width: 85%; margin-top: 15%;">
+            </div>
+            <div class="col-6 text-end">
+                <img class="img-fluid" src="img/about-3.jpg" style="width: 85%;">
+            </div>
+            <div class="col-6 text-end">
+                <img class="img-fluid w-100" src="img/about-4.jpg">
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+        <h1 class="mb-4">We Help To Get The Best Job And Find A Talent</h1>
+        <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet
+            diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna
+            dolore erat amet</p>
+        <p><i class="fa fa-check text-primary me-3"></i>Tempor erat elitr rebum at clita</p>
+        <p><i class="fa fa-check text-primary me-3"></i>Aliqu diam amet diam et eos</p>
+        <p><i class="fa fa-check text-primary me-3"></i>Clita duo justo magna dolore erat amet</p>
+        <a class="btn btn-primary py-3 px-5 mt-3" href="">Read More</a>
+    </div>
+</div>
+</div>
+</div> -->
+    <!-- News End -->
+
+
+
+
+
+    <!-- Testimonial Start -->
+    <!-- <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+<div class="container">
+<h1 class="text-center mb-5">Our Clients Say!!!</h1>
+<div class="owl-carousel testimonial-carousel">
+    <div class="testimonial-item bg-light rounded p-4">
+        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+        <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore
+            diam</p>
+        <div class="d-flex align-items-center">
+            <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-1.jpg"
+                style="width: 50px; height: 50px;">
+            <div class="ps-3">
+                <h5 class="mb-1">Client Name</h5>
+                <small>Profession</small>
+            </div>
+        </div>
+    </div>
+    <div class="testimonial-item bg-light rounded p-4">
+        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+        <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore
+            diam</p>
+        <div class="d-flex align-items-center">
+            <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-2.jpg"
+                style="width: 50px; height: 50px;">
+            <div class="ps-3">
+                <h5 class="mb-1">Client Name</h5>
+                <small>Profession</small>
+            </div>
+        </div>
+    </div>
+    <div class="testimonial-item bg-light rounded p-4">
+        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+        <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore
+            diam</p>
+        <div class="d-flex align-items-center">
+            <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-3.jpg"
+                style="width: 50px; height: 50px;">
+            <div class="ps-3">
+                <h5 class="mb-1">Client Name</h5>
+                <small>Profession</small>
+            </div>
+        </div>
+    </div>
+    <div class="testimonial-item bg-light rounded p-4">
+        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+        <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore
+            diam</p>
+        <div class="d-flex align-items-center">
+            <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-4.jpg"
+                style="width: 50px; height: 50px;">
+            <div class="ps-3">
+                <h5 class="mb-1">Client Name</h5>
+                <small>Profession</small>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div> -->
+    <!-- Testimonial End -->
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white mb-4">Company</h5>
+                    <a class="btn btn-link text-white-50" href="">About Us</a>
+                    <a class="btn btn-link text-white-50" href="">Contact Us</a>
+                    <a class="btn btn-link text-white-50" href="">Our Services</a>
+                    <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
+                    <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white mb-4">Contact</h5>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Da Nang</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+0934746662</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>hodincanh@gmail.com</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white mb-4">Newsletter</h5>
+                    <p>send your email here</p>
+                    <div class="position-relative mx-auto" style="max-width: 400px;">
+                        <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text"
+                               placeholder="Your email">
+                        <button type="button"
+                                class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom" href="#">5Job</a>, All Right Reserved.
+
+                        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                        Designed By <a class="border-bottom" href="">Canh-Vuong</a>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="footer-menu">
+                            <a href="">Home</a>
+                            <a href="">Cookies</a>
+                            <a href="">Help</a>
+                            <a href="">FQAs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+</div>
+
+
+<!-- JavaScript Libraries -->
+<!--<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/lib/wow/wow.min.js}"></script>
+<script th:src="@{/lib/easing/easing.min.js}"></script>
+<!--Không tìm thấy oints/waypoint-->
+<script th:src="@{/lib/waypoints/waypoints.min.js}"></script>
+<script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
+<!-- Template Javascript -->
+<script th:src="@{/js/main.js}"></script>
+
+</body>
+
+</html>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+
+<!--<head>-->
+<!--    <meta charset="utf-8">-->
+<!--    <title>5Jobs</title>-->
+<!--    <meta content="width=device-width, initial-scale=1.0" name="viewport">-->
+<!--    <meta content="" name="keywords">-->
+<!--    <meta content="" name="description">-->
+
+<!--    &lt;!&ndash; Favicon &ndash;&gt;-->
+<!--    <link href="img/favicon.ico" rel="icon">-->
+
+<!--    &lt;!&ndash; Google Web Fonts &ndash;&gt;-->
+<!--    <link rel="preconnect" href="https://fonts.googleapis.com">-->
+<!--    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>-->
+<!--    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"-->
+<!--          rel="stylesheet">-->
+
+<!--    &lt;!&ndash; Icon Font Stylesheet &ndash;&gt;-->
+<!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">-->
+
+<!--    &lt;!&ndash; Libraries Stylesheet &ndash;&gt;-->
+<!--    <link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">-->
+<!--    <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">-->
+
+<!--    &lt;!&ndash; Customized Bootstrap Stylesheet &ndash;&gt;-->
+<!--    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">-->
+
+<!--    &lt;!&ndash; Template Stylesheet &ndash;&gt;-->
+<!--    <link th:href="@{/css/style.css}" rel="stylesheet">-->
+<!--</head>-->
+
+<!--<body>-->
+<!--<div class="container-fluid bg-white p-0">-->
+<!--    &lt;!&ndash; Spinner Start &ndash;&gt;-->
+<!--    <div id="spinner"-->
+<!--         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">-->
+<!--        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">-->
+<!--            <span class="sr-only">Loading...</span>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; Spinner End &ndash;&gt;-->
+
+
+<!--    &lt;!&ndash; Navbar Start &ndash;&gt;-->
+<!--    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">-->
+<!--        <a href="index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">-->
+<!--            <h1 class="m-0 text-primary">5Job</h1>-->
+<!--        </a>-->
+<!--        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"-->
+<!--                data-bs-target="#navbarCollapse">-->
+<!--            <span class="navbar-toggler-icon"></span>-->
+<!--        </button>-->
+<!--        <div class="collapse navbar-collapse" id="navbarCollapse">-->
+<!--            <div class="navbar-nav ms-auto p-4 p-lg-0">-->
+<!--                <a href="index.html" class="nav-item nav-link active">Home</a>-->
+<!--&lt;!&ndash;                <a th:href="@{/user/appliedJob}" class="nav-item nav-link">Job application</a>&ndash;&gt;-->
+<!--                <a th:href="@{/user/listJob}" class="nav-item nav-link">List job</a>-->
+<!--                <a href="" class="nav-item nav-link">CV</a>-->
+<!--                <div class="nav-item dropdown">-->
+<!--                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><span th:text="${acc.name}"></span></a>-->
+<!--                    <div class="dropdown-menu rounded-0 m-0">-->
+<!--                        <a th:href="@{/logout}" class="dropdown-item">Logout</a>-->
+<!--                        <a th:href="@{/user/interview}" class="dropdown-item">interview</a>-->
+<!--                        <a th:href="@{/user/statusInterview}" class="dropdown-item">Status Interview</a>-->
+<!--&lt;!&ndash;                        <a href="" class="dropdown-item">My 5job</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <a href="" class="dropdown-item">my resumes</a>&ndash;&gt;-->
+<!--                        <a  class="dropdown-item" th:href="@{/user/saveJob}">Saved jobs</a>-->
+<!--                        <a th:href="@{/user/appliedJob}" class="dropdown-item">Applied jobs</a>-->
+
+<!--&lt;!&ndash;                        <a href="" class="dropdown-item">Job alerts</a>&ndash;&gt;-->
+<!--                        <a th:href="@{/user/myAccount}" class="dropdown-item">My account</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block"><i-->
+<!--                    class="fa fa-arrow-right ms-3"></i></a>-->
+<!--        </div>-->
+<!--    </nav>-->
+<!--    &lt;!&ndash; Navbar End &ndash;&gt;-->
+
+
+<!--&lt;!&ndash;    &lt;!&ndash; Carousel Start &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="container-fluid p-0">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="owl-carousel header-carousel position-relative">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="owl-carousel-item position-relative">&ndash;&gt;-->
+<!--&lt;!&ndash;                <img class="img-fluid" src="img/carousel-1.jpg" alt="">&ndash;&gt;-->
+<!--&lt;!&ndash;                <div class="position-absolute top-0 start-0 w-100 h-auto d-flex align-items-center"&ndash;&gt;-->
+<!--&lt;!&ndash;                     style="background: rgba(43, 57, 64, .5);">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="container">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div class="row justify-content-start w-100 h-auto">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="col-10 col-lg-8">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <h1 class="display-3 text-white animated slideInDown mb-4">Find The Perfect Job That&ndash;&gt;-->
+<!--&lt;!&ndash;                                    You Deserved</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum&ndash;&gt;-->
+<!--&lt;!&ndash;                                    dolor at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd&ndash;&gt;-->
+<!--&lt;!&ndash;                                    rebum sea elitr.</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Search&ndash;&gt;-->
+<!--&lt;!&ndash;                                    A Job</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Find A&ndash;&gt;-->
+<!--&lt;!&ndash;                                    Talent</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="owl-carousel-item position-relative">&ndash;&gt;-->
+<!--&lt;!&ndash;                <img class="img-fluid" src="img/carousel-1.jpg" alt="">&ndash;&gt;-->
+<!--&lt;!&ndash;                <div class="position-absolute top-0 start-0 w-100 h-auto d-flex align-items-center"&ndash;&gt;-->
+<!--&lt;!&ndash;                     style="background: rgba(43, 57, 64, .5);">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="container">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div class="row justify-content-start w-100 h-auto">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="col-10 col-lg-8">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <h1 class="display-3 text-white animated slideInDown mb-4">Find The Best Startup Job&ndash;&gt;-->
+<!--&lt;!&ndash;                                    That Fit You</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum&ndash;&gt;-->
+<!--&lt;!&ndash;                                    dolor at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd&ndash;&gt;-->
+<!--&lt;!&ndash;                                    rebum sea elitr.</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Search&ndash;&gt;-->
+<!--&lt;!&ndash;                                    A Job</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Find A&ndash;&gt;-->
+<!--&lt;!&ndash;                                    Talent</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    &lt;!&ndash; Carousel End &ndash;&gt;&ndash;&gt;-->
+
+
+<!--    &lt;!&ndash; Search Start &ndash;&gt;-->
+<!--    <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 15px;">-->
+<!--        <div class="container">-->
+<!--            <div class="row g-2">-->
+<!--                <div class="col-md-10">-->
+<!--                    <div class="row g-2">-->
+<!--                        <div class="col-md-4">-->
+<!--                            <input type="text" class="form-control border-0" placeholder="Keyword" />-->
+<!--                        </div>-->
+<!--                        <div class="col-md-4">-->
+<!--                            <select class="form-select border-0">-->
+<!--                                <option selected>Category</option>-->
+<!--                                <option value="1">Category 1</option>-->
+<!--                                <option value="2">Category 2</option>-->
+<!--                                <option value="3">Category 3</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-4">-->
+<!--                            <select class="form-select border-0">-->
+<!--                                <option selected>Location</option>-->
+<!--                                <option value="1">Location 1</option>-->
+<!--                                <option value="2">Location 2</option>-->
+<!--                                <option value="3">Location 3</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-md-2">-->
+<!--                    <button class="btn btn-dark border-0 w-100">Search</button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; Search End &ndash;&gt;-->
+<!--    &lt;!&ndash; Jobs Start &ndash;&gt;-->
+<!--    <div class="container-xxl py-5">-->
+<!--        <div class="container">-->
+<!--            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Job Listing</h1>-->
+<!--            <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">-->
+<!--                <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3 active" data-bs-toggle="pill"-->
+<!--                           href="#tab-1">-->
+<!--                            <h6 class="mt-n1 mb-0">New job</h6>-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="d-flex align-items-center text-start mx-3 pb-3" data-bs-toggle="pill"-->
+<!--                           href="#tab-2">-->
+<!--                            <h6 class="mt-n1 mb-0">Full Time</h6>-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" data-bs-toggle="pill"-->
+<!--                           href="#tab-3">-->
+<!--                            <h6 class="mt-n1 mb-0">Part Time</h6>-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--                <div class="tab-content">-->
+<!--                    <div id="tab-1" class="tab-pane fade show p-0 active">-->
+<!--                        <div th:each="job : ${latestJobs}" class="job-item p-4 mb-4">-->
+<!--                            <div class="row g-4">-->
+<!--                                <div class="col-sm-12 col-md-8 d-flex align-items-center">-->
+<!--                                    <th:block th:with="companyFounds=false">-->
+<!--                                        &lt;!&ndash; Dùng th:each để lặp qua danh sách &ndash;&gt;-->
+<!--                                        <span th:each="employers : ${employersList}" th:unless="${companyFounds}">-->
+<!--        &lt;!&ndash; Kiểm tra điều kiện, nếu khớp thì hiển thị và đặt companyFound=true để dừng lặp &ndash;&gt;-->
+<!--        <span th:if="${employers.getAccount().id == job.getAccountId()}" th:with="companyFounds=true">-->
+
+<!--            <h4  th:unless="${companyFounds}"></h4>-->
+<!--            &lt;!&ndash;            <embed th:src="${employers.account.getAvatar()}" type="application/pdf" width="100%" height="600px" />&ndash;&gt;-->
+<!--            &lt;!&ndash;            <span th:text="${employers.account.getAvatar()}"></span>&ndash;&gt;-->
+<!--            &lt;!&ndash;                        <span th:text="${employers.account.getEmail()}"></span>&ndash;&gt;-->
+<!--            &lt;!&ndash;<span th:text="${employers.account.getEmail()}"></span>&ndash;&gt;-->
+<!--            &lt;!&ndash;            <span th:text="${employers.account.getAvatar()}"></span>&ndash;&gt;-->
+<!--   <img class="flex-shrink-0 img-fluid border rounded" th:src="${employers.account.getAvatar()}" alt="" style="width: 80px; height: 80px;">-->
+<!--            &lt;!&ndash;  <img th:src="${imageUrl}" alt="Cloudinary Image">&ndash;&gt;-->
+
+<!--        </span>-->
+
+<!--    </span>-->
+
+<!--                                        &lt;!&ndash; Hiển thị thông báo nếu không tìm thấy công ty &ndash;&gt;-->
+
+<!--                                        <h4  th:unless="${companyFound}"></h4>-->
+
+<!--                                        &lt;!&ndash; Các dòng code khác nếu cần &ndash;&gt;-->
+<!--                                    </th:block>-->
+<!--&lt;!&ndash;                                    <img class="flex-shrink-0 img-fluid border rounded"  alt="Job Avatar" style="width: 80px; height: 80px;">&ndash;&gt;-->
+<!--                                    <div class="text-start ps-4">-->
+<!--                                      <a th:href="@{/user/jobDetail/{id}(id=${job.id})}"> <h5 class="mb-3" th:text="${job.name}"></h5></a>-->
+<!--                                        <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i><span th:text="${job.requestTime}"></span></span>-->
+<!--&lt;!&ndash;                                        <span class="text-truncate me-3"><i class="far fa-money-bill-alt text-primary me-2"></i><span th:text="${job.salary}"></span></span>&ndash;&gt;-->
+<!--                                        <span class="text-truncate me-3">-->
+<!--                                         <i class="far fa-money-bill-alt text-primary me-2"></i>-->
+<!--                                       <span id="salaryValue" th:text="${job.salary}" style="display:none;"></span>-->
+<!--                                         <script>-->
+<!--                                        var salaryElement = document.getElementById('salaryValue');-->
+<!--                                       var salary = parseFloat(salaryElement.innerText.replace(/[^0-9.-]+/g,"")); // Remove non-numeric characters-->
+
+<!--                                          // Check if salary is a valid number-->
+<!--                                         if (!isNaN(salary)) {-->
+<!--                                               var formattedSalary = salary.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });-->
+<!--                                                      document.write(formattedSalary);-->
+<!--                                        } else {-->
+<!--                                         document.write("Invalid salary value");-->
+<!--                                         }-->
+<!--                                         </script>-->
+<!--                                      </span>-->
+
+<!--                                        <span class="text-truncate me-0"><i class="fa fa-map-marker-alt text-primary me-2"></i><span th:text="${job.address}"></span></span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">-->
+<!--                                    <div class="d-flex mb-3">-->
+<!--                                        <a class="btn btn-light btn-square me-3" th:href="@{/user/saveJob/{id}(id=${job.id})}"><i class="far fa-heart text-primary"></i></a>-->
+<!--                                        <a class="btn btn-primary" th:href="@{/user/jobDetail/{id}(id=${job.id})}">Detail</a>-->
+<!--                                    </div>-->
+<!--                                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date Line: <span th:text="${job.deadline}"></span></small>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <a class="btn btn-primary py-3 px-5" th:href="@{/user/listJob}">Browse More Jobs</a>-->
+<!--                    </div>-->
+
+<!--                    <div id="tab-2" class="tab-pane fade show p-0">-->
+<!--                        <div th:each="job : ${latestJobs}" class="job-item p-4 mb-4">-->
+<!--                              <span th:if="${job.requestTime}=='Full time'">-->
+
+<!--                            <div class="row g-4">-->
+<!--                                <div class="col-sm-12 col-md-8 d-flex align-items-center">-->
+
+
+<!--                                    <img class="flex-shrink-0 img-fluid border rounded"  alt=""-->
+<!--                                         style="width: 80px; height: 80px;">-->
+<!--                                    <div class="text-start ps-4">-->
+<!--                                        <h5 class="mb-3" ><span th:text="${job.name}"></span></h5>-->
+
+<!--                                        <span class="text-truncate me-3"><i-->
+<!--                                                class="far fa-clock text-primary me-2"></i>-->
+<!--                        <span th:text="${job.requestTime}"></span>-->
+<!--                    </span>-->
+<!--                                        <span class="text-truncate me-3"><i-->
+<!--                                                class="far fa-money-bill-alt text-primary me-2"></i>-->
+<!--                        <span id="salaryValue1" th:text="${job.salary}"></span>-->
+
+
+<!--&lt;!&ndash;                                       <span id="salaryValue1" th:text="${job.salary}" style="display:none;"></span>&ndash;&gt;-->
+<!--                                         <script>-->
+<!--                                        var salaryElement = document.getElementById('salaryValue1');-->
+<!--                                        var salary = parseFloat(salaryElement.innerText.replace(/[^0-9.-]+/g,"")); // Remove non-numeric characters-->
+
+<!--                                        // Check if salary is a valid number-->
+<!--                                        if (!isNaN(salary)) {-->
+<!--                                            var formattedSalary = salary.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });-->
+<!--                                            document.write(formattedSalary);-->
+<!--                                        } else {-->
+<!--                                            document.write("Invalid salary value");-->
+<!--                                        }-->
+<!--                                         </script>-->
+
+
+<!--                    </span>-->
+<!--                                        <span class="text-truncate me-0"><i-->
+<!--                                                class="fa fa-map-marker-alt text-primary me-2"></i>-->
+<!--                        <span th:text="${job.address}"></span>-->
+<!--                    </span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">-->
+<!--                                    <div class="d-flex mb-3">-->
+<!--                                        <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>-->
+<!--                                        <a class="btn btn-primary" href="">Apply Now</a>-->
+<!--                                    </div>-->
+<!--                                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>-->
+<!--                                        <span>Date Line:<span  th:text="${job.deadline}"></span></span>-->
+<!--                                    </small>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                              </span>-->
+<!--                        </div>-->
+
+<!--                        <a class="btn btn-primary py-3 px-5" href="">Browse More Jobs</a>-->
+<!--                    </div>-->
+<!--                    <div id="tab-3" class="tab-pane fade show p-0">-->
+<!--                        <div th:each="job : ${latestJobs}" class="job-item p-4 mb-4">-->
+<!--                           <span th:if="${job.requestTime}=='Part time'">-->
+<!--                            <div class="row g-4">-->
+<!--                                <div class="col-sm-12 col-md-8 d-flex align-items-center">-->
+<!--&lt;!&ndash;                                    <img class="flex-shrink-0 img-fluid border rounded" th:src="${job.imageUrl}" alt=""&ndash;&gt;-->
+<!--&lt;!&ndash;                                         style="width: 80px; height: 80px;">&ndash;&gt;-->
+<!--                                    <div class="text-start ps-4">-->
+<!--                                        <h5 class="mb-3" th:text="${job.name}"></h5>-->
+<!--                                        <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>-->
+<!--                          <span th:text="${job.address}"></span>-->
+<!--                          </span>-->
+<!--                                        <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>-->
+<!--                         <span th:text="${job.requestTime}"></span>-->
+<!--                         </span>-->
+<!--                                        <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>-->
+<!--                          <span th:text="${job.salary}"></span>-->
+<!--                          </span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">-->
+<!--                                    <div class="d-flex mb-3">-->
+<!--                                        <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>-->
+<!--                                        <a class="btn btn-primary" href="">Apply Now</a>-->
+<!--                                    </div>-->
+<!--                                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>-->
+<!--                                        <span >Date Line: <span th:text="${job.deadline}"> </span></span>-->
+<!--                                    </small>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                                <span>-->
+<!--                        </div>-->
+<!--                        <a class="btn btn-primary py-3 px-5" href="">Browse More Jobs</a>-->
+<!--                    </div>-->
+
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; Jobs End &ndash;&gt;-->
+<!--    &lt;!&ndash; AD &ndash;&gt;-->
+<!--    <div class="w-100 h-200">-->
+<!--        <img class="flex-shrink-0 img-fluid border rounded" src="img/com-logo-5.jpg" alt=""-->
+<!--             style="width: 100%; height: 100px;">-->
+<!--    </div>-->
+<!--    &lt;!&ndash; AD end &ndash;&gt;-->
+<!--    &lt;!&ndash; Category Start &ndash;&gt;-->
+<!--    <div class="container-xxl py-5">-->
+<!--        <div class="container">-->
+<!--            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Explore By Category</h1>-->
+<!--            <div class="row g-4">-->
+<!--            <span class="col-lg-3 col-sm-6 " th:each="category, iterStat : ${topCategories}">-->
+<!--                <div class="wow fadeInUp" data-wow-delay="0.1s"-->
+<!--                     th:classappend="${iterStat.index % 4 == 0} ? 'clearfix' : ''">-->
+<!--                    <a class="cat-item rounded p-4" href="">-->
+<!--                        <i class="fa fa-3x fa-mail-bulk text-primary mb-4"></i>-->
+<!--                        <h6 class="mb-3" th:text="${category}"></h6>-->
+<!--                        <p class="mb-0">123 Vacancy</p>-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </span>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+<!--    &lt;!&ndash; Category End &ndash;&gt;-->
+<!--    &lt;!&ndash; news start &ndash;&gt;-->
+<!--    <div class="container-fluid p-0">-->
+<!--&lt;!&ndash;        <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">News</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="d-flex justify-content-end">&ndash;&gt;-->
+<!--&lt;!&ndash;            <a class="nav-link ml-auto" href="">View all >>></a>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--        <div class="owl-carousel header-carousel direction-left">-->
+<!--            <div class="owl-carousel-item position-relative">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-md-3">-->
+<!--                        <img class="img-fluid" src="img/carousel-1.jpg" alt="">-->
+<!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Vero elitr justo</p>-->
+<!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Lorem ipsum dolor sit amet.</p>-->
+<!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Etiam et quam ac lectus tincidunt-->
+<!--                            pellentesque. Sed scelerisque, nulla ac tristique semper,</p>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-3">-->
+<!--                        <img class="img-fluid" src="img/carousel-1.jpg" alt="">-->
+<!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Vero elitr justo</p>-->
+<!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Lorem ipsum dolor sit amet.</p>-->
+<!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Etiam et quam ac lectus tincidunt-->
+<!--                            pellentesque. Sed scelerisque, nulla ac tristique semper,</p>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-3">-->
+<!--                        <img class="img-fluid" src="img/carousel-1.jpg" alt="">-->
+<!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Vero elitr justo</p>-->
+<!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Lorem ipsum dolor sit amet.</p>-->
+<!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Etiam et quam ac lectus tincidunt-->
+<!--                            pellentesque. Sed scelerisque, nulla ac tristique semper,</p>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-3">-->
+<!--                        <img class="img-fluid" src="img/carousel-1.jpg" alt="">-->
+<!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Vero elitr justo</p>-->
+<!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Lorem ipsum dolor sit amet.</p>-->
+<!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Etiam et quam ac lectus tincidunt-->
+<!--                            pellentesque. Sed scelerisque, nulla ac tristique semper,</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="owl-carousel-item position-relative">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-md-3">-->
+<!--                        <img class="img-fluid" src="img/carousel-1.jpg" alt="">-->
+<!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Vero elitr justo</p>-->
+<!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Lorem ipsum dolor sit amet.</p>-->
+<!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Etiam et quam ac lectus tincidunt-->
+<!--                            pellentesque. Sed scelerisque, nulla ac tristique semper,</p>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-3">-->
+<!--                        <img class="img-fluid" src="img/carousel-1.jpg" alt="">-->
+<!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Vero elitr justo</p>-->
+<!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Lorem ipsum dolor sit amet.</p>-->
+<!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Etiam et quam ac lectus tincidunt-->
+<!--                            pellentesque. Sed scelerisque, nulla ac tristique semper,</p>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-3">-->
+<!--                        <img class="img-fluid" src="img/carousel-1.jpg" alt="">-->
+<!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Vero elitr justo</p>-->
+<!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Lorem ipsum dolor sit amet.</p>-->
+<!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Etiam et quam ac lectus tincidunt-->
+<!--                            pellentesque. Sed scelerisque, nulla ac tristique semper,</p>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-3">-->
+<!--                        <img class="img-fluid" src="img/carousel-1.jpg" alt="">-->
+<!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Vero elitr justo</p>-->
+<!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Lorem ipsum dolor sit amet.</p>-->
+<!--                        <p class="fs-5 fw-medium text-Black mb-1 pb-1">Etiam et quam ac lectus tincidunt-->
+<!--                            pellentesque. Sed scelerisque, nulla ac tristique semper,</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; news end &ndash;&gt;-->
+
+<!--    &lt;!&ndash; News Start &ndash;&gt;-->
+<!--    &lt;!&ndash; <div class="container-xxl py-5">-->
+<!--        <div class="container">-->
+<!--            <div class="row g-5 align-items-center">-->
+<!--                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">-->
+<!--                    <div class="row g-0 about-bg rounded overflow-hidden">-->
+<!--                        <div class="col-6 text-start">-->
+<!--                            <img class="img-fluid w-100" src="img/about-1.jpg">-->
+<!--                        </div>-->
+<!--                        <div class="col-6 text-start">-->
+<!--                            <img class="img-fluid" src="img/about-2.jpg" style="width: 85%; margin-top: 15%;">-->
+<!--                        </div>-->
+<!--                        <div class="col-6 text-end">-->
+<!--                            <img class="img-fluid" src="img/about-3.jpg" style="width: 85%;">-->
+<!--                        </div>-->
+<!--                        <div class="col-6 text-end">-->
+<!--                            <img class="img-fluid w-100" src="img/about-4.jpg">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">-->
+<!--                    <h1 class="mb-4">We Help To Get The Best Job And Find A Talent</h1>-->
+<!--                    <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet-->
+<!--                        diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna-->
+<!--                        dolore erat amet</p>-->
+<!--                    <p><i class="fa fa-check text-primary me-3"></i>Tempor erat elitr rebum at clita</p>-->
+<!--                    <p><i class="fa fa-check text-primary me-3"></i>Aliqu diam amet diam et eos</p>-->
+<!--                    <p><i class="fa fa-check text-primary me-3"></i>Clita duo justo magna dolore erat amet</p>-->
+<!--                    <a class="btn btn-primary py-3 px-5 mt-3" href="">Read More</a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div> &ndash;&gt;-->
+<!--    &lt;!&ndash; News End &ndash;&gt;-->
+
+
+
+
+
+<!--    &lt;!&ndash; Testimonial Start &ndash;&gt;-->
+<!--    &lt;!&ndash; <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">-->
+<!--        <div class="container">-->
+<!--            <h1 class="text-center mb-5">Our Clients Say!!!</h1>-->
+<!--            <div class="owl-carousel testimonial-carousel">-->
+<!--                <div class="testimonial-item bg-light rounded p-4">-->
+<!--                    <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>-->
+<!--                    <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore-->
+<!--                        diam</p>-->
+<!--                    <div class="d-flex align-items-center">-->
+<!--                        <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-1.jpg"-->
+<!--                            style="width: 50px; height: 50px;">-->
+<!--                        <div class="ps-3">-->
+<!--                            <h5 class="mb-1">Client Name</h5>-->
+<!--                            <small>Profession</small>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="testimonial-item bg-light rounded p-4">-->
+<!--                    <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>-->
+<!--                    <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore-->
+<!--                        diam</p>-->
+<!--                    <div class="d-flex align-items-center">-->
+<!--                        <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-2.jpg"-->
+<!--                            style="width: 50px; height: 50px;">-->
+<!--                        <div class="ps-3">-->
+<!--                            <h5 class="mb-1">Client Name</h5>-->
+<!--                            <small>Profession</small>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="testimonial-item bg-light rounded p-4">-->
+<!--                    <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>-->
+<!--                    <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore-->
+<!--                        diam</p>-->
+<!--                    <div class="d-flex align-items-center">-->
+<!--                        <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-3.jpg"-->
+<!--                            style="width: 50px; height: 50px;">-->
+<!--                        <div class="ps-3">-->
+<!--                            <h5 class="mb-1">Client Name</h5>-->
+<!--                            <small>Profession</small>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="testimonial-item bg-light rounded p-4">-->
+<!--                    <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>-->
+<!--                    <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore-->
+<!--                        diam</p>-->
+<!--                    <div class="d-flex align-items-center">-->
+<!--                        <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-4.jpg"-->
+<!--                            style="width: 50px; height: 50px;">-->
+<!--                        <div class="ps-3">-->
+<!--                            <h5 class="mb-1">Client Name</h5>-->
+<!--                            <small>Profession</small>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div> &ndash;&gt;-->
+<!--    &lt;!&ndash; Testimonial End &ndash;&gt;-->
+
+
+<!--    &lt;!&ndash; Footer Start &ndash;&gt;-->
+<!--    <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">-->
+<!--        <div class="container py-5">-->
+<!--            <div class="row g-5">-->
+<!--                <div class="col-lg-3 col-md-6">-->
+<!--                    <h5 class="text-white mb-4">Company</h5>-->
+<!--                    <a class="btn btn-link text-white-50" href="">About Us</a>-->
+<!--                    <a class="btn btn-link text-white-50" href="">Contact Us</a>-->
+<!--                    <a class="btn btn-link text-white-50" href="">Our Services</a>-->
+<!--                    <a class="btn btn-link text-white-50" href="">Privacy Policy</a>-->
+<!--                    <a class="btn btn-link text-white-50" href="">Terms & Condition</a>-->
+<!--                </div>-->
+<!--                <div class="col-lg-3 col-md-6">-->
+<!--                    <h5 class="text-white mb-4">Contact</h5>-->
+<!--                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Da Nang</p>-->
+<!--                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+0934746662</p>-->
+<!--                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>hodincanh@gmail.com</p>-->
+<!--                    <div class="d-flex pt-2">-->
+<!--                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>-->
+<!--                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>-->
+<!--                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>-->
+<!--                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-lg-3 col-md-6">-->
+<!--                    <h5 class="text-white mb-4">Newsletter</h5>-->
+<!--                    <p>send your email here</p>-->
+<!--                    <div class="position-relative mx-auto" style="max-width: 400px;">-->
+<!--                        <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text"-->
+<!--                               placeholder="Your email">-->
+<!--                        <button type="button"-->
+<!--                                class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">send</button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="container">-->
+<!--            <div class="copyright">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">-->
+<!--                        &copy; <a class="border-bottom" href="#">5Job</a>, All Right Reserved.-->
+
+<!--                        &lt;!&ndash;/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/&ndash;&gt;-->
+<!--                        Designed By <a class="border-bottom" href="">Canh-Vuong</a>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-6 text-center text-md-end">-->
+<!--                        <div class="footer-menu">-->
+<!--                            <a href="">Home</a>-->
+<!--                            <a href="">Cookies</a>-->
+<!--                            <a href="">Help</a>-->
+<!--                            <a href="">FQAs</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; Footer End &ndash;&gt;-->
+
+
+<!--    &lt;!&ndash; Back to Top &ndash;&gt;-->
+<!--    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>-->
+<!--</div>-->
+
+
+<!--&lt;!&ndash; JavaScript Libraries &ndash;&gt;-->
+<!--<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>-->
+<!--<script th:src="@{/lib/wow/wow.min.js}"></script>-->
+<!--<script th:src="@{/lib/easing/easing.min.js}"></script>-->
+<!--&lt;!&ndash;Không tìm thấy oints/waypoint&ndash;&gt;-->
+<!--<script th:src="@{/lib/waypoints/waypoints.min.js}"></script>-->
+<!--<script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>-->
+
+<!--&lt;!&ndash; Template Javascript &ndash;&gt;-->
+<!--<script th:src="@{/js/main.js}"></script>-->
+<!--</body>-->
+
+<!--</html>-->

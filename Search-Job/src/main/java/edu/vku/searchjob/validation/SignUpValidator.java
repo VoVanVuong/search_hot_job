@@ -20,11 +20,9 @@ public class SignUpValidator implements Validator {
         String email="email";
         String password="password";
         if (account.getName() == null || account.getName().isEmpty()) {
-            errors.rejectValue(name, "category.null", "Category name cannot be empty");
+            errors.rejectValue(name, "name.null", "Name cannot be empty");
         } else if (account.getName().length() > 100) {
             errors.rejectValue(name, "name.length", "Name must be less than 100 characters.");
-        } else if (!account.getName().matches("^[a-zA-Z\\s]*$")) {
-            errors.rejectValue(name, "name.invalid", "Name should only contain letters and spaces.");
         }
 
         if (account.getEmail() == null || account.getEmail().isEmpty()) {
@@ -34,12 +32,14 @@ public class SignUpValidator implements Validator {
         }
         // Kiểm tra mật khẩu
         if (account.getPassword()== null || account.getPassword().isEmpty()) {
-            errors.rejectValue("password", "password.empty", "Password cannot be empty");
+            errors.rejectValue(password, "password.empty", "Password cannot be empty");
         } else if (account.getPassword().length() < 6) {
-            errors.rejectValue("password", "password.length", "Password must be at least 6 characters long.");
-        } else if (!account.getPassword().matches(".*[a-zA-Z].*") || !account.getPassword().matches(".*\\d.*")) {
-            errors.rejectValue("password", "password.invalid", "Password must contain both letters and digits.");
+            errors.rejectValue(password, "password.length", "Password must be at least 6 characters long.");
         }
+//        else if (!account.getPassword().matches(".*[a-zA-Z].*") || !account.getPassword().matches(".*\\d.*")) {
+//            errors.rejectValue(password, "password.invalid", "Password must contain both letters and digits.");
+//        }
+
 //        if (account.getName() == null ||  account.getName() == "") {
 //            errors.rejectValue(name, "category.null", "Category name cannot be empty");
 //        } else if (account.getName().length() > 100) {

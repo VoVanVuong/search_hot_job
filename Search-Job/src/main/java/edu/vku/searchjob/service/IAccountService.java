@@ -1,6 +1,7 @@
 package edu.vku.searchjob.service;
 
 import edu.vku.searchjob.entity.Account;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +22,7 @@ public interface IAccountService {
     public void changePassword(Account account, String newPassword);
     public void changeNowPassword(String email, String currentPassword, String newPassword);
     public void save(Account account);
+    public Account updateAvatar(int id, MultipartFile avatar);
 //    public Integer getUserId();
 //    public void updatePrivacyField(int accountId);
 //public void updatePrivacyByEmail(String email);

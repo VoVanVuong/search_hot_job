@@ -1,7 +1,11 @@
 package edu.vku.searchjob.controller;
 
 import edu.vku.searchjob.entity.*;
+import edu.vku.searchjob.repository.IJobsRepository;
 import edu.vku.searchjob.service.*;
+//import edu.vku.searchjob.service.impl.RecommenderService;
+import org.apache.mahout.cf.taste.common.TasteException;
+import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,7 +25,11 @@ public class candidateController {
     @Autowired
     private ICadidatesService iCadidatesService;
     @Autowired
+    private IJobsRepository iJobsRepository;
+    @Autowired
     private IEmployersService iEmployersService;
+//    @Autowired
+//    private RecommenderService recommenderService;
     @Autowired
     private IAccountService iAccountService;
     @Autowired
@@ -48,11 +57,13 @@ public class candidateController {
 //        return "user/myAccount";
 //    }
 @PostMapping("/user/updateCandidate/{id}")
-    public String updateCandidate(@PathVariable int id, @RequestParam("skill") String skill, @RequestParam("dateOfBirth") String dateOfBirth, @RequestParam("phoneNumber") int phoneNumber, @RequestParam("address") String address, @RequestParam("gender") String gender,@RequestParam("cadidatedName") String cadidatedName,@RequestParam("work") String work,@RequestParam("candidateCv") MultipartFile candidateCv,@RequestParam("categotyRequired") String categotyRequired,@RequestParam("experience") String experience,@RequestParam("salaryRequired") String salaryRequired, Model model, Principal p){
-        model.addAttribute("email",p.getName());
-        model.addAttribute("success","Successfully updated information");
+    public String updateCandidate(@PathVariable int id, @RequestParam("skill") String skill, @RequestParam("dateOfBirth") String dateOfBirth, @RequestParam("phoneNumber") int phoneNumber, @RequestParam("address") String address, @RequestParam("gender") String gender,@RequestParam("cadidatedName") String cadidatedName,@RequestParam("work") String work,@RequestParam("candidateCv") MultipartFile candidateCv,@RequestParam("categotyRequired") String categotyRequired,@RequestParam("experience") String experience,@RequestParam("salaryRequired") String salaryRequired,@RequestParam("deleteFlag") boolean deleteFlag, Model model, Principal p,RedirectAttributes redirectAttributes){
+    redirectAttributes.addFlashAttribute("email",p.getName());
+    redirectAttributes.addFlashAttribute("success","Successfully updated information");
+//            .addAttribute();
+//        model.addAttribute("success","Successfully updated information");
        // public Cadidates updateCandidate(int id,String skill, String dateOfBirth, int phoneNumber, String address, String gender)
-        iCadidatesService.updateCandidate(id,skill,dateOfBirth,phoneNumber,address,gender,candidateCv,cadidatedName,work,categotyRequired,experience,salaryRequired);
+        iCadidatesService.updateCandidate(id,skill,dateOfBirth,phoneNumber,address,gender,candidateCv,cadidatedName,work,categotyRequired,experience,salaryRequired,deleteFlag);
         return "redirect:/user/myAccount";
     }
     @GetMapping("/employer/employerSearchCandidate")
@@ -140,12 +151,15 @@ public class candidateController {
         return "user/jobFeedback";
     }
     @GetMapping("/user/interview")
-    public String interview(Model model,Principal p){
+    public String interview(Model model,Principal p, @RequestParam(required = false) String name){
         String email = p.getName();
         Account acc = iAccountService.finByEmail(email);
         Cadidates cadidatesAccount=iCadidatesService.candidatesaccount(acc);
-       List<EmployersSearchCandidates> employersSearchCandidatesListFalse=iEmployersSearchCandidatesService.listStatusFalse(cadidatesAccount);
+//       List<EmployersSearchCandidates> employersSearchCandidatesListFalse=iEmployersSearchCandidatesService.listStatusFalse(cadidatesAccount);
+        List<EmployersSearchCandidates> employersSearchCandidatesListFalse=iEmployersSearchCandidatesService.findByStatusAndCadidatesAndName(cadidatesAccount,name);
+
         model.addAttribute("email",acc.getName());
+        model.addAttribute("acc",acc);
         model.addAttribute("employersSearchCandidatesListFalse",employersSearchCandidatesListFalse);
 
         List<Employers> employersList = iEmployersService.finAll();
@@ -156,12 +170,14 @@ public class candidateController {
         return "user/interview";
     }
     @GetMapping("/user/statusInterview")
-    public String statusInterview(Model model,Principal p){
+    public String statusInterview(Model model,Principal p,@RequestParam(required = false) String name,@RequestParam(required = false) String company){
         String email = p.getName();
         Account acc = iAccountService.finByEmail(email);
         Cadidates cadidatesAccount=iCadidatesService.candidatesaccount(acc);
-        List<EmployersSearchCandidates> employersSearchCandidatesListFalse=iEmployersSearchCandidatesService.listStatusTrue(cadidatesAccount);
+//        List<EmployersSearchCandidates> employersSearchCandidatesListFalse=iEmployersSearchCandidatesService.listStatusTrue(cadidatesAccount);////// findByStatusAndCadidatesTrueAndName
+        List<EmployersSearchCandidates> employersSearchCandidatesListFalse=iEmployersSearchCandidatesService.findByStatusAndCadidatesTrueAndName(cadidatesAccount,name,company);
         model.addAttribute("email",acc.getName());
+        model.addAttribute("acc",acc);
         model.addAttribute("employersSearchCandidatesListFalse",employersSearchCandidatesListFalse);
 
         List<Employers> employersList = iEmployersService.finAll();
@@ -171,6 +187,53 @@ public class candidateController {
 //      redirectAttributes.addFlashAttribute("messages", "Successful application");
         return "user/statusInterview";
     }
+//@GetMapping("/statusInterview")
+//public String statusInterview(Model model, Principal p, @RequestParam(required = false) String name, @RequestParam(required = false) String address,,@RequestParam(required = false) String company) {
+//    String email = p.getName();
+//    Account acc = iAccountService.finByEmail(email);
+//    Cadidates cadidatesAccount = iCadidatesService.candidatesaccount(acc);
+//
+//    List<EmployersSearchCandidates> employersSearchCandidatesListFalse = iEmployersSearchCandidatesService.findByStatusAndCadidatesTrueAndName(cadidatesAccount, name, company);
+//    model.addAttribute("email", acc.getName());
+//    model.addAttribute("acc", acc);
+//    model.addAttribute("employersSearchCandidatesListFalse", employersSearchCandidatesListFalse);
+//
+//    List<Employers> employersList = iEmployersService.finAll();
+//    model.addAttribute("employersList", employersList);
+//    List<Jobs> jobsListThree = iJobsService.findLatestThreeJobs();
+//    model.addAttribute("jobsListThree", jobsListThree);
+//
+//    List<Jobs> foundJobs = iJobsRepository.findByAttributesJob(name, address);
+//    model.addAttribute("foundJobs", foundJobs);
+//
+//    try {
+//        long userId = getUserIdForRecommendation();
+//        int numberOfRecommendations = 5;
+//        List<RecommendedItem> recommendedJobs = recommenderService.getRecommendationsForUser(userId, numberOfRecommendations);
+//
+//        List<Jobs> recommendedJobsDetails = getJobsDetails(recommendedJobs);
+//        model.addAttribute("recommendedJobs", recommendedJobsDetails);
+//    } catch (TasteException e) {
+//        e.printStackTrace();
+//    }
+//
+//    return "user/statusInterview";
+//}
+//
+//    private long getUserIdForRecommendation() {
+//        return 1;
+//    }
+//
+//    private List<Jobs> getJobsDetails(List<RecommendedItem> recommendedJobs) {
+//        List<Jobs> recommendedJobsDetails = new ArrayList<>();
+//        for (RecommendedItem item : recommendedJobs) {
+//            Jobs job = iJobsRepository.findById(item.getItemID()).orElse(null);
+//            if (job != null) {
+//                recommendedJobsDetails.add(job);
+//            }
+//        }
+//        return recommendedJobsDetails;
+//    }
     @GetMapping("/user/interviewStatus/{id}")
     public String deleteArticle(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
         iEmployersSearchCandidatesService.statusTrue(id);

@@ -76,8 +76,13 @@ public class saveJobController {
 
     }
     @GetMapping("/user/saveJob")
-    public String saveJob(Model model){
-        List<SaveJob> listSaveJob=iSaveJobService.findByDeleteFlagFalse();
+    public String saveJob(Model model,Principal p,@RequestParam(required = false) String name){
+        String email=p.getName();
+        Account account=iAccountService.finByEmail(email);
+        model.addAttribute("acc",account);
+//        List<SaveJob> listSaveJob=iSaveJobService.findByDeleteFlagFalse();
+//        List<SaveJob> listSaveJob=iSaveJobService.findByAccountId(account);
+        List<SaveJob> listSaveJob=iSaveJobService.findByAccountIdAndName(account,name);
         model.addAttribute("listSaveJob",listSaveJob);
         List<Employers> employersList = iEmployersService.finAll();
         model.addAttribute("employersList",employersList);

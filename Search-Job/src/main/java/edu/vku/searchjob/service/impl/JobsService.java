@@ -51,7 +51,10 @@ public class JobsService implements IJobsService {
             iJobsRepository.save(jobs);
         }
     }
-
+   @Override
+   public List<Jobs> findByAttributesJob(String name,String address){
+        return iJobsRepository.findByAttributesJob(name,address);
+   }
     @Override
     public void undeleteJob(int jobID) {
         Optional<Jobs> jobsOptional = iJobsRepository.findById(jobID);
@@ -107,12 +110,12 @@ public class JobsService implements IJobsService {
 //    }
     @Override
     public List<Jobs> getLatestJobs() {
-        PageRequest pageRequest = PageRequest.of(0, 5);
+        PageRequest pageRequest = PageRequest.of(0, 6);
         return iJobsRepository.findLatestJobs( pageRequest);
     }
     @Override
     public List<Jobs>  findLatestThreeJobs() {
-        PageRequest pageRequest = PageRequest.of(0, 3);
+        PageRequest pageRequest = PageRequest.of(0, 5);
         return iJobsRepository.findLatestJobs( pageRequest);
     }
 

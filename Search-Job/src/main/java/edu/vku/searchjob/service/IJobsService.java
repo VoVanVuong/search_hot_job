@@ -15,6 +15,7 @@ public interface IJobsService {
     //    void markAsDeleted(int categoryId);
     void deleteJob(int jobID);
     void undeleteJob(int jobID);
+
     public void saveJobs(Jobs jobs);
     public List<Jobs> findByAllAccountId(int accountId);
     public Optional<Jobs> getJobsById(int id);
@@ -34,5 +35,5 @@ public interface IJobsService {
 
 //    List<Jobs> getJobsForAccount(String email);
 
-
+    public List<Jobs> findByAttributesJob(String name,String address);
 }

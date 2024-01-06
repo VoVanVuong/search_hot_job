@@ -34,19 +34,24 @@ public class candidateJobController {
     @Autowired
     private Cloudinary cloudinary;
     @GetMapping("/employer/jobDetails/{id}")
-    public String getJobDetails(@PathVariable int id, Model model) {
+    public String getJobDetails(@PathVariable int id, Model model,Principal p) {
 //        Optional<Jobs> job = iJobsService.getJobsById(id); // You need to implement this method in JobService
         List<CandidateJobs> candidateJobs = iCandidateJobsService.getCandidateJobsForJob(id);
-
+        String email = p.getName();
+        Account acc = iAccountService.finByEmail(email);
+        model.addAttribute("acc", acc);
 //        model.addAttribute("job", job);
         model.addAttribute("candidateJobs", candidateJobs);
 
         return "employer/receivedApplication"; // Thymeleaf template name without the extension
     }
     @GetMapping("/employer/jobDetails/applyEmployer/{id}")
-    public String applyEmployer(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
+    public String applyEmployer(@PathVariable("id") int id, RedirectAttributes redirectAttributes,Principal p,Model model) {
   //      iEmployersService.deleteEmployers(id);
        iCandidateJobsService.applyCandidateJobs(id);
+        String email = p.getName();
+        Account acc = iAccountService.finByEmail(email);
+        model.addAttribute("acc", acc);
 //        iCandidateJobsService.findByJobsId(id);
 //        Optional<CandidateJobs> canJob=iCandidateJobsService.findById(id);
         CandidateJobs canJob=iCandidateJobsService.finByIdCanJob(id);

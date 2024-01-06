@@ -19,6 +19,7 @@ public interface IEmployersService {
 
     public Employers findByAccountId(Account account);
     public Employers findEmployersByEmail(Account account);
+    public List<Employers> ListCompany(String name);
 //    public Employers getEmployerByAccountId(int accountId);
 //    public void addEmployerWithAvatar(Employers employer, byte[] avatarData);
 }

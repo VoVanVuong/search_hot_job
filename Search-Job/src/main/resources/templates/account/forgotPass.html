@@ -134,12 +134,12 @@
 
     // Kiểm tra mật khẩu mới và xác nhận mật khẩu
     if (newPassword === '' || confirmPassword === '') {
-      document.getElementById('passwordError').innerText = 'Vui lòng nhập mật khẩu mới và xác nhận mật khẩu';
+      document.getElementById('passwordError').innerText = 'Please enter a new password and confirm the password';
       return;
     }
 
     if (newPassword !== confirmPassword) {
-      document.getElementById('passwordError').innerText = 'Mật khẩu mới và xác nhận mật khẩu không khớp';
+      document.getElementById('passwordError').innerText = 'New password and confirm password do not match';
       return;
     }
 

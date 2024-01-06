@@ -16,4 +16,6 @@ public List<EmployersSearchCandidates> listStatusFalse(Cadidates cadidates);
     public void statusfalse(int id);
     public List<EmployersSearchCandidates> listStatusAndEmployer(Employers employers);
     public List<EmployersSearchCandidates> listStatusAndEmployerTrue(Employers employers);
+    public List<EmployersSearchCandidates> findByStatusAndCadidatesAndName(Cadidates canCadidates,String name);
+    public List<EmployersSearchCandidates> findByStatusAndCadidatesTrueAndName(Cadidates cadidates,String name,String company);
 }

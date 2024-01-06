@@ -111,71 +111,141 @@
 
   <div class="sticky-top">
     <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow p-0">
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
       <a href="index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
-        <h1 class="m-0 text-primary">5Job</h1>
+        <!--            <h1 class="m-0 text-primary">5Job</h1>-->
+
+        <!--            <img th:src="../../static/img/5jlogo1.png" height="376" width="743"/></a>-->
+        <img th:src="@{/img/5jlogo1.png}" height="60%" />
       </a>
       <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"
               data-bs-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
-        <div class="navbar-nav ms-auto p-4 p-lg-0">
-          <a href="index.html" class="nav-item nav-link active">Home</a>
-          <a href="" class="nav-item nav-link">Companies</a>
-          <a href="" class="nav-item nav-link">5Job tool</a>
-          <a href="" class="nav-item nav-link">CV</a>
-          <div class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" th:text="${email}"></a>
-            <div class="dropdown-menu rounded-0 m-0">
-              <a th:href="@{/logout}" class="dropdown-item">Logout</a>
-              <a th:href="@{/user/interview}" class="dropdown-item active">interview</a>
+        <div class="navbar-nav ms-auto p-4 p-lg-0 position-relative mb-0">
+          <a th:href="@{/user/home}"  class="nav-item nav-link active"><i class="bi bi-house-door"></i> Home</a>
+          <!--                <a th:href="@{/user/appliedJob}" class="nav-item nav-link">Job application</a>-->
+          <a th:href="@{/user/listCompany}" class="nav-item nav-link"><i class="bi bi-building"></i> Company</a>
+          <a th:href="@{/user/listJob}" class="nav-item nav-link"><i class="bi bi-book"></i> List job</a>
+          <a th:if="${acc != null and not #strings.isEmpty(acc.name)}" th:href="@{http://localhost:9000/}"
+             class="nav-item nav-link"><i class="bi bi-chat"></i>Bot chat</a>
+          <div th:if="${acc != null and not #strings.isEmpty(acc.name)}" class="nav-item dropdown mb-0 ml-1">
+                        <span style="display:flex;align-items:center;position:relative;box-sizing:border-box;">
+                            <a href="#" class="nav-link" data-bs-toggle="dropdown"
+                               style="background-color:#E0F2FA;padding-right:6px;padding-left:6px;border-radius:50px;color:rgb(14, 18, 37);display:flex;align-items:center;font-weight:100;margin-left:4px;border:0.8px solid rgb(215, 215, 219);white-space:nowrap;cursor:pointer;text-decoration:none solid rgb(14, 18, 37);background-color:rgba(0, 0, 0, 0);box-sizing:border-box;">
+<!--                             <img th:if="${acc.avatar ne null}" th:src="${acc.avatar}" alt="User Avatar">-->
+                              <!--<img th:if="${acc.avatar == null}" th:src="@{/img/nomal.jpg}" alt="Default Avatar">-->
+          <img alt="avatar" height="30" width="30" th:if="${acc.avatar ne null}" th:src="${acc.avatar}"
+               style="object-fit:cover;object-position:50% 50%;margin-right:4px;border-radius:50%;vertical-align:middle;border-style:none;box-sizing:border-box;" />
+                                <img alt="avatar" height="30" width="30" th:if="${acc.avatar == null}" th:src="@{/img/nomal.jpg}"
+                                     style="object-fit:cover;object-position:50% 50%;margin-right:4px;border-radius:50%;vertical-align:middle;border-style:none;box-sizing:border-box;" />
+                                <span
+                                        style="max-width:150px;text-overflow:ellipsis;overflow:hidden;box-sizing:border-box;">
+                                </span>
+                                <span id="accName" th:if="${acc != null and not #strings.isEmpty(acc.name)}"
+                                      th:text="${acc.name}">
+                                </span>
+                            </a>
+                        </span>
+            <div class="dropdown-menu rounded-0 m-0 top-50 start-40 translate-middle mr-2">
+
+              <a th:href="@{/user/interview}" class="dropdown-item"><i class="fas fa-envelope"></i>
+                Interview</a>
+              <a th:href="@{/user/statusInterview}" class="dropdown-item"><i class="fas fa-envelope"></i>
+                Status Interview</a>
               <!--                        <a href="" class="dropdown-item">My 5job</a>-->
               <!--                        <a href="" class="dropdown-item">my resumes</a>-->
-              <a  class="dropdown-item" th:href="@{/user/saveJob}">Saved jobs</a>
-              <a th:href="@{/user/appliedJob}" class="dropdown-item">Applied jobs</a>
-              <!--                        <a href="" class="dropdown-item">Job alerts</a>-->
-              <a th:href="@{/user/myAccount}" class="dropdown-item">My account</a>
+              <a class="dropdown-item" th:href="@{/user/saveJob}"><i class="fas fa-heart"></i> Saved
+                jobs</a>
+              <a th:href="@{/user/appliedJob}" class="dropdown-item"><i class="fas fa-check"></i> Applied
+                jobs</a>
 
+              <!--                        <a href="" class="dropdown-item">Job alerts</a>-->
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <a th:href="@{#}" class="dropdown-item"><i class="bi bi-chat"></i>Chat</a>
+
+              <a th:href="@{/user/myAccount}" class="dropdown-item"><i class="fas fa-user"></i> My
+                account</a>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <a th:href="@{/logout}" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </div>
           </div>
+          <a th:href="@{/logout}" class="nav-item nav-link"
+             th:unless="${acc != null and not #strings.isEmpty(acc.name)}"><i class="fas fa-sign-in-alt"></i>
+            Login</a>
+
         </div>
-        <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Employers<i
-                class="fa fa-arrow-right ms-3"></i></a>
+
+        <!--            <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block"><i-->
+        <!--                    class="fa fa-arrow-right ms-3"></i></a>-->
       </div>
     </nav>
+
+    <!--    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow p-0">-->
+<!--      <a href="index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">-->
+<!--        <h1 class="m-0 text-primary">5Job</h1>-->
+<!--      </a>-->
+<!--      <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"-->
+<!--              data-bs-target="#navbarCollapse">-->
+<!--        <span class="navbar-toggler-icon"></span>-->
+<!--      </button>-->
+<!--      <div class="collapse navbar-collapse" id="navbarCollapse">-->
+<!--        <div class="navbar-nav ms-auto p-4 p-lg-0">-->
+<!--          <a href="index.html" class="nav-item nav-link active">Home</a>-->
+<!--          <a href="" class="nav-item nav-link">Companies</a>-->
+<!--          <a href="" class="nav-item nav-link">5Job tool</a>-->
+<!--          <a href="" class="nav-item nav-link">CV</a>-->
+<!--          <div class="nav-item dropdown">-->
+<!--            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" th:text="${email}"></a>-->
+<!--            <div class="dropdown-menu rounded-0 m-0">-->
+<!--              <a th:href="@{/logout}" class="dropdown-item">Logout</a>-->
+<!--              <a th:href="@{/user/interview}" class="dropdown-item active">interview</a>-->
+<!--              &lt;!&ndash;                        <a href="" class="dropdown-item">My 5job</a>&ndash;&gt;-->
+<!--              &lt;!&ndash;                        <a href="" class="dropdown-item">my resumes</a>&ndash;&gt;-->
+<!--              <a  class="dropdown-item" th:href="@{/user/saveJob}">Saved jobs</a>-->
+<!--              <a th:href="@{/user/appliedJob}" class="dropdown-item">Applied jobs</a>-->
+<!--              &lt;!&ndash;                        <a href="" class="dropdown-item">Job alerts</a>&ndash;&gt;-->
+<!--              <a th:href="@{/user/myAccount}" class="dropdown-item">My account</a>-->
+
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Employers<i-->
+<!--                class="fa fa-arrow-right ms-3"></i></a>-->
+<!--      </div>-->
+<!--    </nav>-->
     <!-- Navbar End -->
     <!-- Search Start -->
     <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 5px;">
       <div class="container">
-        <div class="row g-2">
+        <form th:action="@{/user/statusInterview}" method="get" class="row g-2">
           <div class="col-md-10">
             <div class="row g-2">
-              <div class="col-md-4">
-                <input type="text" class="form-control border-0" placeholder="Keyword" />
+              <div class="col-md-6">
+                <input type="text" class="form-control border-0" name="name" placeholder="Keyword" />
               </div>
-              <div class="col-md-4">
-                <select class="form-select border-0">
-                  <option selected>Category</option>
-                  <option value="1">Category 1</option>
-                  <option value="2">Category 2</option>
-                  <option value="3">Category 3</option>
-                </select>
+              <div class="col-md-6">
+                <input type="text" class="form-control border-0" name="company" placeholder="Company" />
               </div>
-              <div class="col-md-4">
-                <select class="form-select border-0">
-                  <option selected>Location</option>
-                  <option value="1">Location 1</option>
-                  <option value="2">Location 2</option>
-                  <option value="3">Location 3</option>
-                </select>
-              </div>
+<!--              <div class="col-md-4">-->
+<!--                <select class="form-select border-0">-->
+<!--                  <option selected>Location</option>-->
+<!--                  <option value="1">Location 1</option>-->
+<!--                  <option value="2">Location 2</option>-->
+<!--                  <option value="3">Location 3</option>-->
+<!--                </select>-->
+<!--              </div>-->
             </div>
           </div>
           <div class="col-md-2">
-            <button class="btn btn-dark border-0 w-100">Search</button>
+            <button type="submit" class="btn btn-dark border-0 w-100">Search</button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
     <!-- Search End -->
@@ -205,8 +275,12 @@
               <div class="p-4 d-flex align-items-start border">
                 <div
                         style="margin-right: 10px ; width: 90px; height: 90px; border-radius: 4.8px; border: 0.8px solid rgb(215, 215, 219); background-color: rgb(255, 255, 255);">
-                  <img alt="" loading="lazy" th:src="${employersSearchCandidatesList.employers.getAccount().getAvatar()}" class="img-fluid"
+                  <img alt="" loading="lazy" th:if="${employersSearchCandidatesList.employers.getAccount().getAvatar() == null}" th:src="@{/img/nomal.jpg}" class="img-fluid"
                        style="max-width: 100%; max-height: 100%; border-radius: 4.8px; vertical-align: middle; border-style: none;">
+                  <img alt="" loading="lazy" th:if="${employersSearchCandidatesList.employers.getAccount().getAvatar() ne null}"  th:src="${employersSearchCandidatesList.employers.getAccount().getAvatar()}" class="img-fluid"
+                       style="max-width: 100%; max-height: 100%; border-radius: 4.8px; vertical-align: middle; border-style: none;">
+<!--                  <img class="img-profile rounded-circle" th:if="${acc.avatar ne null}" th:src="${acc.avatar}">
+              <img class="img-profile rounded-circle"th:if="${acc.avatar == null}" th:src="@{/img/nomal.jpg}">-->
                 </div>
                 <div class="overflow-hidden flex-grow-1">
                   <a title="" href="" target="_blank"

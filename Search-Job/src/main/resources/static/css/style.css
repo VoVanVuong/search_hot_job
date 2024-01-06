@@ -6,6 +6,7 @@
     --dark: #2B3940;
 }
 
+
 .back-to-top {
     position: fixed;
     display: none;
@@ -87,10 +88,9 @@
 .navbar-dark .navbar-nav .nav-link,
 .navbar-light .navbar-nav .nav-link {
     margin-right: 30px;
-    padding: 25px 0;
+
     color: #FFFFFF;
     font-size: 15px;
-    text-transform: uppercase;
     outline: none;
 }
 

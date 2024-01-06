@@ -318,12 +318,14 @@
 
                 <tbody>
 
-                <tr th:each="account, stat :${listAccount}">
-                 <span th:if="${account.role}=='ROLE_EMPLOYER'">
+                <tr th:each="account, stat :${listAccount}"  th:if="${account.role}=='ROLE_EMPLOYER'">
                   <td th:text="${stat.count}"></td>
+
                   <td th:text="${account.name}"></td>
                   <td th:text="${account.email}"> </td>
-                  <td th:text="${account.enabled}"></td>
+                  <td th:text="${account.enabled} ? 'Active' : 'Inactive'"></td>
+
+                  <!--                  <td th:text="${account.enabled}"></td>-->
                   <td th:text="${account.createdAt}"></td>
                   <td th:text="${account.updatedAt}"></td>
 <!--                  <td> <a th:href="@{/admin/account/deleteAccount/{id}(id=${account.id})}"> <span style="color: red"><i class="fa-solid fa-trash-can-arrow-up"></i> </span></a>|| <i class="fa-regular fa-pen-to-square"></i></td>-->
@@ -342,18 +344,17 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                          <div class="modal-body">
-<!---->
-<!--                             <span th:if="${listEmployer.?[account_id == account.id].size() > 0}">-->
+                          <div class="modal-body" th:each="employer : ${listEmployer}">
 
-<!--                &lt;!&ndash; Display the address of the first matching employer &ndash;&gt;-->
-<!--               <th:block th:each="employer : ${listEmployer.?[account_id == account.id]}">-->
-<!--                    &lt;!&ndash; Hiển thị địa chỉ của từng nhà tuyển dụng &ndash;&gt;-->
-<!--                  <span>dfhdfhdgd</span>  <span th:text="${employer.address}"></span><br/>-->
-<!--                </th:block>-->
-<!--            </span>-->
-<!--                            <p><strong>Name:</strong> <span th:text="${account.name}"></span></p>-->
+                          <p>   <span th:if="${employer.account.id == account.id}" th:text="${employer.name}"></span></p>
+                            <p>   <span th:if="${employer.account.id == account.id}" th:text="${employer.address}"></span></p>
 <!--                            <p><strong>Address:</strong><span th:text="${account.email}"></span> </p>-->
+<!--                            <tr th:each="employer : ${listEmployer}">-->
+<!--                              <td>-->
+<!--                                <span th:if="${employer.account.id == account.id}" th:text="${employer.name}"></span>-->
+<!--                                <span th:unless="${employer.account.id == account.id}">Not Matched</span>-->
+<!--                              </td>-->
+<!--                            </tr>-->
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -370,12 +371,19 @@
 
 <!--                                  <td> <a th:href="@{/admin/account/unDeleteAccount/{id}(id=${account.id})}"> <span style="color: red"><i class="fa-solid fa-trash-can-arrow-up"></i> </span></a>|| <i class="fa-regular fa-pen-to-square"></i></td>-->
                        <!-- Button to trigger the modal -->
-                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                  <button type="button" class="btn btn-danger" data-toggle="modal" th:attr="data-target='#deleteModal-'+ ${account.id}">
                      lock
                   </button>
                   </td>
+<!--                     <button type="button" class="btn btn-outline-primary" data-toggle="modal"  th:attr="data-target='#userInfoModal-' + ${candidate.id}" >
+                            Details
+                          </button>
+
+
+<div class="modal fade" th:id="'userInfoModal-' + ${candidate.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                               aria-hidden="true">-->
                    <!-- Modal -->
-                  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade" th:id="'deleteModal-'+${account.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div style="background-color: red" class="modal-header">
@@ -401,12 +409,12 @@
                     </div>
                   </div>
 
-                  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<!--                  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>-->
                   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
                   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
                    </td>
-                 </span>
+
                 </tr>
                 </tbody>
               </table>
@@ -462,7 +470,7 @@
 </div>
 
 <!-- Bootstrap core JavaScript-->
-<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<!--<script th:src="@{/vendor/jquery/jquery.min.js}"></script>-->
 <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
 <!-- Core plugin JavaScript-->

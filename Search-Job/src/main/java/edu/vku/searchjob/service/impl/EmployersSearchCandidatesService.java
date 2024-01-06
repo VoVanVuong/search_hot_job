@@ -28,8 +28,16 @@ public class EmployersSearchCandidatesService implements IEmployersSearchCandida
         return iEmployersSearchCandidatesRepository.findByStatusAndCadidates(cadidates);
     }
     @Override
+    public List<EmployersSearchCandidates> findByStatusAndCadidatesAndName(Cadidates canCadidates,String name){
+        return iEmployersSearchCandidatesRepository.findByStatusAndCadidatesAndName(canCadidates,name);
+    }
+    @Override
     public List<EmployersSearchCandidates> listStatusTrue(Cadidates cadidates){
         return iEmployersSearchCandidatesRepository.findByStatusAndCadidatesTrue(cadidates);
+    }
+    @Override
+    public List<EmployersSearchCandidates> findByStatusAndCadidatesTrueAndName(Cadidates cadidates,String name,String company){
+        return iEmployersSearchCandidatesRepository.findByStatusAndCadidatesTrueAndName(cadidates,name,company);
     }
     @Override
     public List<EmployersSearchCandidates> listStatusAndEmployer(Employers employers){

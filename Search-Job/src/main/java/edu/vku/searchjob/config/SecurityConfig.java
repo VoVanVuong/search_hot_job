@@ -47,6 +47,11 @@ public class SecurityConfig  {
                                     .requestMatchers("/signUp").permitAll()
                                         .requestMatchers("/employRegister").permitAll()
                                         .requestMatchers("/forgotPass").permitAll()
+
+                                        .requestMatchers("/homes").permitAll()
+                                        .requestMatchers("/listCompany").permitAll()
+                                        .requestMatchers("/listJob").permitAll()
+
                                         .requestMatchers("/home").permitAll()
                                         .requestMatchers("/home/details").permitAll()
                                         .requestMatchers("/signIn/**").permitAll()

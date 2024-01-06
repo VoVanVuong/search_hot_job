@@ -43,6 +43,64 @@
 			<artifactId>cloudinary-taglib</artifactId>
 			<version>1.32.2</version>
 		</dependency>
+
+<!--		<dependency>-->
+<!--			<groupId>org.apache.mahout</groupId>-->
+<!--			<artifactId>mahout-math</artifactId>-->
+<!--			<version>0.15.1</version> &lt;!&ndash; Cập nhật phiên bản phù hợp &ndash;&gt;-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.apache.mahout</groupId>-->
+<!--			<artifactId>mahout-mr</artifactId>-->
+<!--			<version>0.15.1</version> &lt;!&ndash; Cập nhật phiên bản phù hợp &ndash;&gt;-->
+<!--		</dependency>-->
+<!--		-->
+		<!-- https://mvnrepository.com/artifact/org.apache.mahout/mahout-math-scala -->
+<!--		<dependency>-->
+<!--			<groupId>org.apache.mahout</groupId>-->
+<!--			<artifactId>mahout-math-scala_2.10</artifactId>-->
+<!--			<version>0.12.0</version>-->
+<!--		</dependency>-->
+
+		<!--		<dependency>-->
+<!--			<groupId>org.apache.mahout</groupId>-->
+<!--			<artifactId>mahout-math-scala_2.12</artifactId>-->
+<!--			<version>0.15.1</version> &lt;!&ndash; Cập nhật phiên bản phù hợp &ndash;&gt;-->
+<!--		</dependency>-->
+		<dependency>
+			<groupId>org.apache.mahout</groupId>
+			<artifactId>mahout</artifactId>
+			<version>0.12.1</version>
+			<type>pom</type>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.mahout/mahout-core -->
+		<dependency>
+			<groupId>org.apache.mahout</groupId>
+			<artifactId>mahout-core</artifactId>
+			<version>14.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.mahout</groupId>
+			<artifactId>mahout-integration</artifactId>
+			<version>0.13.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.mahout</groupId>
+			<artifactId>mahout-mr</artifactId>
+			<version>0.13.0</version> <!-- Phiên bản có thể thay đổi -->
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.mahout/mahout-examples -->
+		<dependency>
+			<groupId>org.apache.mahout</groupId>
+			<artifactId>mahout-examples</artifactId>
+			<version>0.13.0</version>
+		</dependency>
+
+		<!--		<dependency>-->
+<!--			<groupId>org.apache.mahout</groupId>-->
+<!--			<artifactId>mahout-mr</artifactId>-->
+<!--			<version>0.13.0</version> &lt;!&ndash; Replace with the latest version &ndash;&gt;-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>io.github.cdimascio</groupId>
 			<artifactId>dotenv-java</artifactId>
@@ -74,6 +132,10 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

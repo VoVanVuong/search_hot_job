@@ -18,8 +18,14 @@ public interface IEmployersSearchCandidatesRepository extends JpaRepository<Empl
 @Query("SELECT esc FROM EmployersSearchCandidates esc WHERE esc.status = false AND esc.cadidates = :cadidates")
 List<EmployersSearchCandidates> findByStatusAndCadidates(@Param("cadidates") Cadidates cadidates);
 
-    @Query("SELECT esc FROM EmployersSearchCandidates esc WHERE esc.status = true AND esc.cadidates = :cadidates")
+    @Query("SELECT esc FROM EmployersSearchCandidates esc WHERE esc.status = false AND esc.cadidates = :cadidates AND (:name IS NULL OR esc.cadidates.work LIKE %:name%)")
+    List<EmployersSearchCandidates> findByStatusAndCadidatesAndName(@Param("cadidates") Cadidates cadidates, @Param("name") String name);
+    @Query("SELECT esc FROM EmployersSearchCandidates esc WHERE esc.status = true AND esc.cadidates = :cadidates ")
     List<EmployersSearchCandidates> findByStatusAndCadidatesTrue(@Param("cadidates") Cadidates cadidates);
+
+    @Query("SELECT esc FROM EmployersSearchCandidates esc WHERE esc.status = true AND esc.cadidates = :cadidates AND (:name IS NULL OR esc.cadidates.work LIKE %:name%) AND (:company IS NULL OR esc.employers.name LIKE %:company%)")
+    List<EmployersSearchCandidates> findByStatusAndCadidatesTrueAndName(@Param("cadidates") Cadidates cadidates,@Param("name") String name,@Param("company") String company);
+
 
     @Query("SELECT esc FROM EmployersSearchCandidates esc WHERE esc.status = false AND esc.employers = :employers")
     List<EmployersSearchCandidates> findByStatusAndEmployer(@Param("employers") Employers employers);

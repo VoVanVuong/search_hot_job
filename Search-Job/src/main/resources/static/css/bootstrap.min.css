@@ -701,8 +701,7 @@ progress {
     display: flex;
     flex-wrap: wrap;
     margin-top: calc(var(--bs-gutter-y) * -1);
-    margin-right: calc(var(--bs-gutter-x) / -2);
-    margin-left: calc(var(--bs-gutter-x) / -2)
+
 }
 
 .row>* {
@@ -3849,8 +3848,8 @@ fieldset:disabled .btn {
     position: absolute;
     z-index: 1000;
     display: none;
-    min-width: 10rem;
-    padding: .5rem 0;
+    min-width: 11rem;
+    padding: 1rem 0;
     margin: 0;
     font-size: 1rem;
     color: #666565;
@@ -3858,8 +3857,9 @@ fieldset:disabled .btn {
     list-style: none;
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 1);
     border-radius: 2px
+
 }
 
 .dropdown-menu[data-bs-popper] {
@@ -7260,7 +7260,7 @@ fieldset:disabled .btn {
 }
 
 .translate-middle {
-    transform: translate(-50%, -50%) !important
+    transform: translate(-20%, 10%) !important
 }
 
 .translate-middle-x {

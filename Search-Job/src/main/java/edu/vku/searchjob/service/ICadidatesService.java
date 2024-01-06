@@ -13,7 +13,7 @@ public interface ICadidatesService {
 public Cadidates finByAccount(Account id);
     public Cadidates save(Cadidates cadidates);
 
-    public Cadidates updateCandidate(int id, String skill, String dateOfBirth, int phoneNumber, String address, String gender,MultipartFile candidateCv,String cadidatedName,String work,String categotyRequired,String experience,String salaryRequired);
+    public Cadidates updateCandidate(int id, String skill, String dateOfBirth, int phoneNumber, String address, String gender,MultipartFile candidateCv,String cadidatedName,String work,String categotyRequired,String experience,String salaryRequired,Boolean deleteFlag);
 
     public List<Cadidates> search(String work, String experience, String categoryRequired, String salaryRequired);
     //    public Cadidates updateCandidate(Cadidates cadidates);

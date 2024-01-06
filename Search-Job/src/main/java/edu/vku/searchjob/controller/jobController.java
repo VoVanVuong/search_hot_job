@@ -187,19 +187,73 @@ public class jobController {
         model.addAttribute("topCategories", topCategories);
         return "user/home";
     }
+    @GetMapping("/homes")
+    public String guestHome(Model model, Principal p){
+
+        List<Jobs> latestJobs = iJobsService.getLatestJobs();
+        model.addAttribute("latestJobs", latestJobs);
+        List<Employers> employersList = iEmployersService.finAll();
+        model.addAttribute("employersList",employersList);
+//        String email = p.getName();
+//        Account acc = iAccountService.finByEmail(email);
+//        model.addAttribute("acc", acc);
+
+        List<String> topCategories = iCategoriesService.getTop8Categories();
+        model.addAttribute("topCategories", topCategories);
+        return "guest/home";
+    }
     @GetMapping("/user/listJob")
-    public String listJobUser(Model model){
+    public String listJobUser(Model model,Principal p,@RequestParam(required = false) String name,@RequestParam(required = false) String address){
+
+        String email = p.getName();
+        Account acc = iAccountService.finByEmail(email);
+        model.addAttribute("acc", acc);
+        List<Employers> employersList = iEmployersService.finAll();
+        model.addAttribute("employersList",employersList);
+        List<Jobs> jobsListThree=iJobsService.findLatestThreeJobs();
+        model.addAttribute("jobsListThree",jobsListThree);
+
+        List<Categories> categoriesList = iCategoriesService.findByDeleteFlagFalse();
+        model.addAttribute("categoriesList", categoriesList);
+//        List<Jobs> listJob=iJobsService.listJobUser();
+        List<Jobs> listJob=iJobsService.findByAttributesJob(name,address);
+        model.addAttribute("listJob",listJob);
+        return "user/listJob";
+    }
+    @GetMapping("/user/listJob/{id}")
+    public String listJobUserId(@PathVariable("id") int id,Model model,Principal p,@RequestParam(required = false) String name,@RequestParam(required = false) String address){
+
+        String email = p.getName();
+        Account acc = iAccountService.finByEmail(email);
+        model.addAttribute("acc", acc);
+        List<Employers> employersList = iEmployersService.finAll();
+        model.addAttribute("employersList",employersList);
+        List<Jobs> jobsListThree=iJobsService.findLatestThreeJobs();
+        model.addAttribute("jobsListThree",jobsListThree);
+
+        List<Categories> categoriesList = iCategoriesService.findByDeleteFlagFalse();
+        model.addAttribute("categoriesList", categoriesList);
+//        List<Jobs> listJob=iJobsService.listJobUser();
+        List<Jobs> listJob=iJobsService.findByAllAccountId(id);
+        model.addAttribute("listJob",listJob);
+        return "user/listJobId";
+    }
+    @GetMapping("/listJob")
+    public String guestListJobUser(Model model){
         List<Jobs> listJob=iJobsService.listJobUser();
         List<Employers> employersList = iEmployersService.finAll();
         model.addAttribute("employersList",employersList);
         List<Jobs> jobsListThree=iJobsService.findLatestThreeJobs();
         model.addAttribute("jobsListThree",jobsListThree);
         model.addAttribute("listJob",listJob);
-        return "user/listJob";
+        return "guest/listJob";
     }
     @GetMapping("/user/jobDetail/{id}")
-    public String jobDetailUser(@PathVariable("id") int id,Model model){
+    public String jobDetailUser(@PathVariable("id") int id,Model model,Principal p){
         Jobs job = iJobsService.getJobById(id);
+        String email = p.getName();
+        Account acc = iAccountService.finByEmail(email);
+        model.addAttribute("acc", acc);
         model.addAttribute("job", job);
         List<Employers> employersList = iEmployersService.finAll();
        model.addAttribute("employersList",employersList);

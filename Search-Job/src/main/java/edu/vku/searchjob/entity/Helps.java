@@ -1,6 +1,8 @@
 package edu.vku.searchjob.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "helps")
@@ -18,16 +20,20 @@ public class Helps {
     @Column(name = "reply")
     private String reply;
     @Column(name = "status")
-    private String status;
+    private boolean status;
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at",columnDefinition = "Datetime")
     private String createdAt;
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated_at",columnDefinition = "Datetime")
     private String updatedAt;
 
     public Helps() {
     }
 
-    public Helps(int id, String title, Account account, String content, String reply, String status, String createdAt, String updatedAt) {
+    public Helps(int id, String title, Account account, String content, String reply, boolean status, String createdAt, String updatedAt) {
         this.id = id;
         this.title = title;
         this.account = account;
@@ -78,11 +84,11 @@ public class Helps {
         this.reply = reply;
     }
 
-    public String getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 

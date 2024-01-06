@@ -287,23 +287,25 @@
 
                 <tbody>
 
-                <tr th:each="account, stat :${listAccount}">
-                      <span th:if="${account.role}=='ROLE_EMPLOYER'">
+                <tr th:each="account, stat :${listAccount}" th:if="${account.role}=='ROLE_EMPLOYER'">
+
                   <td th:text="${stat.count}"></td>
                   <td th:text="${account.name}"></td>
                   <td th:text="${account.email}"> </td>
-                  <td th:text="${account.enabled}"></td>
-                                    <td th:text="${account.createdAt}"></td>
+<!--                  <td th:text="${account.enabled}"></td>-->
+                  <td th:text="${account.enabled} ? 'Active' : 'Inactive'"></td>
+
+                  <td th:text="${account.createdAt}"></td>
                                     <td th:text="${account.updatedAt}"></td>
                   <td>
 <!--                                  <td> <a th:href="@{/admin/account/unDeleteAccount/{id}(id=${account.id})}"> <span style="color: red"><i class="fa-solid fa-trash-can-arrow-up"></i> </span></a>|| <i class="fa-regular fa-pen-to-square"></i></td>-->
                   <!-- Button to trigger the modal -->
-                  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#deleteModal">
+                  <button type="button" class="btn btn-info" data-toggle="modal"   th:attr="data-target='#userInfoModal-' + ${account.id}">
                     Active
                   </button>
                   </td>
                   <!-- Modal -->
-                  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade"  th:id="'userInfoModal-' + ${account.id}"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div style="background-color: #007bff" class="modal-header">
@@ -329,10 +331,7 @@
                     </div>
                   </div>
 
-                  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-                  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-                  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-                      </span>
+
                 </tr>
                 </tbody>
               </table>
@@ -403,6 +402,9 @@
 
 <!-- Page level custom scripts -->
 <script th:src="@{/js/demo/datatables-demo.js}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 

@@ -217,8 +217,12 @@
           <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-              <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+              <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="${acc.getName()}"></span>
+              <img class="img-profile rounded-circle" th:if="${acc.avatar ne null}" th:src="${acc.avatar}">
+              <img class="img-profile rounded-circle" th:if="${acc.avatar ne null}" th:src="@{/img/nomal.jpg}">
+<!--              <img th:if="${acc.avatar ne null}" th:src="${acc.avatar}" alt="User Avatar">
+<img th:if="${acc.avatar == null}" th:src="@{/img/nomal.jpg}" alt="Default Avatar">
+-->
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -287,10 +291,18 @@
         <div class="col-sm-4 mb-3">
           <div class="card p-3">
             <div class="text-muted font-weight-bold">Total applications</div>
-            <div class="font-weight-bold display-4">0 <i class="icon"></i></div>
+<!--            <div class="font-weight-bold display-4" th:each="candidateJob : ${candidateJobs}">-->
+<!--              <span th:text="${#lists.size(candidateJob.isStatus())}"></span>-->
+<!--              <i class="icon"></i></div>-->
+            <div class="font-weight-bold display-4" th:if="${#lists.isEmpty(candidateJobs) and candidateJobs[0].isStatus()}">
+              <span th:with="totalItems=${#lists.size(candidateJobs)}" th:text="${#lists.size(candidateJobs)}"></span>
+              <i class="icon"></i>
+            </div>
+
           </div>
         </div>
-
+<!--<span id="totalItems" th:if="${not candidateJobs.isStatus()}" th:text="${#lists.size(candidateJobs)}" style="display: none;"></span>
+-->
         <div class="col-sm-4 mb-3">
           <div class="card p-3">
             <div class="text-muted font-weight-bold">Total Views</div>

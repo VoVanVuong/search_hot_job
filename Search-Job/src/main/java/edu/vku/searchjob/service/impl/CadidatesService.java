@@ -52,7 +52,7 @@ public Cadidates finByAccount(Account id){
 //        return iCadidatesRepository.save(cadidates);
 //    }
     @Override
-    public Cadidates updateCandidate(int id, String skill, String dateOfBirth, int phoneNumber, String address, String gender,MultipartFile candidateCv,String cadidatedName,String work,String categotyRequired,String experience,String salaryRequired){
+    public Cadidates updateCandidate(int id, String skill, String dateOfBirth, int phoneNumber, String address, String gender,MultipartFile candidateCv,String cadidatedName,String work,String categotyRequired,String experience,String salaryRequired,Boolean deleteFlag){
 //        String userEmail = p.getName();
        // Account account = iAccountService.finByEmail(userEmail);
      //  List<Cadidates> cadidatesList=iCadidatesRepository.findAll();
@@ -70,6 +70,7 @@ public Cadidates finByAccount(Account id){
      existingCadidates.setPhoneNumber(phoneNumber);
      existingCadidates.setAddress(address);
      existingCadidates.setGender(gender);
+     existingCadidates.setDeleteFlag(deleteFlag);
 //     ,String categotyRequired,String experience,String salaryRequired
      existingCadidates.setCategotyRequired(categotyRequired);
      existingCadidates.setExperience(experience);

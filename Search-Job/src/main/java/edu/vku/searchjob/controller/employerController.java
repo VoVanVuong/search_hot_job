@@ -62,7 +62,10 @@ public class employerController {
         return "employer/searchResumes";
     }
     @GetMapping("/user/companyInfo/{id}")
-    public String companyInfo(@PathVariable("id") int id,Model model){
+    public String companyInfo(@PathVariable("id") int id,Model model,Principal p){
+        String email=p.getName();
+        Account acc=iAccountService.finByEmail(email);
+        model.addAttribute("acc",acc);
         Employers employer=iEmployersService.getJobById(id);
         List<Jobs> jobsList=iJobsService.findLatestThreeJobs();
         model.addAttribute("jobsList",jobsList);
@@ -97,6 +100,7 @@ public class employerController {
         model.addAttribute("employersSearchCandidatesListTrue",employersSearchCandidatesListTrue);
         return "employer/invitedCandidate";
     }
+
 //    @GetMapping("/employer/receivedApplication")
 //    public String  receivedApplication(){
 //        return "employer/receivedApplication";
@@ -106,5 +110,28 @@ public class employerController {
 //        return "employer/employerIndexWhenLogin";
 //    }
 
+    @GetMapping("/user/listCompany")
+    public String listCompany(Principal p,Model model,@RequestParam(required = false) String name) {
+        String email = p.getName();
+        Account acc = iAccountService.finByEmail(email);
+        model.addAttribute("acc",acc);
+        List<Employers> companyList=iEmployersService.ListCompany(name);
+        model.addAttribute("companyList",companyList);
+        List<Jobs> jobsList=iJobsService.findByDeleteFlagFalse();
+        model.addAttribute("jobsList",jobsList);
+//        public List<Employers> ListCompany(String name)
 
+    return "employer/listcompany";
+    }
+    @GetMapping("/listCompany")
+    public String guestListCompany(Principal p,Model model,@RequestParam(required = false) String name) {
+//        String email = p.getName();
+//        Account acc = iAccountService.finByEmail(email);
+//        model.addAttribute("acc",acc.getName());
+        List<Employers> companyList=iEmployersService.ListCompany(name);
+        model.addAttribute("companyList",companyList);
+//        public List<Employers> ListCompany(String name)
+
+        return "guest/listCompany";
+    }
 }

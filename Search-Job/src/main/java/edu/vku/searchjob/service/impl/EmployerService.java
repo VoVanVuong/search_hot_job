@@ -86,6 +86,11 @@ public class EmployerService implements IEmployersService {
             return null;
         }
     }
+    @Override
+    public List<Employers> ListCompany(String name){
+        return iEmployersRepository.findByAttributesWord(name);
+    }
+
 //    @Override
 //    public Employers getEmployerByAccountId(int accountId) {
 //        return iEmployersRepository.findByAccountId(accountId);

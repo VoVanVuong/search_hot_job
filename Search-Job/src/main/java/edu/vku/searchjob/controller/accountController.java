@@ -2,17 +2,12 @@ package edu.vku.searchjob.controller;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import edu.vku.searchjob.entity.Account;
-import edu.vku.searchjob.entity.Cadidates;
-import edu.vku.searchjob.entity.Categories;
-import edu.vku.searchjob.entity.Employers;
+import edu.vku.searchjob.entity.*;
 import edu.vku.searchjob.repository.IAccountRepository;
-import edu.vku.searchjob.service.IAccountService;
-import edu.vku.searchjob.service.ICadidatesService;
-import edu.vku.searchjob.service.IEmailService;
-import edu.vku.searchjob.service.IEmployersService;
+import edu.vku.searchjob.service.*;
 import edu.vku.searchjob.validation.SignUpValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -29,6 +24,7 @@ import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -47,9 +43,15 @@ public class accountController {
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
+    private IEmployersSearchCandidatesService iEmployersSearchCandidatesService;
+    @Autowired
     private IEmailService iEmailService;
     @Autowired
     private Cloudinary cloudinary;
+    @Autowired
+    private IJobsService iJobsService;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/signUp")
     public String signUp(Model model){
@@ -64,9 +66,10 @@ public class accountController {
     }
     @GetMapping("/admin/listAccount")
     public String listAccount(Model model){
-        List<Account> listAccount=iAccountService.findByDeleteFlagFalse();
+
 
 //        List<Cadidates> listCadidates=iCadidatesService.finAll();
+        List<Account> listAccount=iAccountService.findByDeleteFlagFalse();
         model.addAttribute("listAccount",listAccount);
         List<Employers> listEmployer=iEmployersService.finAll();
        model.addAttribute("listEmployer",listEmployer);
@@ -111,7 +114,7 @@ public class accountController {
         return "redirect:/admin/listDeleteAccount";
     }
     @PostMapping("/signUp")
-    public String registerAccount(@Validated @ModelAttribute("account") Account account,@ModelAttribute("cadidates") Cadidates cadidates, Model model,  BindingResult result) {
+    public String registerAccount(@Validated @ModelAttribute("account") Account account, @Param("password") String password, @ModelAttribute("cadidates") Cadidates cadidates, Model model, BindingResult result) {
         String email = account.getEmail();
         if (iAccountService.isEmailExists(email)) {
             // Email đã tồn tại, hiển thị thông báo lỗi
@@ -123,6 +126,8 @@ public class accountController {
             model.addAttribute("success", "validate error");
             return "account/signUp";
         }
+        account.setPassword(passwordEncoder.encode(password));
+//       account.setPassword();
         iAccountService.registerAccount(account);
         cadidates.setAccount(iAccountService.registerAccount(account));
         iCadidatesService.save(cadidates);
@@ -290,7 +295,7 @@ public String listUserDeleteAccount(Model model){
         return "account/employRegister";
     }
     @PostMapping("/employRegister")
-    public String  employRegisterAccount(@Validated @ModelAttribute("account") Account account, @ModelAttribute("employer") Employers employer, Model model,  BindingResult result) {
+    public String  employRegisterAccount(@Validated @ModelAttribute("account") Account account,@Param("password") String password, @ModelAttribute("employer") Employers employer, Model model,  BindingResult result) {
         String email = account.getEmail();
         if (iAccountService.isEmailExists(email)) {
             // Email đã tồn tại, hiển thị thông báo lỗi
@@ -301,9 +306,11 @@ public String listUserDeleteAccount(Model model){
         if (result.hasErrors()) {
             return "account/employRegister";
         }
-        iAccountService.registerEmployerAccount(account);
-       // account = accountService.registerAccount(account);
-        employer.setAccount(iAccountService.registerEmployerAccount(account));
+//      Account imy=  iAccountService.registerEmployerAccount(account);
+        account.setPassword(passwordEncoder.encode(password));
+ iAccountService.registerAccount(account);
+        employer.setAccount(iAccountService.registerAccount(account));
+      employer.setDeleteFlag(true);
          iEmployersService.save(employer);
         model.addAttribute("success", "Registered " + account.getName() + " account successfully Registered successfully ");
         return "account/employRegister";
@@ -370,6 +377,7 @@ public String listUserDeleteAccount(Model model){
        System.err.println("id"+account.getId()+"can"+candidate.getId()+"id accc"+candidate.getAccount().getId());
      //   System.err.println("account"+account.getId()+"candi"+candidate.+candidate.getPhoneNumber());
         model.addAttribute("candidate", candidate);
+        model.addAttribute("account", account);
         return "user/myAccount";
     }
 
@@ -393,7 +401,7 @@ public String listUserDeleteAccount(Model model){
 //        return "redirect:/admin/ListCategory";
 //    }
     @PostMapping("/user/changePasswordUser")
-    public String changeAcount(Principal principal,@RequestParam String currentPassword, @RequestParam String newPassword,Model model){
+    public String changeAcount(Principal principal,@RequestParam String currentPassword, @RequestParam String newPassword,Model model,RedirectAttributes redirectAttributes){
 
         if (principal == null) {
             // Xử lý khi không có người dùng đăng nhập
@@ -410,16 +418,48 @@ public String listUserDeleteAccount(Model model){
             return "redirect:/login"; // Hoặc điều hướng đến trang đăng nhập
         }
         if (!passwordEncoder.matches(currentPassword, account.getPassword())) {
-            model.addAttribute("error", "Current password is incorrect");
-            return "user/myAccount";
+//            model.addAttribute("error", "Current password is incorrect");
+            redirectAttributes.addFlashAttribute("error", "Current password is incorrect!");
+
+            return "redirect:/user/myAccount";
         }
         model.addAttribute("email",principal.getName());
         // Thực hiện thay đổi mật khẩu
         iAccountService.changePassword(account, newPassword);
-        model.addAttribute("success", "Password changed successfully!");
+//        model.addAttribute("success", "Password changed successfully!");
+        redirectAttributes.addFlashAttribute("success", "Password changed successfully!");
 
         return "redirect:/user/myAccount";
     }
+//    @PostMapping("/user/updateacc/{id}")
+//@PostMapping("/user/updateCandidate/{id}")
+//public String updateCandidate(@PathVariable int id, @RequestParam("skill") String skill, @RequestParam("dateOfBirth") String dateOfBirth, @RequestParam("phoneNumber") int phoneNumber, @RequestParam("address") String address, @RequestParam("gender") String gender,@RequestParam("cadidatedName") String cadidatedName,@RequestParam("work") String work,@RequestParam("candidateCv") MultipartFile candidateCv,@RequestParam("categotyRequired") String categotyRequired,@RequestParam("experience") String experience,@RequestParam("salaryRequired") String salaryRequired, Model model, Principal p,RedirectAttributes redirectAttributes){
+//    redirectAttributes.addFlashAttribute("email",p.getName());
+//    redirectAttributes.addFlashAttribute("success","Successfully updated information");
+////            .addAttribute();
+////        model.addAttribute("success","Successfully updated information");
+//    // public Cadidates updateCandidate(int id,String skill, String dateOfBirth, int phoneNumber, String address, String gender)
+//    iCadidatesService.updateCandidate(id,skill,dateOfBirth,phoneNumber,address,gender,candidateCv,cadidatedName,work,categotyRequired,experience,salaryRequired);
+//    return "redirect:/user/myAccount";
+//}
+    @PostMapping("/user/updateAvatar/{id}")
+    public String updateAvatar(@PathVariable int id,@RequestParam("avatar") MultipartFile avatar, Model model, Principal p,RedirectAttributes redirectAttributes){
+        redirectAttributes.addFlashAttribute("email",p.getName());
+        redirectAttributes.addFlashAttribute("success","Successfully updated information");
+//            .addAttribute();
+//        model.addAttribute("success","Successfully updated information");
+        // public Cadidates updateCandidate(int id,String skill, String dateOfBirth, int phoneNumber, String address, String gender)
+        iAccountService.updateAvatar(id,avatar);
+        return "redirect:/user/myAccount";
+    }
+    @GetMapping("/user/chatbot")
+    public String chatbot(Model model,Principal p){
+        String email=p.getName();
+        Account account=iAccountService.finByEmail(email);
+        model.addAttribute("account",account);
+        return "user/chatBot";
+    }
+
     @PostMapping("/employer/addAvatar")
     public String addAvatar(@RequestParam("avatar") MultipartFile avatar,
                             Principal principal,
@@ -455,9 +495,63 @@ public String listUserDeleteAccount(Model model){
 
         return "employer/employerSetting";
     }
-    @GetMapping("admin/index")
-public String index(){
-        return "admin/index";
-}
+//    @GetMapping("admin/index")
+//public String index(){
+//        return "admin/index";
+//}
+    @GetMapping("employer/employerStatistics")
+    public String employerStatistics(Model model,Principal p){
+//        String userEmail = p.getName();
+//        Account account = iAccountService.finByEmail(userEmail);
+//        model.addAttribute("account",account);
+        String email = p.getName();
+        Account acc = iAccountService.finByEmail(email);
+
+        Employers employers=iEmployersService.findEmployersByEmail(acc);
+
+        List<Jobs> jobsList = iJobsService.findByDeleteFlagFalse();
+        List<Jobs> findAllId = iJobsService.findByAllAccountId(acc.getId());
+        List<Jobs> filteredJobsList = jobsList.stream()
+                .filter(findAllId::contains)
+                .collect(Collectors.toList());
+        model.addAttribute("findAllId", filteredJobsList);
+
+        List<EmployersSearchCandidates> employersSearchCandidatesList=iEmployersSearchCandidatesService.listStatusAndEmployer(employers);
+        model.addAttribute("employersSearchCandidatesList",employersSearchCandidatesList);
+
+        List<EmployersSearchCandidates> employersSearchCandidatesListTrue=iEmployersSearchCandidatesService.listStatusAndEmployerTrue(employers);
+        model.addAttribute("employersSearchCandidatesListTrue",employersSearchCandidatesListTrue);
+
+        List<Jobs> jobsListTrue = iJobsService.findByDeleteFlagTrue();
+        List<Jobs> findAllIdTrue = iJobsService.findByAllAccountId(acc.getId());
+        List<Jobs> filteredJobsListTrue = jobsListTrue.stream()
+                .filter(findAllIdTrue::contains)
+                .collect(Collectors.toList());
+        model.addAttribute("findAllIdTrue", filteredJobsListTrue);
+
+        model.addAttribute("account", acc);
+        return "employer/employerStatistics";
+    }
+    @GetMapping("admin/adminStatistics")
+    public String adminStatistics(Model model,Principal p){
+//        String userEmail = p.getName();
+//        Account account = iAccountService.finByEmail(userEmail);
+//        model.addAttribute("account",account);
+//
+//        Employers employers=iEmployersService.findByAccountId(account);
+
+        String email = p.getName();
+        Account acc = iAccountService.finByEmail(email);
+        List<Jobs> jobsList = iJobsService.findByDeleteFlagFalse();
+        List<Jobs> findAllId = iJobsService.findByAllAccountId(acc.getId());
+        List<Jobs> filteredJobsList = jobsList.stream()
+                .filter(findAllId::contains)
+                .collect(Collectors.toList());
+        model.addAttribute("findAllId", filteredJobsList);
+        model.addAttribute("account", acc);
+        return "admin/adminStatistics";
+    }
+
+
 }
 
